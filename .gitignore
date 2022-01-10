@@ -38,3 +38,5 @@ out/
 !/.gitignore
 .gitignore
 src/
+!/.gitignore
+!/.gitignore

@@ -13,10 +13,23 @@ repositories {
 }
 
 dependencies {
+	//lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+//junit5
 test {
 	useJUnitPlatform()
 }
+
+//test {
+//	useJUnitPlatform {
+//		includeEngines 'junit-vintage'
+//		// excludeEngines 'junit-jupiter'
+//	}
+//}
