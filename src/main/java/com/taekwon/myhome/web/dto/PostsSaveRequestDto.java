@@ -1,6 +1,6 @@
 package com.taekwon.myhome.web.dto;
 
-import com.taekwon.myhome.domain.Posts;
+import com.taekwon.myhome.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
