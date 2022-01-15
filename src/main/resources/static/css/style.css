@@ -760,7 +760,7 @@ section {
   min-height: 880px;
 }
 .hero-section.inner-page {
-  height: 60vh;
+  height: 30vh;
   min-height: 0;
 }
 .hero-section.inner-page .hero-text {
