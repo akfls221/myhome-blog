@@ -760,11 +760,11 @@ section {
   min-height: 880px;
 }
 .hero-section.inner-page {
-  height: 30vh;
+  height: 40vh;
   min-height: 0;
 }
 .hero-section.inner-page .hero-text {
-  transform: translateY(-150px);
+  transform: translateY(-170px);
   margin-top: -120px;
 }
 @media screen and (max-width: 992px) {

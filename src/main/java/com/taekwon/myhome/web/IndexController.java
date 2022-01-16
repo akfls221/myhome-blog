@@ -15,4 +15,9 @@ public class IndexController {
     public String notice() {
         return "notice";
     }
+
+    @GetMapping("/posts")
+    public String posts() {
+        return "posts";
+    }
 }
