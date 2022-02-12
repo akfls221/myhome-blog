@@ -18,7 +18,7 @@ public class ViewResolver implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/webapp/", "classpath:/static/")
+                .addResourceLocations("classpath:/frontend/", "classpath:/static/")
                 .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
     }
 }

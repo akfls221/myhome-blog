@@ -23,7 +23,8 @@ dependencies {
 	//mysql-dataBase
 	implementation 'mysql:mysql-connector-java'
 
-	
+	//spring dev-tools
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter'
