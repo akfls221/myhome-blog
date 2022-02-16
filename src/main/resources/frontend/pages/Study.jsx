@@ -8,18 +8,23 @@ const Study = () => {
   const [boardList, setBoardList] = useState([]);
 
   useEffect(() => {
+    let isComponentMounted = true;
+
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/boardList',
+      url: 'http://localhost:8080/api/board/boardList',
     }).then((res) => {
+      if(isComponentMounted) {
       console.log(res.data);
-      setBoardList(res.data.content);
+        setBoardList(res.data.content);
+      }
     }).catch(error => {
       console.log(error);
       throw new Error(error);
     });
 
     return () => {
+      isComponentMounted = false;
     };
   }, []);
 

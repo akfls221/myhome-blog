@@ -61,7 +61,9 @@ const NoticeView = () => {
                <NoticeHeader typeValue={noticeType} titleValue={noticeTitle}/>
               </div>
               <div className="col-md-12 mb-5 mb-md-0">
-                <div dangerouslySetInnerHTML={{__html: noticeContent}}></div>
+                <div className="notice-content-wrap">
+                  <div dangerouslySetInnerHTML={{__html: noticeContent}}></div>
+                </div>
               </div>
             </div>
             <button className="btn btn-regist small" onClick={returnHistory}>목록</button>

@@ -17,23 +17,22 @@ public class BoardApiController {
 
     private final BoardService boardService;
 
-    @PostMapping("/api/v1/board")
+    @PostMapping("/api/board")
     public long save(@RequestBody BoardSaveRequestDto requestDto) {
-        System.out.println("@@@@@@ = " + requestDto);
         return boardService.save(requestDto);
     }
 
-    @PostMapping("/api/v1/{id}")
+    @PostMapping("/api/boardUpdate/{id}")
     public long update(@PathVariable Long id, BoardUpdateRequestDto requestDto) {
         return boardService.update(id, requestDto);
     }
 
-    @GetMapping("/api/v1/{id}")
+    @GetMapping("/api/board/{id}")
     public BoardResponseDto findById(@PathVariable Long id) {
         return boardService.findById(id);
     }
 
-    @PostMapping("/api/v1/boardList")
+    @PostMapping("/api/board/boardList")
     public Page<BoardListResponseDto> findAllDesc(Pageable pageable) {
         return boardService.findAllDesc(pageable);
     }

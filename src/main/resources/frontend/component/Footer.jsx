@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-const Footer = () => {
+const Footer = (props) => {
+
+  const url = window.location.hash;
 
   return (
       <>

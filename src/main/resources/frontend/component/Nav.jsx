@@ -1,5 +1,6 @@
 import React, {memo, useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {getCookie} from "../util/Cookie";
 
 
 const Nav = memo(() => {
@@ -11,14 +12,19 @@ const Nav = memo(() => {
     {menu: 'CONTACT ME', url: "/contact"},
   ]);
   const [selectMenu, setSelectMenu] = useState("");
+  const navigate = useNavigate();
 
   const onClickLi = (item) => {
     setSelectMenu(item);
+
+    if (item === 'STUDY') {
+      const access = getCookie('loginCookie');
+      if (access === undefined) {
+        alert("나가");
+        navigate(-1);
+      }
+    }
   }
-
-  useEffect(() => {
-
-  }, [selectMenu])
 
   return (
       <>

@@ -15,10 +15,10 @@ const NoticeContent = ({contentValue, contentOnChange }) => {
   const config = { // http://rmamuzic.rs/node_modules/jodit/examples/index.html
     readonly: false, // all options from https://xdsoft.net/jodit/doc/
     height: 500,
-    // theme: 'dark'
     language : 'ko',
     uploader: {
-      url: 'connector/upload.php',
+      insertImageAsBase64URI: true,
+      url: 'http://localhost:8081',
       format: 'json',
       pathVariableName: 'path',
       filesVariableName: function (r) {

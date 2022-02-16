@@ -1120,3 +1120,169 @@ section {
   flex: 0 0 auto;
   width: 33.33333333%;
 }
+
+.notice-content-wrap {
+  margin-top: 50px;
+}
+
+.study-thumbnail {
+    max-width: 100%;
+    height: 416px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.modal button {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+}
+.modal > section {
+    width: 90%;
+    max-width: 420px;
+    height: 700px;
+    margin: 0 auto;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 0.3s;
+    overflow: hidden;
+}
+.modal > section > header {
+    position: relative;
+    padding: 16px 64px 16px 16px;
+    background-color: #034B8C;
+    font-weight: 700;
+    color: white;
+}
+.modal > section > header button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    font-size: 21px;
+    font-weight: 700;
+    text-align: center;
+    background-color: transparent;
+    color: white;
+}
+.modal > section > main {
+    padding: 16px;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    height: 590px;
+}
+.modal > section > footer {
+    padding: 12px 16px;
+    text-align: right;
+}
+.modal > section > footer button {
+    padding: 6px 12px;
+    color: #fff;
+    background-color: #6c757d;
+    border-radius: 5px;
+    font-size: 13px;
+}
+.modal.openModal {
+    display: flex;
+    align-items: center;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-bg-show 0.3s;
+}
+@keyframes modal-show {
+    from {
+        opacity: 0;
+        margin-top: -50px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+@keyframes modal-bg-show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.login-form-wrapper {
+    padding: 0 10px;
+    text-align: center;
+    height: 500px;
+    margin: 0 10px;
+
+}
+
+.login-input-form{
+    display: inline-block;
+    max-width: 400px;
+    height: 60px;
+}
+
+.login-input {
+    display: block;
+    position: relative;
+    margin: 15px 5px;
+    width: 350px;
+    height: 40px;
+    border-radius: 0;
+    border: 1px solid #dae0e5;
+    float: left;
+}
+
+.btn.btn-login {
+    background: linear-gradient(-45deg, #1391a5, #274685);
+    color: #fff;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+    float: right;
+    font-size: 13px;
+    margin-top: 15px;
+    width: 100%;
+    height: 45px;
+    vertical-align: middle;
+}
+
+.ask-sign-up{
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.bordert::after{
+    display: inline-block;
+    content: "기타 소셜로 로그인하기";
+    width: 368px;
+    top: -3px;
+    left: 33%;
+    background-color: #fff;
+    padding: 0px 8px;
+}
+.bordert {
+    border-top: 2px solid #aaa;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.login-head-img{
+    display: inline-block;
+    width: 60px;
+    margin-right: 180px;
+    margin-left: 180px;
+    max-height: 60px;
+    margin-top: 15px;
+}
+
+.login-btn-form{
+    display: inline-block;
+    width: 350px;
+    height: 60px;
+}

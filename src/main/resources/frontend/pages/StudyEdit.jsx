@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import StudyBoardConfig from "./StudyBoardConfig";
-import NoticeContent from "../noticeComponent/NoticeContent";
-import RegDeleteBtn from "../buttonComponent/RegDeleteBtn";
+import StudyBoardConfig from "../component/studyBoardComponent/StudyBoardConfig";
+import NoticeContent from "../component/noticeComponent/NoticeContent";
+import RegDeleteBtn from "../component/buttonComponent/RegDeleteBtn";
 
 const StudyEdit = () => {
   const [studyTitle, setStudyTitle] = useState('');
@@ -52,9 +52,11 @@ const StudyEdit = () => {
       alert("게시글 제목 또는 내용을 입력해 주세요");
       return;
     }
+    const thumbNail = 'src';
+    console.log("썸네일 뽑아보자", studyContent)
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/board',
+      url: 'http://localhost:8080/api/board',
       data: {
         'title': studyTitle,
         'author' : '관리자',
