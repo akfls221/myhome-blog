@@ -17,6 +17,10 @@ const Modal = ({ open, close }) => {
     setUserPw(e.target.value)
   }
 
+  const loginGoogle = () => {
+    location.href = "http://localhost:8080/social/google";
+  }
+
   const loginSubmit = (e) => {
     e.preventDefault();
 
@@ -72,6 +76,18 @@ const Modal = ({ open, close }) => {
                   <div className="ask-sign-up">계정이 없으신 가요?  Join!</div>
                   <div className="social-sign-up"></div>
                   <div className="bordert"></div>
+                  <div className="login-btn-form">
+                    <img className="logo-zone" src="../static/img/google-btn.png" />
+                    <button className="btn btn-google" onClick={loginGoogle}>Google Login 하기</button>
+                  </div>
+                  <div className="login-btn-form">
+                    <img className="logo-zone" src="../static/img/kakao-btn.png" />
+                    <button className="btn btn-kakao" onClick={loginGoogle}>KaKao Login 하기</button>
+                  </div>
+                  <div className="login-btn-form">
+                    <img className="logo-zone" src="../static/img/naver-btn.png" />
+                    <button className="btn btn-naver" onClick={loginGoogle}>Naver Login 하기</button>
+                  </div>
                 </div>
               <footer>
                 <button className="close" onClick={close}>

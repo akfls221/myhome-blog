@@ -9,7 +9,7 @@ module.exports ={
         extensions:['.jsx', '.js'],
     },
     entry:{
-        app:['./render/app',]
+        app:['./render/app',],
     },
     module :{
         rules:[{

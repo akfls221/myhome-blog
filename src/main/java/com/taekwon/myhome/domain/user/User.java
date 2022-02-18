@@ -28,13 +28,14 @@ public class User extends BaseTimeEntity implements UserDetails {
     @Column(nullable = false, unique = true, length=30)
     private String uid;
 
-    @Column(nullable = false, length = 100)
     private String password;
 
-    @Column(nullable = false, length = 100)
     private String name;
 
+    private String profileImageUrl;
+
     @ElementCollection(fetch = FetchType.EAGER)
+    @Column(nullable = false)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
@@ -44,12 +45,20 @@ public class User extends BaseTimeEntity implements UserDetails {
     }
 
     @Builder
-    public User(Long id, String uid, String password, String name, List<String> roles) {
+    public User(Long id, String uid, String password, String name, String profileImageUrl, List<String> roles) {
         this.id = id;
         this.uid = uid;
         this.password = password;
         this.name = name;
+        this.profileImageUrl = profileImageUrl;
         this.roles = roles;
+    }
+
+    public User update(String name, String picture) {
+        this.name = name;
+        this.profileImageUrl = picture;
+
+        return this;
     }
 
     @Override

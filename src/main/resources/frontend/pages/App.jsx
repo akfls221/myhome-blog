@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "../component/Header";
 import WelcomeSection from "../component/sectionComponent/WelcomeSection";
-import {HashRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import { Routes } from 'react-router';
 import Notice from "./Notice";
 import Main from "./Main";
@@ -11,6 +11,7 @@ import Footer from "../component/Footer";
 import Study from "./Study";
 import StudyEdit from "./StudyEdit";
 import StudyView from "./StudyView";
+import Social from "./Social";
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path = "/study" element={<Study />}></Route>
           <Route path = "/study_edit" element={<StudyEdit />}></Route>
           <Route path = "/study/:id" exact element={<StudyView />}></Route>
+          <Route path = "/social" exact element={<Social />}></Route>
         </Routes>
         <Footer />
       </Router>

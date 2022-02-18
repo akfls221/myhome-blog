@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {getCookie, removeCookie} from "../../util/Cookie";
 import Modal from "../../pages/Modal";
+import axios from "axios";
 
 const WelcomeSection = () => {
   const [welcomeTitle, setWelcomeTitle] = useState("엄태권의 개발 블로그입니다");
@@ -20,7 +21,7 @@ const WelcomeSection = () => {
     setModalOpen(true)
   }
 
-  const closeModal =() => {
+  const closeModal = () => {
     setModalOpen(false)
   }
 
@@ -60,7 +61,7 @@ const WelcomeSection = () => {
             </div>
           </div>
         </section>
-        <Modal open={modalOpen} close={closeModal} header="asdlfkjasdlkfj"></Modal>
+        <Modal open={modalOpen} close={closeModal} header="로그인"></Modal>
       </>
     );
 }
