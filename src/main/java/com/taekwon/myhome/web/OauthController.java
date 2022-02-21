@@ -1,9 +1,9 @@
 package com.taekwon.myhome.web;
 
 import com.taekwon.myhome.service.UserService;
+import com.taekwon.myhome.util.Oauth;
 import com.taekwon.myhome.web.dto.SignResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,26 +13,36 @@ import org.springframework.web.bind.annotation.*;
 public class OauthController {
 
     private final UserService userService;
-
-    @Value("${spring.social.google.client_id}")
-    private String googleClientId;
-    @Value("${spring.social.google.url.login}")
-    private String googleLoginUrl;
-    @Value("${spring.social.google.redirect}")
-    private String googleRedirect;
-    @Value("${spring.social.google.url.scope}")
-    private String googleScope;
+    private final Oauth oauth;
 
     @GetMapping("/social/google")
     public String googleLogin() {
-        return "redirect:" + googleLoginUrl + "?client_id=" + googleClientId +
-                "&response_type=code&redirect_uri=" +googleRedirect + "&scope="+googleScope;
+        return "redirect:" + oauth.getGoogleLoginUrl() +
+                "?client_id=" + oauth.getGoogleClientId() +
+                "&response_type=code" +
+                "&redirect_uri=" + oauth.getGoogleRedirect() +
+                "&scope=" + oauth.getGoogleScope();
+    }
+
+    @GetMapping("/social/kakao")
+    public String kakaoLogin() {
+        return "redirect:" + oauth.getKakaoLoginUrl() +
+                "?client_id=" + oauth.getKakaoClientId() +
+                "&response_type=code" +
+                "&redirect_uri=" + oauth.getKakaoRedirect();
+    }
+
+    @GetMapping("/social/kakao/logout")
+    public String kakaoLogOut() {
+        return "redirect:" + oauth.getKakaoLogOutUrl() +
+                "?client_id=" + oauth.getKakaoClientId() +
+                "&logout_redirect_uri=" + oauth.getKakaoLogOutRedirect();
     }
 
     @GetMapping("/social/google/callback")
     @ResponseBody
-    public SignResponseDto oauthLogin(String code) {
-        return userService.oauthLogin(code);
+    public SignResponseDto oauthLogin(String code, String socialType) {
+        return userService.oauthLogin(code, socialType);
     }
 }
 

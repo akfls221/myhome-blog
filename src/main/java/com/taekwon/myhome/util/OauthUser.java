@@ -1,20 +1,20 @@
 package com.taekwon.myhome.util;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GoogleUser {
+@Builder
+public class OauthUser {
 
     public String id;
     public String email;
-    public Boolean verifiedEmail;
     public String name;
-    public String givenName;
-    public String familyName;
     public String picture;
-    public String locale;
+    public String socialType;
+    public String nickName;
 }

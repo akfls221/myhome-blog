@@ -1,15 +1,14 @@
 package com.taekwon.myhome.web.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class SignResponseDto {
 
     private boolean success;
@@ -21,17 +20,6 @@ public class SignResponseDto {
     private String name;
     private String picture;
     private List<String> roles;
-
-    @Builder
-    public SignResponseDto(boolean success, int code, String msg, String accessToken, Long id, String uid, String name, String picture, List<String> roles) {
-        this.success = success;
-        this.code = code;
-        this.msg = msg;
-        this.accessToken = accessToken;
-        this.id = id;
-        this.uid = uid;
-        this.name = name;
-        this.picture = picture;
-        this.roles = roles;
-    }
+    private String socialType;
+    private String nickName;
 }

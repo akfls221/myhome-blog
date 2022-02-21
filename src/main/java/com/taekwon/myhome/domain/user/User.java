@@ -1,6 +1,7 @@
 package com.taekwon.myhome.domain.user;
 
 import com.taekwon.myhome.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 @Builder
 public class User extends BaseTimeEntity implements UserDetails {
@@ -39,19 +41,13 @@ public class User extends BaseTimeEntity implements UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
+    private String socialType;
+
+    private String nickName;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map((role) -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
-    }
-
-    @Builder
-    public User(Long id, String uid, String password, String name, String profileImageUrl, List<String> roles) {
-        this.id = id;
-        this.uid = uid;
-        this.password = password;
-        this.name = name;
-        this.profileImageUrl = profileImageUrl;
-        this.roles = roles;
     }
 
     public User update(String name, String picture) {

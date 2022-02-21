@@ -21,6 +21,10 @@ const Modal = ({ open, close }) => {
     location.href = "http://localhost:8080/social/google";
   }
 
+  const loginKakao =() => {
+    location.href = "http://localhost:8080/social/kakao";
+  }
+
   const loginSubmit = (e) => {
     e.preventDefault();
 
@@ -82,7 +86,7 @@ const Modal = ({ open, close }) => {
                   </div>
                   <div className="login-btn-form">
                     <img className="logo-zone" src="../static/img/kakao-btn.png" />
-                    <button className="btn btn-kakao" onClick={loginGoogle}>KaKao Login 하기</button>
+                    <button className="btn btn-kakao" onClick={loginKakao}>KaKao Login 하기</button>
                   </div>
                   <div className="login-btn-form">
                     <img className="logo-zone" src="../static/img/naver-btn.png" />

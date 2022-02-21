@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import {getCookie, removeCookie} from "../../util/Cookie";
+import {useNavigate} from "react-router-dom";
+import {getCookie, removeCookie, setCookie} from "../../util/Cookie";
 import Modal from "../../pages/Modal";
-import axios from "axios";
 
 const WelcomeSection = () => {
   const [welcomeTitle, setWelcomeTitle] = useState("엄태권의 개발 블로그입니다");
@@ -10,11 +9,20 @@ const WelcomeSection = () => {
   const [btnState, setBtnState] = useState("LogIn");
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const data = getCookie('loginCookie');
 
   const handleLogOut = (e) => {
-    removeCookie('loginCookie')
-    navigate("/")
-    location.reload();
+    const social = data.socialType;
+    if (social === 'kakao') {
+      location.href = "http://localhost:8080/social/kakao/logout";
+      removeCookie('loginCookie');
+    } else if (social === 'google') {
+      location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8081";
+      removeCookie('loginCookie');
+    }
+    // removeCookie('loginCookie');
+    // navigate("/")
+    // location.reload();
   }
 
   const openModal = () => {
@@ -26,7 +34,6 @@ const WelcomeSection = () => {
   }
 
   useEffect(() => {
-    const data = getCookie('loginCookie');
     console.log("@@@@@@",data)
     if (data !== undefined) {
       setWelcomeSub(`안녕하세요! ${data.name} 님!!`);

@@ -1216,112 +1216,167 @@ section {
 }
 
 .login-form-wrapper {
-    padding: 0 10px;
-    text-align: center;
-    height: 500px;
-    margin: 0 10px;
-
+  padding: 0 10px;
+  text-align: center;
+  height: 500px;
+  margin: 0 10px;
 }
 
 .login-input-form{
-    display: inline-block;
-    max-width: 400px;
-    height: 60px;
+  display: inline-block;
+  max-width: 400px;
+  height: 60px;
 }
 
 .login-input {
-    display: block;
-    position: relative;
-    margin: 15px 5px;
-    width: 350px;
-    height: 40px;
-    border-radius: 0;
-    border: 1px solid #dae0e5;
-    float: left;
+  display: block;
+  position: relative;
+  margin: 15px 5px;
+  width: 350px;
+  height: 40px;
+  border-radius: 0;
+  border: 1px solid #dae0e5;
+  float: left;
 }
 
 .btn.btn-login {
-    background: linear-gradient(-45deg, #1391a5, #274685);
-    color: #fff;
-    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
-    float: right;
-    font-size: 13px;
-    margin-top: 15px;
-    width: 100%;
-    height: 45px;
-    vertical-align: middle;
+  background: linear-gradient(-45deg, #1391a5, #274685);
+  color: #fff;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+  float: right;
+  font-size: 13px;
+  margin-top: 15px;
+  width: 100%;
+  height: 45px;
+  vertical-align: middle;
 }
 
 .ask-sign-up{
-    display: inline-block;
-    margin-top: 30px;
+  display: inline-block;
+  margin-top: 30px;
 }
 
 .bordert::after{
-    display: inline-block;
-    content: "기타 소셜로 로그인하기";
-    width: 368px;
-    top: -3px;
-    left: 33%;
-    background-color: #fff;
-    padding: 0px 8px;
-    margin-bottom: 20px;
+  display: inline-block;
+  content: "기타 소셜로 로그인하기";
+  width: 368px;
+  top: -3px;
+  left: 33%;
+  background-color: #fff;
+  padding: 0px 8px;
+  margin-bottom: 20px;
 }
 .bordert {
-    border-top: 2px solid #aaa;
-    display: inline-block;
-    margin-top: 20px;
+  border-top: 2px solid #aaa;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 .login-head-img{
-    display: inline-block;
-    width: 60px;
-    margin-right: 180px;
-    margin-left: 180px;
-    max-height: 60px;
-    margin-top: 15px;
+  display: inline-block;
+  width: 60px;
+  margin-right: 180px;
+  margin-left: 180px;
+  max-height: 60px;
+  margin-top: 15px;
 }
 
 .login-btn-form{
-    display: inline-block;
-    width: 350px;
-    height: 60px;
+  display: inline-block;
+  width: 350px;
+  height: 60px;
 }
 
 .btn.btn-google {
-    color: #ffffff;
-    background: linear-gradient(-45deg, #c20b0b, #e21515);
-    border-color: rgba(0,0,0,0.2);
-    width: 100%;
-    height: 45px;
-    vertical-align: middle;
-    font-size: 13px;
-    font-weight: bolder;
+  color: #ffffff;
+  background: linear-gradient(-45deg, #c20b0b, #e21515);
+  border-color: rgba(0,0,0,0.2);
+  width: 100%;
+  height: 45px;
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: bolder;
 }
 
 .logo-zone{
-    height: 45px;
-    width: 45px;
-    position: absolute;
-
+  height: 45px;
+  width: 45px;
+  position: absolute;
+  border-right: 0.5px solid #cecbcb;
 }
 .btn.btn-naver {
-    color: #ffffff;
-    background: linear-gradient(-45deg, #04cf5c, #05a345);
-    border-color: rgba(0,0,0,0.2);
-    width: 100%;
-    height: 45px;
-    vertical-align: middle;
-    font-size: 13px;
-    font-weight: bolder;
+  color: #ffffff;
+  background: linear-gradient(-45deg, #04cf5c, #05a345);
+  border-color: rgba(0,0,0,0.2);
+  width: 100%;
+  height: 45px;
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: bolder;
 }
 .btn.btn-kakao {
-    color: #964b00;
-    background: linear-gradient(-45deg, #ffd52b, #ffd50c);
-    border-color: rgba(0,0,0,0.2);
-    width: 100%;
-    height: 45px;
+  color: #964b00;
+  background: linear-gradient(-45deg, rgba(255, 213, 43, 0.8), rgb(255, 215, 23));
+  border-color: rgba(0,0,0,0.2);
+  width: 100%;
+  height: 45px;
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+.user_info_page{
+  float: right;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 50px;
+  background: url("../img/my_page.png") white;
+}
+
+.profile-img{
+  float: left;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  margin-right: 50px;
+  background: white;
+}
+
+.profile-info{
+  float: right;
+  margin-right: 200px;
+  text-align: left;
+  width: 500px;
+}
+
+.profile-detail {
+    display: table;
+    width: 400px;
+    table-layout: fixed;
+    margin-bottom: 30px;
+}
+
+.profile-text {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  font-weight: bolder;
+  float: right;
+  display: block;
+}
+
+.profile-subtitle{
+    display: table-cell;
+    padding: 16px 10px;
+    width: 180px;
     vertical-align: middle;
-    font-size: 13px;
-    font-weight: bolder;
+    text-align: left;
+    color: black;
+}
+
+.profile-subtitle::after{
+    content: "|";
+    float: right;
+    display: block;
+    text-decoration-color: rgba(0, 0, 0, 0.18);
 }

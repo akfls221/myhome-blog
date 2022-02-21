@@ -6,12 +6,13 @@ import {useNavigate} from "react-router";
 const Social = () => {
   const navigate = useNavigate();
 
-  const test = () => {
+  const socialLogin = () => {
     let code = new URL(window.location.href).searchParams.get("code");
+    let socialType =  new URL(window.location.href).pathname.substring(1);
 
     axios({
       method: "GET",
-      url: 'http://localhost:8080/social/google/callback?code=' + code,
+      url: 'http://localhost:8080/social/google/callback?code=' + code + "&socialType=" + socialType,
     }).then((res) => {
       const resData = res.data
       console.log("!!!!!!!!!!!!!", resData);
@@ -26,8 +27,7 @@ const Social = () => {
   }
 
   useEffect(() => {
-
-    test();
+    socialLogin();
     navigate("/");
 
   }, []);
