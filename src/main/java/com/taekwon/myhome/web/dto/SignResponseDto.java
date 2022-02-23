@@ -22,4 +22,5 @@ public class SignResponseDto {
     private List<String> roles;
     private String socialType;
     private String nickName;
+    private String email;
 }

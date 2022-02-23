@@ -66,7 +66,6 @@ public class UserService {
         return loginInfo;
     }
 
-
     @Transactional
     public User isJoinedUser (OauthUser oauthUser) {
         if (userRepository.findByUid(oauthUser.email).isPresent()) {

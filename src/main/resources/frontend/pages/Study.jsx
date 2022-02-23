@@ -3,19 +3,27 @@ import SearchForm from "../component/SearchForm";
 import StudyList from "../component/studyBoardComponent/StudyList";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {getCookie} from "../util/Cookie";
 
 const Study = () => {
   const [boardList, setBoardList] = useState([]);
+  const [roleCheck, setRoleCheck] = useState(false);
+  const userInfo = getCookie('loginCookie');
 
   useEffect(() => {
     let isComponentMounted = true;
+    if (userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
+      setRoleCheck(true);
+    } else {
+      setRoleCheck(false);
+    }
 
     axios({
       method: "POST",
       url: 'http://localhost:8080/api/board/boardList',
     }).then((res) => {
       if(isComponentMounted) {
-      console.log(res.data);
+        console.log(res.data);
         setBoardList(res.data.content);
       }
     }).catch(error => {
@@ -51,7 +59,9 @@ const Study = () => {
                 );
               })}
             </div>
-            <Link to={"/study_edit"}><button className="btn btn-regist small">글쓰기</button></Link>
+            {
+              roleCheck === true && <Link to={"/study_edit"}><button className="btn btn-regist small" >글쓰기</button></Link>
+            }
           </div>
         </section>
       </>

@@ -20,7 +20,7 @@ const Nav = memo(() => {
     if (item === 'STUDY') {
       const access = getCookie('loginCookie');
       if (access === undefined) {
-        alert("나가");
+        alert("회원 전용 게시글 입니다. 로그인 후 이용 부탁 드립니다.");
         navigate(-1);
       }
     }

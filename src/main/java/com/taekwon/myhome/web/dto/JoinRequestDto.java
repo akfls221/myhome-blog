@@ -10,4 +10,6 @@ public class JoinRequestDto {
     private String uid;
     private String password;
     private String name;
+    private String nickName;
+    private String email;
 }

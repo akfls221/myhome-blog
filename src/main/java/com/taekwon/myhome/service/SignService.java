@@ -50,10 +50,21 @@ public class SignService {
                 .id(user.getId())
                 .uid(user.getUid())
                 .name(user.getName())
+                .email(user.getEmail())
+                .socialType(user.getSocialType())
+                .nickName(user.getNickName())
                 .roles(user.getRoles())
                 .build();
 
         return response;
+    }
+
+    public boolean isJoinedUser(String uid) {
+        if (userRepository.findByUid(uid).isPresent()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Transactional
@@ -64,6 +75,9 @@ public class SignService {
                 .uid(request.getUid())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
+                .socialType("blog")
+                .email(request.getEmail())
+                .nickName(request.getNickName())
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build());
 

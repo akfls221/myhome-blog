@@ -19,6 +19,9 @@ const WelcomeSection = () => {
     } else if (social === 'google') {
       location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8081";
       removeCookie('loginCookie');
+    } else {
+      removeCookie('loginCookie');
+      location.reload();
     }
     // removeCookie('loginCookie');
     // navigate("/")
@@ -68,7 +71,7 @@ const WelcomeSection = () => {
             </div>
           </div>
         </section>
-        <Modal open={modalOpen} close={closeModal} header="로그인"></Modal>
+        <Modal open={modalOpen} close={closeModal} header="로그인" />
       </>
     );
 }

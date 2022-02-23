@@ -17,6 +17,9 @@ const StudyList = ({value}) => {
 
   useEffect(() => {
     setThumbNail(CreateThumbnail);
+    if (thumbNail.length <= 0) {
+
+    }
   }, [])
 
   return (

@@ -45,6 +45,8 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     private String nickName;
 
+    private String email;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map((role) -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());

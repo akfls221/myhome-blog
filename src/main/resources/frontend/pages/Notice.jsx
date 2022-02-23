@@ -3,11 +3,20 @@ import SearchForm from "../component/SearchForm";
 import NoticeList from "../component/noticeComponent/NoticeList";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {getCookie} from "../util/Cookie";
 
 const Notice = () => {
   const [noticeList, setNoticeList] = useState([]);
+  const [roleCheck, setRoleCheck] = useState(false);
+  const userInfo = getCookie('loginCookie');
 
   useEffect(() => {
+    if (userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
+      setRoleCheck(true);
+    }else{
+      setRoleCheck(false);
+    }
+
     axios({
       method: "POST",
       url: 'http://localhost:8080/api/v1/postsList',
@@ -41,7 +50,9 @@ const Notice = () => {
                 <NoticeList key={item.id} value={item}/>
               );
             })}
-            <Link to={"/notice_edit"}><button className="btn btn-regist small">글쓰기</button></Link>
+            {
+              roleCheck === true && <Link to={"/notice_edit"}><button className="btn btn-regist small">글쓰기</button></Link>
+            }
           </div>
         </section>
       </>

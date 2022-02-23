@@ -9,12 +9,7 @@ const MyPage = () => {
   const [userAuth, setUserAuth] = useState('');
   const [userLoginType, setUserLoginType] = useState('');
   const [userProfile, setUserProfile] = useState('');
-  const navigate = useNavigate();
   const userInfo = getCookie('loginCookie');
-
-  const socialLogin = () => {
-
-  }
 
   useEffect(() => {
     if (userInfo !== undefined) {
@@ -23,6 +18,7 @@ const MyPage = () => {
       setUserName(userInfo.name);
       setUserAuth(userInfo.roles[0]);
       setUserLoginType(userInfo.socialType.toUpperCase());
+      setUserNickName(userInfo.nickName);
     }
 
   }, []);

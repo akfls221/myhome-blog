@@ -13,6 +13,7 @@ import StudyEdit from "./StudyEdit";
 import StudyView from "./StudyView";
 import Social from "./Social";
 import MyPage from "./MyPage";
+import JoinPage from "./JoinPage";
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
           <Route path = "/study" element={<Study />}></Route>
           <Route path = "/study_edit" element={<StudyEdit />}></Route>
           <Route path = "/study/:id" exact element={<StudyView />}></Route>
+          <Route path = "/join" exact element={<JoinPage />}></Route>
           <Route path = "/mypage" element={<MyPage />}></Route>
           <Route path = "/google" exact element={<Social />}></Route>
           <Route path = "/kakao" exact element={<Social />}></Route>

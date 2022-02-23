@@ -56,7 +56,7 @@ const Modal = ({ open, close }) => {
       <>
       <div className={open ? 'openModal modal' : 'modal'}>
         {open ? (
-            <section>
+            <section className="login-section">
               <header>
                 로그인
                 <button className="close" onClick={close}>
@@ -77,7 +77,7 @@ const Modal = ({ open, close }) => {
                   <div className="login-btn-form">
                     <button className="btn btn-login" onClick={loginSubmit}>LogIn</button>
                   </div>
-                  <div className="ask-sign-up">계정이 없으신 가요?  Join!</div>
+                  <div className="ask-sign-up">계정이 없으신 가요?  <a className="join-link blink" href="/join">Join!</a></div>
                   <div className="social-sign-up"></div>
                   <div className="bordert"></div>
                   <div className="login-btn-form">

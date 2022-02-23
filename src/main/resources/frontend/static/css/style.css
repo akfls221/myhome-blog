@@ -1144,7 +1144,7 @@ section {
     cursor: pointer;
     border: 0;
 }
-.modal > section {
+.login-section {
     width: 90%;
     max-width: 420px;
     height: 700px;
@@ -1379,4 +1379,115 @@ section {
     float: right;
     display: block;
     text-decoration-color: rgba(0, 0, 0, 0.18);
+}
+
+.join-detail {
+    display: table;
+    width: 610px;
+    table-layout: fixed;
+    margin-bottom: 30px;
+}
+
+.join-input{
+    display: table-cell;
+    position: relative;
+    margin: 16px 10px;
+    width: 350px;
+    height: 40px;
+    border-radius: 0;
+    border: 1px solid #dae0e5;
+    float: left;
+}
+
+.check-result{
+    display: table-cell;
+    position: relative;
+    margin: 16px 0px;
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+    float: left;
+}
+
+.exist-check {
+    color: white;
+    font-weight: bolder;
+    font-size: 13px;
+    padding: 0px;
+    background-color: #1274cb;
+    border-color: #0e84b6;
+    border-radius: 12%;
+    height: 36px;
+    width: 60px;
+    display: table-cell;
+    float: right;
+    margin: 16px 0px;
+}
+
+.non-exist-check {
+    color: white;
+    font-weight: bolder;
+    font-size: 13px;
+    padding: 0px;
+    background-color: #d74343;
+    border-color: #d74343;
+    border-radius: 12%;
+    height: 36px;
+    width: 60px;
+    display: table-cell;
+    float: right;
+    margin: 16px 0px;
+}
+
+@keyframes blink-effect { 50% { opacity: 0; } }
+
+.blink { animation: blink-effect 1s step-end infinite;}
+
+.join-link{
+  color: #004abb;
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.email-form-wrapper {
+    padding: 0 10px;
+    text-align: center;
+    height: 300px;
+    margin: 0 10px;
+}
+
+.email-section {
+    width: 90%;
+    max-width: 420px;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 0.3s;
+    overflow: hidden;
+}
+
+.email-input{
+    display: table-cell;
+    position: relative;
+    margin: 16px 10px;
+    width: 300px;
+    height: 40px;
+    border-radius: 0;
+    border: 1px solid #dae0e5;
+    float: left;
+}
+
+.btn.btn-join {
+    background: linear-gradient(-45deg, #1391a5, #274685);
+    color: #fff;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+    font-size: 13px;
+    margin-top: 15px;
+    width: 100px;
+    height: 45px;
+    vertical-align: middle;
+    display: inline-block;
+
 }
