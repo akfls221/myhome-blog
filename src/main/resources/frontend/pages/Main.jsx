@@ -1,15 +1,15 @@
 import React from 'react';
 
-import RecentBord from "../component/sectionComponent/RecentBord";
 import RecentNotice from "../component/sectionComponent/RecentNotice";
 import FeedBackSection from "../component/sectionComponent/FeedBackSection";
+import RecentBoard from "../component/sectionComponent/RecentBoard";
 
 
 const Main = () => {
 
   return(
       <>
-        <RecentBord />
+        <RecentBoard />
         <RecentNotice />
         <FeedBackSection />
       </>

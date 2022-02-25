@@ -4,12 +4,14 @@ import {useNavigate} from "react-router-dom";
 import StudyBoardConfig from "../component/studyBoardComponent/StudyBoardConfig";
 import NoticeContent from "../component/noticeComponent/NoticeContent";
 import RegDeleteBtn from "../component/buttonComponent/RegDeleteBtn";
+import {getCookie} from "../util/Cookie";
 
 const StudyEdit = () => {
   const [studyTitle, setStudyTitle] = useState('');
   const [studySub, setStudySub] = useState('');
   const [studyContent, setStudyContent] = useState('');
   const [studyDate, setStudyDate] = useState('');
+  const accessToken = getCookie('loginCookie').accessToken;
 
   const handleTitleInput = (value) => {
     setStudyTitle(value);
@@ -52,11 +54,13 @@ const StudyEdit = () => {
       alert("게시글 제목 또는 내용을 입력해 주세요");
       return;
     }
-    const thumbNail = 'src';
+
     console.log("썸네일 뽑아보자", studyContent)
+
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/board',
+      url: 'http://localhost:8080/api/v1/board',
+      headers: {Authorization: accessToken},
       data: {
         'title': studyTitle,
         'author' : '관리자',

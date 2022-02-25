@@ -24,7 +24,7 @@ import java.util.List;
 @Component
 public class JwtTokenProvider {
 
-    @Value("${spring.jwt.secret}")
+    @Value("${jwt.secret}")
     private String secretKey;
 
     private long tokenValidMilliSecond  = 1000L * 60 * 60; //1시간 동안 토큰 유효
@@ -63,7 +63,7 @@ public class JwtTokenProvider {
 
     // Request의 Header에서 token 파싱 : "X-AUTH-TOKEN: jwt토큰"
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        return request.getHeader("Authorization");
     }
 
     // Jwt 토큰의 유효성 + 만료일자 확인

@@ -28,6 +28,11 @@ const Modal = ({ open, close }) => {
   const loginSubmit = (e) => {
     e.preventDefault();
 
+    if (userPw.length === 0 && userId.length === 0) {
+      alert("ID 혹은 비밀번호를 입력해주세요");
+      return;
+    }
+
     axios({
       method: "POST",
       url: 'http://localhost:8080/api/v1/sign',
@@ -37,14 +42,18 @@ const Modal = ({ open, close }) => {
       }
     }).then((res) => {
       const resData = res.data
-      setCookie('loginCookie', resData, {
-        // httpOnly: true,
-      });
-      navigate("/");
-      location.reload();
-
+      if (resData.message !== undefined) {
+        alert(resData.message);
+        return;
+      } else {
+        setCookie('loginCookie', resData, {
+          // httpOnly: true,
+        });
+        navigate("/");
+        location.reload();
+      }
     }).catch(error => {
-      throw new Error(error);
+      alert(error);
     });
   }
 
@@ -68,15 +77,17 @@ const Modal = ({ open, close }) => {
                 <img src="../static/img/login-icon.png"/>
               </div>
                 <div className="login-form-wrapper">
-                  <div className="login-input-form">
-                    <input className="login-input" value={userId} onChange={handleInputChangeId}/>
-                  </div>
-                  <div className="login-input-form">
-                    <input type="password" className="login-input" value={userPw} onChange={handleInputChangePw} />
-                  </div>
+                  <form onSubmit={loginSubmit}>
+                    <div className="login-input-form">
+                      <input className="login-input" value={userId} onChange={handleInputChangeId}/>
+                    </div>
+                    <div className="login-input-form">
+                      <input type="password" className="login-input" value={userPw} onChange={handleInputChangePw} />
+                    </div>
                   <div className="login-btn-form">
-                    <button className="btn btn-login" onClick={loginSubmit}>LogIn</button>
+                    <button className="btn btn-login" >LogIn</button>
                   </div>
+                  </form>
                   <div className="ask-sign-up">계정이 없으신 가요?  <a className="join-link blink" href="/join">Join!</a></div>
                   <div className="social-sign-up"></div>
                   <div className="bordert"></div>

@@ -9,7 +9,7 @@ const NoticeList = ({value}) => {
           <div className="col-md-12 mb-5 mb-md-0" >
             <div className="board-list-content-wrap">
               <div className="board-list-content-title">
-                {value.type === "M" && <img className="must-notice-img" src="/static/img/must2.png"/>}
+                {value.type === "M" && <img className="must-notice-img" src="/static/img/must.png"/>}
                 <Link to={{
                   pathname: `/view/${value.id}`,
                   state: {id: value.id}

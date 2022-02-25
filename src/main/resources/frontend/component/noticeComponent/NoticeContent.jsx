@@ -8,10 +8,6 @@ const NoticeContent = ({contentValue, contentOnChange }) => {
     contentOnChange(content);
   }
 
-  const fileUpload = (data) => {
-    console.log(data)
-  }
-
   const config = { // http://rmamuzic.rs/node_modules/jodit/examples/index.html
     readonly: false, // all options from https://xdsoft.net/jodit/doc/
     height: 500,

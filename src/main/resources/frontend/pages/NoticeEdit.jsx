@@ -6,12 +6,14 @@ import NoticeContent from "../component/noticeComponent/NoticeContent";
 import RegDeleteBtn from "../component/buttonComponent/RegDeleteBtn";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {getCookie} from "../util/Cookie";
 
 const NoticeEdit = () => {
   const [noticeTitle, setNoticeTitle] = useState('');
   const [noticeType, setNoticeType] = useState('N');
   const [noticeContent, setNoticeContent] = useState('');
   const [noticeDate, setNoticeDate] = useState('');
+  const accessToken = getCookie('loginCookie').accessToken;
 
   const handleTitleInput = (value) => {
     setNoticeTitle(value);
@@ -57,6 +59,7 @@ const NoticeEdit = () => {
     axios({
       method: "POST",
       url: 'http://localhost:8080/api/v1/posts',
+      headers: {Authorization: accessToken},
       data: {
         'title': noticeTitle,
         'created_date': noticeDate,

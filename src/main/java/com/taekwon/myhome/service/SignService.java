@@ -37,9 +37,9 @@ public class SignService {
 
     public SignResponseDto getSingleResult(SignRequestDto request) {
 
-        User user = userRepository.findByUid(request.getUid()).orElseThrow(IllegalStateException::new);
+        User user = userRepository.findByUid(request.getUid()).orElseThrow(() -> new IllegalArgumentException("ID를 확인해 주세요"));
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword()))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("패스워드를 확인해 주세요");
 
         String accessToken = jwtTokenProvider.createToken(String.valueOf(user.getId()), user.getRoles());
 

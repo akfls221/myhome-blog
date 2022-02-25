@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 public class User extends BaseTimeEntity implements UserDetails {
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue
     private Long id;
 

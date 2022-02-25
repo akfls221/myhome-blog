@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:8081/")
@@ -17,23 +19,28 @@ public class BoardApiController {
 
     private final BoardService boardService;
 
-    @PostMapping("/api/board")
+    @PostMapping("/api/v1/board")
     public long save(@RequestBody BoardSaveRequestDto requestDto) {
         return boardService.save(requestDto);
     }
 
-    @PostMapping("/api/boardUpdate/{id}")
+    @PostMapping("/api/v1/boardUpdate/{id}")
     public long update(@PathVariable Long id, BoardUpdateRequestDto requestDto) {
         return boardService.update(id, requestDto);
     }
 
-    @GetMapping("/api/board/{id}")
+    @GetMapping("/api/v1/board/{id}")
     public BoardResponseDto findById(@PathVariable Long id) {
         return boardService.findById(id);
     }
 
-    @PostMapping("/api/board/boardList")
+    @PostMapping("/api/v1/board/boardList")
     public Page<BoardListResponseDto> findAllDesc(Pageable pageable) {
         return boardService.findAllDesc(pageable);
+    }
+
+    @PostMapping("/api/v1/board/recentBoardList")
+    public List<BoardListResponseDto> findTop3() {
+        return boardService.findTop3();
     }
 }

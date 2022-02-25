@@ -20,7 +20,7 @@ const Study = () => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/board/boardList',
+      url: 'http://localhost:8080/api/v1/board/boardList',
     }).then((res) => {
       if(isComponentMounted) {
         console.log(res.data);

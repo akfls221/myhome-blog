@@ -25,7 +25,7 @@ const StudyView = () => {
 
       axios({
         method: "GET",
-        url: `http://localhost:8080/api/board/${param}`,
+        url: `http://localhost:8080/api/v1/board/${param}`,
       }).then((res) => {
         const item = res.data;
         setTitleContent(item);

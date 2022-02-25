@@ -8,7 +8,12 @@ import com.taekwon.myhome.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -35,5 +40,10 @@ public class PostsApiController {
     @PostMapping("/api/v1/postsList")
     public Page<PostsListResponseDto> findAllDesc(Pageable pageable) {
         return postsService.findAllDesc(pageable);
+    }
+
+    @PostMapping("/api/v1/recentPostList")
+    public List<PostsListResponseDto> findTop3() {
+        return postsService.findTop3();
     }
 }

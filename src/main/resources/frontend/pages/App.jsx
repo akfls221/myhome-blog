@@ -14,6 +14,7 @@ import StudyView from "./StudyView";
 import Social from "./Social";
 import MyPage from "./MyPage";
 import JoinPage from "./JoinPage";
+import AboutMe from "./AboutMe";
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
           <Route path = "/mypage" element={<MyPage />}></Route>
           <Route path = "/google" exact element={<Social />}></Route>
           <Route path = "/kakao" exact element={<Social />}></Route>
+          <Route path = "/about" exact element={<AboutMe />}></Route>
 
         </Routes>
         <Footer />
