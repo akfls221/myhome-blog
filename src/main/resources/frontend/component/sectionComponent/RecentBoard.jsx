@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import axios from "axios";
+import RecentBoardDetail from "./RecentBoardDetail";
 
 const RecentBoard = () => {
   const [recentBoard, setRecentBoard] = useState([]);
@@ -18,7 +19,7 @@ const RecentBoard = () => {
     });
   }, []);
 
-  return(
+  return (
       <>
         <section className="section">
           <div className="container">
@@ -30,47 +31,22 @@ const RecentBoard = () => {
             </div>
 
             <div className="row">
-              {recentBoard.length <= 0 ?
-                <div className="board-list-none">
-                  <img src="/static/img/none-notice.png"/>
-                  <div className="board-list-none-text">최근 게시글이 없습니다</div>
-                </div>
-                :
-                <>
-                <div className="col-md-4" data-aos="fade-up" data-aos-delay="">
-                  <div className="feature-1 text-center">
-                    <div className="wrap-icon icon-1">
-                      <i className="bi bi-people"></i>
-                    </div>
-                    <h3 className="mb-3">Explore Your Team</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
+              {recentBoard.length <= 0 &&
+                  <div className="board-list-none">
+                    <img src="/static/img/none-notice.png"/>
+                    <div className="board-list-none-text">최근 게시글이 없습니다</div>
                   </div>
-                </div>
-                <div className="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                  <div className="feature-1 text-center">
-                    <div className="wrap-icon icon-1">
-                      <i className="bi bi-brightness-high"></i>
-                    </div>
-                    <h3 className="mb-3">Digital Whiteboard</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                  </div>
-                </div>
-                <div className="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                  <div className="feature-1 text-center">
-                    <div className="wrap-icon icon-1">
-                      <i className="bi bi-bar-chart"></i>
-                    </div>
-                    <h3 className="mb-3">Design To Development</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                  </div>
-                </div>
-                </>
               }
+              {recentBoard.map(item => {
+                return(
+                  <RecentBoardDetail key={"board_"+item.id} value={item}/>
+                )
+              })}
             </div>
           </div>
         </section>
       </>
-  )
+  );
 }
 
 export default RecentBoard;

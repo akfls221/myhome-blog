@@ -4,11 +4,18 @@ import StudyList from "../component/studyBoardComponent/StudyList";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
+import Page from "../component/Page";
 
 const Study = () => {
   const [boardList, setBoardList] = useState([]);
   const [roleCheck, setRoleCheck] = useState(false);
+  const [totalPage, setTotalPage] = useState(0);
+  const [nowPage, setNowPage] = useState(1);
   const userInfo = getCookie('loginCookie');
+
+  const movePage = (value) => {
+    setNowPage(value);
+  }
 
   useEffect(() => {
     let isComponentMounted = true;
@@ -20,11 +27,12 @@ const Study = () => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/board/boardList',
+      url: 'http://localhost:8080/api/v1/board/boardList?page=' + nowPage,
     }).then((res) => {
       if(isComponentMounted) {
         console.log(res.data);
         setBoardList(res.data.content);
+        setTotalPage(res.data.totalPages);
       }
     }).catch(error => {
       console.log(error);
@@ -34,7 +42,7 @@ const Study = () => {
     return () => {
       isComponentMounted = false;
     };
-  }, []);
+  }, [nowPage]);
 
   return (
       <>
@@ -58,6 +66,11 @@ const Study = () => {
                   <StudyList key={item.id} value={item}/>
                 );
               })}
+            </div>
+            <div className="row">
+              <div className="page-area">
+                <Page totalPage={totalPage} setNowPage={setNowPage} nowPage={nowPage} movePage={value => movePage(value)} />
+              </div>
             </div>
             {
               roleCheck === true && <Link to={"/study_edit"}><button className="btn btn-regist small" >글쓰기</button></Link>

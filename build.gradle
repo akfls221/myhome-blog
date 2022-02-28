@@ -24,7 +24,7 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 
 	//spring dev-tools
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+//    developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     //Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'

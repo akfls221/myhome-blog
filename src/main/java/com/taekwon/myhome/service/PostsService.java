@@ -8,6 +8,7 @@ import com.taekwon.myhome.web.dto.PostsSaveRequestDto;
 import com.taekwon.myhome.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +46,8 @@ public class PostsService {
     }
 
     public Page<PostsListResponseDto> findAllDesc(Pageable pageable) {
+        int page = pageable.getPageNumber() == 0 ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, 10);
         return postsRepository.findAllDesc(pageable).map(posts -> new PostsListResponseDto(posts));
     }
 

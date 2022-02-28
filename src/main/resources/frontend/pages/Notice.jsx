@@ -4,11 +4,18 @@ import NoticeList from "../component/noticeComponent/NoticeList";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
+import Page from "../component/Page";
 
 const Notice = () => {
   const [noticeList, setNoticeList] = useState([]);
   const [roleCheck, setRoleCheck] = useState(false);
+  const [totalPage, setTotalPage] = useState(0);
+  const [nowPage, setNowPage] = useState(1);
   const userInfo = getCookie('loginCookie');
+
+  const movePage = (value) => {
+    setNowPage(value);
+  }
 
   useEffect(() => {
     if (userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
@@ -19,10 +26,11 @@ const Notice = () => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/postsList',
+      url: 'http://localhost:8080/api/v1/postsList?page=' + nowPage ,
     }).then((res) => {
       console.log(res.data);
       setNoticeList(res.data.content);
+      setTotalPage(res.data.totalPages);
     }).catch(error => {
       console.log(error);
       throw new Error(error);
@@ -30,7 +38,7 @@ const Notice = () => {
 
     return () => {
     };
-  }, []);
+  }, [nowPage]);
 
   return (
       <>
@@ -50,6 +58,11 @@ const Notice = () => {
                 <NoticeList key={item.id} value={item}/>
               );
             })}
+            <div className="row">
+              <div className="page-area">
+                <Page totalPage={totalPage} setNowPage={setNowPage} nowPage={nowPage} movePage={value => movePage(value)} />
+              </div>
+            </div>
             {
               roleCheck === true && <Link to={"/notice_edit"}><button className="btn btn-regist small">글쓰기</button></Link>
             }

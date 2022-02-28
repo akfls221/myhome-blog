@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import RecentNoticeDetail from "./RecentNoticeDetail";
 
 const RecentNotice = () => {
   const [recentNotice, setRecentNotice] = useState([]);
@@ -28,31 +29,17 @@ const RecentNotice = () => {
               </div>
             </div>
             <div className="row">
-              {recentNotice.length <= 0 ?
+              {recentNotice.length <= 0 &&
                 <div className="board-list-none">
                   <img src="/static/img/none-notice.png"/>
                   <div className="board-list-none-text">최근 공지사항이 없습니다</div>
                 </div>
-                :
-                <>
-                  {recentNotice.map((item, index) => {
-                    return (
-                      <div className="col-md-4">
-                        <div className="step">
-                          {item.type === 'M' ?
-                            <span className="number">{'0' + (index + 1)}<img className="must-recent-img" src="/static/img/must.png"/></span>
-                            :
-                            <span className="number">{'0' + (index + 1)}</span>
-                          }
-                          <h4>{item.title.substring(0,25) + "..."}</h4>
-                          <p>{item.content.substring(3, 40) + "..."}</p>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </>
               }
-
+              {recentNotice.map((item, index) => {
+                return (
+                  <RecentNoticeDetail value={item} key={"notice_" + item.id} index={index}/>
+                )
+              })}
             </div>
           </div>
         </section>
