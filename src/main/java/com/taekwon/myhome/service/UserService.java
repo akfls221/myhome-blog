@@ -35,7 +35,7 @@ public class UserService {
 
     public UserResponseDto findById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(CUserNotFoundException::new);
+                .orElseThrow(() -> new CUserNotFoundException("일치하는 회원이 없습니다."));
         return new UserResponseDto(user);
     }
 

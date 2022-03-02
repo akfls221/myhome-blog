@@ -15,6 +15,8 @@ const JoinPage = () => {
   const [userName, setUserName] = useState('');
   const [userNickName, setUserNickName] = useState('');
   const [userProfile, setUserProfile] = useState('');
+  const [datePath, setDatePath] = useState('');
+  const [uuidFilename, setUuidFilename] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [emailCheckResult, setEmailCheckResult] = useState(false);
   const [joinBtn, setJoinBtn] = useState(true);
@@ -60,8 +62,55 @@ const JoinPage = () => {
     }).catch(error => {
       console.log(error);
       alert("존재하지 않는 이메일이거나 이메일 형식이 잘못 되었습니다.");
-      return;
     });
+  }
+
+  const uploadProfile = (e) => {
+    const profile = e.target.files[0]
+    if (profile !== undefined) {
+      const formData = new FormData();
+      formData.append("multipartFile", profile);
+      console.log(e.target.files[0]);
+
+      if (uuidFilename !== '') {
+        axios({
+          method: "POST",
+          url: "http://localhost:8080/api/v1/deleteProfile",
+          data: {deletePath : datePath + "\\" + uuidFilename},
+        }).then((res) => {
+          if (res.data.error) {
+            alert(res.data.message);
+            return;
+          }
+          setDatePath('');
+          setUuidFilename('');
+          setUserProfile('');
+
+        }).catch(error => {
+          console.log(error);
+          alert("파일 업로드에 문제가 있습니다. 관리자에게 문의해주세요");
+        });
+      }
+
+      axios({
+        method: "POST",
+        url: "http://localhost:8080/api/v1/profile",
+        data: formData,
+      }).then((res) => {
+        if (res.data.error) {
+          alert(res.data.message);
+          return;
+        }
+        setDatePath(res.data.datePath);
+        setUuidFilename(res.data.uuidFilename);
+
+        setUserProfile("http://localhost:8080/api/v1/getProfile/" + res.data.requestPath);
+
+      }).catch(error => {
+        console.log(error);
+        alert("파일 업로드에 실패 했습니다. 관리자에게 문의해주세요.");
+      });
+    }
   }
 
   const closeModal = () => {
@@ -138,6 +187,10 @@ const JoinPage = () => {
     }
   }, [existCheck, pwCheckResult, emailCheckResult])
 
+  // useEffect(() => {
+  //   getProfileImage();
+  // }, [requestProfile])
+
   return (
       <>
         <section className="section">
@@ -150,13 +203,17 @@ const JoinPage = () => {
                 <form method="post" role="form" className="php-email-form">
                   <div className="col-md-12 mb-5 mb-md-0">
                     <div className="profile-wrapper">
+                      <div className="profile-img-wrapper">
                       <img className="profile-img" src={userProfile} />
+                        <label className="input-file-button" htmlFor="inputFile">프로필 업로드</label>
+                        <input className="input-file" type="file" id="inputFile" multiple="multiple" onChange={uploadProfile} />
+                      </div>
                       <div className="profile-info">
                         <div className="join-detail">
                           <div className="profile-subtitle">사용자 ID</div>
                           <input className="join-input" value={userId} onChange={uIdHandle} />
                           {existCheck === true ?
-                              <img className="check-result" src='/static/img/check-icon.png' />
+                              <img className="check-result" src='../static/img/check-icon.png' />
                               :
                               <button className="non-exist-check" onClick={idCheckHandle}>중복체크</button>
                           }

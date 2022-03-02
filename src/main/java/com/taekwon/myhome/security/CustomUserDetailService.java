@@ -15,6 +15,6 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userPk) {
-        return userRepository.findById(Long.valueOf(userPk)).orElseThrow(CUserNotFoundException::new);
+        return userRepository.findById(Long.valueOf(userPk)).orElseThrow(() ->new CUserNotFoundException("존재하는 회원이 없습니다."));
     }
 }

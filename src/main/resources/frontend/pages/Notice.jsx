@@ -9,7 +9,7 @@ import Page from "../component/Page";
 const Notice = () => {
   const [noticeList, setNoticeList] = useState([]);
   const [roleCheck, setRoleCheck] = useState(false);
-  const [totalPage, setTotalPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
   const userInfo = getCookie('loginCookie');
 

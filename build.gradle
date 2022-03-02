@@ -26,6 +26,12 @@ dependencies {
 	//spring dev-tools
 //    developmentOnly("org.springframework.boot:spring-boot-devtools")
 
+    //Thumbnailator
+    implementation 'net.coobird:thumbnailator:0.4.1'
+
+    //Apache Commonse IO
+    implementation group: 'commons-io', name: 'commons-io', version: '2.5'
+
     //Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     //jwt

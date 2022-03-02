@@ -11,7 +11,7 @@ const AboutMe = () => {
             </div>
           </div>
           <div className="profile-container">
-            <img className="cmd-img" src="../static/img/aaa.png"/>
+            <img className="cmd-img" src="../static/img/cmd-toolbar.png"/>
             <div className="about-wrapper">
               <div className="about-profile-txt">
                 <div className="profile-detail">
@@ -37,7 +37,7 @@ const AboutMe = () => {
                   </div>
                 </div>
               </div>
-              <img className="about-profile-img" src="../static/img/my-profile.jpg"/>
+              <img className="about-profile-img" src="../static/img/profile.jpg"/>
             </div>
           </div>
         </section>

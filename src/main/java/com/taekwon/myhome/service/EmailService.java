@@ -2,6 +2,7 @@ package com.taekwon.myhome.service;
 
 import com.taekwon.myhome.domain.email.Email;
 import com.taekwon.myhome.domain.email.EmailRepository;
+import com.taekwon.myhome.exception.CEmailSignFailedException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
@@ -68,13 +69,13 @@ public class EmailService {
 
         }catch(MailException es){
             es.printStackTrace();
-            throw new IllegalArgumentException();
+            throw new CEmailSignFailedException("존재하지 않는 이메일 이거나 형식이 잘못 되었습니다.");
         }
     }
 
     public boolean checkEmail(String email, String code) {
         String accessCode = emailRepository.findRecentEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("코드를 재발급 해주세요"))
+                .orElseThrow(() -> new CEmailSignFailedException("코드를 재발급 해주세요"))
                 .getAccess_code();
         if (accessCode.equals(code)) {
             return true;

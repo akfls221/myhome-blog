@@ -1334,6 +1334,14 @@ section {
   background: url("../img/my_page.png") white;
 }
 
+.profile-img-wrapper{
+    float: left;
+    width: 400px;
+    height: 600px;
+    margin-right: 50px;
+    float: left;
+}
+
 .profile-img{
   float: left;
   width: 400px;
@@ -1480,6 +1488,15 @@ section {
   height: 45px;
   vertical-align: middle;
   display: inline-block;
+}
+
+.input-file-button {
+    padding: 6px 25px;
+    background: linear-gradient(-45deg, #1391a5, #274685);
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
 .must-recent-img{
@@ -1650,4 +1667,8 @@ section {
 .recent-board-thumb{
   width: 420px;
   height: 300px;
+}
+
+.input-file{
+  display: none;
 }
