@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {getCookie, removeCookie, setCookie} from "../../util/Cookie";
+import {getCookie, removeCookie} from "../../util/Cookie";
 import Modal from "../../pages/Modal";
 
-const WelcomeSection = () => {
+const WelcomeSection = memo(() => {
   const [welcomeTitle, setWelcomeTitle] = useState("엄태권의 개발 블로그입니다");
   const [welcomeSub, setWelcomeSub] = useState("안녕하세요! 저의 사이트에 방문해 주셔서 감사 합니다!");
   const [btnState, setBtnState] = useState("LogIn");
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const data = getCookie('loginCookie');
+  const userInfo = getCookie('loginCookie');
 
   const handleLogOut = (e) => {
-    const social = data.socialType;
+    const social = userInfo.socialType;
     if (social === 'kakao') {
       location.href = "http://localhost:8080/social/kakao/logout";
       removeCookie('loginCookie');
@@ -21,7 +21,8 @@ const WelcomeSection = () => {
       removeCookie('loginCookie');
     } else {
       removeCookie('loginCookie');
-      location.reload();
+      navigate("/")
+      // location.reload();
     }
     // removeCookie('loginCookie');
     // navigate("/")
@@ -37,17 +38,17 @@ const WelcomeSection = () => {
   }
 
   useEffect(() => {
-    console.log("@@@@@@",data)
-    if (data !== undefined) {
-      setWelcomeSub(`안녕하세요! ${data.name} 님!!`);
+    console.log("@@@@@@", userInfo)
+    if (userInfo !== undefined) {
+      setWelcomeSub(`안녕하세요! ${userInfo.name} 님!!`);
       setBtnState('LogOut');
     } else {
-      return;
+      setWelcomeSub("안녕하세요! 저의 사이트에 방문해 주셔서 감사 합니다!");
+      setBtnState('LogIn');
     }
+  }, [userInfo]);
 
-  }, []);
-
-    return(
+  return (
       <>
         <section className="hero-section" id="hero">
           <div className="container">
@@ -60,9 +61,9 @@ const WelcomeSection = () => {
                     <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500">
                       <a href="#" className="btn btn-outline-white">About Site</a>
                       {btnState === 'LogIn' ?
-                        <a onClick={openModal} className="btn btn-outline-white" >{btnState}</a>
-                        :
-                        <a className="btn btn-outline-white" onClick={handleLogOut}>{btnState}</a>
+                          <a onClick={openModal} className="btn btn-outline-white">{btnState}</a>
+                          :
+                          <a className="btn btn-outline-white" onClick={handleLogOut}>{btnState}</a>
                       }
                     </p>
                   </div>
@@ -71,9 +72,9 @@ const WelcomeSection = () => {
             </div>
           </div>
         </section>
-        <Modal open={modalOpen} close={closeModal} header="로그인" />
+        <Modal open={modalOpen} close={closeModal} header="로그인"/>
       </>
-    );
-}
+  );
+});
 
 export default WelcomeSection;

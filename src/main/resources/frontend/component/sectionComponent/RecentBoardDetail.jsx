@@ -1,8 +1,12 @@
-import React, {useEffect, useMemo, useState} from 'react';
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {getCookie} from "../../util/Cookie";
 
 const RecentBoardDetail = ({value}) => {
   const [thumbNail, setThumbNail] = useState('');
+
+  const userInfo = getCookie('loginCookie');
+  const navigate = useNavigate();
 
   const CreateThumbnail = () => {
     const content = value.content;
@@ -18,6 +22,14 @@ const RecentBoardDetail = ({value}) => {
     return viewThumbNail;
   }
 
+  const checkLogin = () => {
+    if (userInfo === undefined) {
+      alert("회원 가입후 이용 가능한 페이지 입니다.");
+    } else {
+      navigate(`/study/${value.id}`);
+    }
+  }
+
   useEffect(() => {
     const result = CreateThumbnail();
     if (result.length <= 0) {
@@ -31,14 +43,10 @@ const RecentBoardDetail = ({value}) => {
     <div className="col-md-4">
       <div className="feature-1 text-center">
         <div className="post-entry-thumb">
-          <Link to={`/study/${value.id}`}>
-            <img className="recent-board-thumb" src={thumbNail}/>
-          </Link>
+          <img className="recent-board-thumb" src={thumbNail} onClick={checkLogin}/>
         </div>
-        <Link to={`/study/${value.id}`}>
-          <h4 className="mb-2">{value.title.slice(0, 20)}</h4>
-        </Link>
-        <p>{value.sub}</p>
+        <h4 className="mb-2" onClick={checkLogin}>{value.title.slice(0, 20)}</h4>
+          <p>{value.sub}</p>
       </div>
     </div>
   )

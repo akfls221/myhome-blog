@@ -38,8 +38,8 @@ public class SignApiController {
     }
 
     @PostMapping("/idCheck")
-    public Boolean isJoined(@RequestBody String uid) {
-        return signService.isJoinedUser(uid);
+    public boolean isJoined(@RequestBody SignRequestDto request) {
+        return signService.isJoinedUser(request.getUid());
     }
 
 

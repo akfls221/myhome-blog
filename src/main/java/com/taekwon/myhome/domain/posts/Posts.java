@@ -36,8 +36,10 @@ public class Posts extends BaseTimeEntity {
         this.type = type;
     }
 
-    public void update(String title, String content) {
+    public void update(String title, String content, String author, String type) {
         this.title = title;
         this.content = content;
+        this.author = author;
+        this.type = type;
     }
 }

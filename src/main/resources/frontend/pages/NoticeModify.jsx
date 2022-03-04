@@ -1,18 +1,43 @@
 import React, {useEffect, useState} from 'react';
-
 import NoticeConfig from "../component/noticeComponent/NoticeConfig";
 import NoticeContent from "../component/noticeComponent/NoticeContent";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
+import {useParams} from "react-router";
 
-const NoticeEdit = () => {
+const NoticeModify = () => {
   const [noticeTitle, setNoticeTitle] = useState('');
   const [noticeType, setNoticeType] = useState('N');
   const [noticeContent, setNoticeContent] = useState('');
   const [noticeDate, setNoticeDate] = useState('');
   const [author, setAuthor] = useState('');
   const userInfo = getCookie('loginCookie');
+
+  const id = useParams().id;
+
+  useEffect(() => {
+    if(userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
+      axios({
+        method: "GET",
+        url: `http://localhost:8080/api/v1/posts/${id}`,
+      }).then((res) => {
+        const item = res.data;
+        console.log(item);
+        setNoticeType(item.type);
+        setNoticeContent(item.content);
+        setNoticeTitle(item.title)
+
+      }).catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
+    }
+
+    return () => {
+    }
+  }, [])
+
 
   const handleTitleInput = (value) => {
     setNoticeTitle(value);
@@ -49,7 +74,7 @@ const NoticeEdit = () => {
     return () => {}
   }, []);
 
-  const registNotice = (e) => {
+  const modifyNotice = (e) => {
     e.preventDefault();
     if (noticeTitle.length === 0 || noticeContent.length === 0) {
       alert("게시글 제목 또는 내용을 입력해 주세요");
@@ -57,7 +82,7 @@ const NoticeEdit = () => {
     }
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/posts',
+      url: `http://localhost:8080/api/v1/postsUpdate/${id}`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: noticeTitle,
@@ -66,8 +91,13 @@ const NoticeEdit = () => {
         type: noticeType,
       }
     }).then((res) => {
-      alert("게시글 등록이 완료되었습니다.");
-      navigate('/notice');
+      const resData = res.data;
+      if (resData.message !== undefined) {
+        alert(resData.message);
+      }else {
+        alert("수정이 완료되었습니다.");
+        navigate(-1);
+      }
     }).catch(error => {
       console.log(error);
       throw new Error(error);
@@ -87,11 +117,11 @@ const NoticeEdit = () => {
         <section className="section">
           <div className="container">
             <div className="row justify-content-left text-left mb-5" data-aos="fade-up">
-              <h2 className="board-title">공지사항 등록</h2>
+              <h2 className="board-title">공지사항 수정</h2>
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-                <form method="post" role="form" className="php-email-form" onSubmit={registNotice}>
+                <form method="post" role="form" className="php-email-form" >
                   <NoticeConfig
                       titleValue={noticeTitle}
                       titleOnChange={(value) => handleTitleInput(value)}
@@ -105,7 +135,7 @@ const NoticeEdit = () => {
                       contentOnChange={(value) => handelNoticeContent(value)}
                   />
                   <button onClick={handleDeleteBtn} className="btn btn-delete small">취소</button>
-                  <button className="btn btn-regist small" onClick={registNotice}>등록</button>
+                  <button className="btn btn-regist small" onClick={modifyNotice}>등록</button>
                 </form>
               </div>
             </div>
@@ -115,4 +145,4 @@ const NoticeEdit = () => {
   )
 }
 
-export default NoticeEdit;
+export default NoticeModify;

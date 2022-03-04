@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
-import {getCookie} from "../util/Cookie";
 import axios from "axios";
-import Modal from "./Modal";
 import EmailCheckModal from "./EmailCheckModal";
 
 const JoinPage = () => {
@@ -131,11 +129,11 @@ const JoinPage = () => {
         uid: userId
       }
     }).then((res) => {
-      if (res.data) {
+      if (!res.data) {
         alert("사용 가능한 아이디 입니다.");
         setExistCheck(true);
       } else {
-        alert("아이디가 중복되었습니다. 다식 확인 부탁 드립니다.");
+        alert("아이디가 중복되었습니다. 다시 확인 부탁 드립니다.");
         setExistCheck(false);
       }
     }).catch(error => {
@@ -155,7 +153,8 @@ const JoinPage = () => {
         password: userPw,
         name: userName,
         nickName: userNickName,
-        email: userEmail
+        email: userEmail,
+        profileImageUrl: userProfile
       }
     }).then((res) => {
       const userInfo = res.data;
@@ -186,10 +185,6 @@ const JoinPage = () => {
       setJoinBtn(false);
     }
   }, [existCheck, pwCheckResult, emailCheckResult])
-
-  // useEffect(() => {
-  //   getProfileImage();
-  // }, [requestProfile])
 
   return (
       <>

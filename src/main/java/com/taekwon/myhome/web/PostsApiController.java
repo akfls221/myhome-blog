@@ -27,7 +27,8 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/postsUpdate/{id}")
+    @CrossOrigin(origins = "http://localhost:8081/")
+    @PostMapping("/api/v1/postsUpdate/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }

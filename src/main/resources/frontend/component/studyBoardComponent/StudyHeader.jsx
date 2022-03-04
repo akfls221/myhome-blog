@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StudyHeader = ({titleValue}) => {
+const StudyHeader = ({titleValue, sub}) => {
 
   return (
       <>
@@ -9,6 +9,10 @@ const StudyHeader = ({titleValue}) => {
             <div className="board-detail">
               <div className="board-subtitle">게시글 제목</div>
               <div className="board-sub-content">{titleValue}</div>
+            </div>
+            <div className="board-detail">
+              <div className="board-subtitle">게시글 설명</div>
+              <div className="board-sub-content">{sub}</div>
             </div>
             <div className="board-detail">
               <div className="board-subtitle">게시글 작성자</div>

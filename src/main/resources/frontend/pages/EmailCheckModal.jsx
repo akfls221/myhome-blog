@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
 import axios from "axios";
-import {setCookie} from "../util/Cookie";
 
 const EmailCheckModal = ({ open, close, setModalOpen, userEmail, setEmailCheckResult }) => {
   const [code, setCode] = useState('');
-
-  const navigate = useNavigate();
 
   const codeHandleChange = (e) => {
     setCode(e.target.value)

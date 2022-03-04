@@ -1,44 +1,52 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import StudyHeader from "../component/studyBoardComponent/StudyHeader";
+import {getCookie} from "../util/Cookie";
 
 const StudyView = () => {
-  const param = useParams().id;
-
   const [studyTitle, setStudyTitle] = useState('');
   const [studyContent, setStudyContent] = useState('');
+  const [studySub, setStudySub] = useState('');
+  const [roleCheck, setRoleCheck] = useState(false);
 
+  const userInfo = getCookie('loginCookie');
   const navigate = useNavigate();
-
-  const setTitleContent = (item) => {
-    setStudyTitle(item.title);
-    setStudyContent(item.content);
-  }
+  const id = useParams().id;
 
   const returnHistory = () => {
     navigate(-1);
   }
 
   useEffect(() => {
-
+    if(userInfo !== undefined) {
       axios({
         method: "GET",
-        url: `http://localhost:8080/api/v1/board/${param}`,
+        url: `http://localhost:8080/api/v1/board/${id}`,
       }).then((res) => {
         const item = res.data;
-        setTitleContent(item);
+        setStudyTitle(item.title);
+        setStudyContent(item.content);
+        setStudySub(item.sub);
 
       }).catch(error => {
         console.log(error);
         throw new Error(error);
       });
-
+    }
     return () => {
     }
-
   }, [])
+
+  useEffect(() => {
+    if (userInfo === undefined) {
+      alert("회원가입 후 이용가능한 페이지 입니다.");
+      navigate(-1);
+    } else if(userInfo.roles[0] === 'ROLE_ADMIN') {
+      setRoleCheck(userInfo.name);
+    }
+  }, []);
 
   return (
       <>
@@ -49,15 +57,22 @@ const StudyView = () => {
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-               <StudyHeader titleValue={studyTitle}/>
+               <StudyHeader titleValue={studyTitle}
+                            sub={studySub}
+               />
               </div>
               <div className="col-md-12 mb-5 mb-md-0">
                 <div className="notice-content-wrap">
-                  <div dangerouslySetInnerHTML={{__html: studyContent}}></div>
+                  <div dangerouslySetInnerHTML={{__html: studyContent}}/>
                 </div>
               </div>
             </div>
             <button className="btn btn-regist small" onClick={returnHistory}>목록</button>
+            {roleCheck &&
+              <Link to={`/study_modify/${id}`}>
+                <button className="btn btn-modify small">수정</button>
+              </Link>
+            }
           </div>
         </section>
       </>

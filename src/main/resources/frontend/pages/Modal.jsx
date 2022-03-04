@@ -48,6 +48,7 @@ const Modal = ({ open, close }) => {
       } else {
         setCookie('loginCookie', resData, {
           // httpOnly: true,
+          expires: new Date(Date.parse(new Date()) + 1000 * 60 * 60)
         });
         navigate("/");
         location.reload();

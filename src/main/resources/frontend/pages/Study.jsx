@@ -18,29 +18,29 @@ const Study = () => {
   }
 
   useEffect(() => {
-    let isComponentMounted = true;
     if (userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
       setRoleCheck(true);
     } else {
       setRoleCheck(false);
     }
 
-    axios({
-      method: "POST",
-      url: 'http://localhost:8080/api/v1/board/boardList?page=' + nowPage,
-    }).then((res) => {
-      if(isComponentMounted) {
-        console.log(res.data);
-        setBoardList(res.data.content);
-        setTotalPage(res.data.totalPages);
-      }
-    }).catch(error => {
-      console.log(error);
-      throw new Error(error);
-    });
+    if(userInfo !== undefined) {
+      axios({
+        method: "POST",
+        url: 'http://localhost:8080/api/v1/board/boardList?page=' + nowPage,
+      }).then((res) => {
+        if (isComponentMounted) {
+          console.log(res.data);
+          setBoardList(res.data.content);
+          setTotalPage(res.data.totalPages);
+        }
+      }).catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
+    }
 
     return () => {
-      isComponentMounted = false;
     };
   }, [nowPage]);
 

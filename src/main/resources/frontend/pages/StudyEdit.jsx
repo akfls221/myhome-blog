@@ -3,7 +3,6 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import StudyBoardConfig from "../component/studyBoardComponent/StudyBoardConfig";
 import NoticeContent from "../component/noticeComponent/NoticeContent";
-import RegDeleteBtn from "../component/buttonComponent/RegDeleteBtn";
 import {getCookie} from "../util/Cookie";
 
 const StudyEdit = () => {
@@ -11,7 +10,8 @@ const StudyEdit = () => {
   const [studySub, setStudySub] = useState('');
   const [studyContent, setStudyContent] = useState('');
   const [studyDate, setStudyDate] = useState('');
-  const accessToken = getCookie('loginCookie').accessToken;
+  const [author, setAuthor] = useState('');
+  const userInfo = getCookie('loginCookie');
 
   const handleTitleInput = (value) => {
     setStudyTitle(value);
@@ -38,6 +38,7 @@ const StudyEdit = () => {
 
   const handleDeleteBtn = (e) => {
     e.preventDefault();
+    navigate(-1);
   }
 
   const navigate = useNavigate()
@@ -47,7 +48,7 @@ const StudyEdit = () => {
     return () => {}
   }, []);
 
-  const registNotice = (e) => {
+  const registStudy = (e) => {
     e.preventDefault();
 
     if (studyTitle.length === 0 || studyContent.length === 0) {
@@ -60,12 +61,12 @@ const StudyEdit = () => {
     axios({
       method: "POST",
       url: 'http://localhost:8080/api/v1/board',
-      headers: {Authorization: accessToken},
+      headers: {Authorization: userInfo.accessToken},
       data: {
-        'title': studyTitle,
-        'author' : '관리자',
-        'content' : studyContent,
-        'sub': studySub,
+        title: studyTitle,
+        author : author,
+        content : studyContent,
+        sub: studySub,
       }
     }).then((res) => {
       navigate('/study');
@@ -74,6 +75,15 @@ const StudyEdit = () => {
       throw new Error(error);
     });
   }
+
+  useEffect(() => {
+    if (userInfo === undefined || userInfo.roles[0] !== 'ROLE_ADMIN') {
+      navigate(-1);
+    } else {
+      setAuthor(userInfo.name);
+    }
+  }, [userInfo]);
+
   return(
       <>
         <section className="section">
@@ -83,19 +93,21 @@ const StudyEdit = () => {
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-                <form method="post" role="form" className="php-email-form" onSubmit={registNotice}>
+                <form method="post" role="form" className="php-email-form" onSubmit={registStudy}>
                   <StudyBoardConfig
                       titleValue={studyTitle}
                       titleOnChange={(value) => handleTitleInput(value)}
                       subValue={studySub}
                       subOnChange={(value) => handleStudySub(value)}
                       dateValue={studyDate}
+                      author={author}
                   />
                   <NoticeContent
                       contentValue={studyContent}
                       contentOnChange={(value) => handelNoticeContent(value)}
                   />
-                  <RegDeleteBtn onClick={(e) => handleDeleteBtn(e)}/>
+                  <button onClick={handleDeleteBtn} className="btn btn-delete small">취소</button>
+                  <button className="btn btn-regist small" onClick={registStudy}>등록</button>
                 </form>
               </div>
             </div>

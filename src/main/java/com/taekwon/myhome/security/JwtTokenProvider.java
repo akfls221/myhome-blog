@@ -61,7 +61,7 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // Request의 Header에서 token 파싱 : "X-AUTH-TOKEN: jwt토큰"
+    // Request의 Header에서 token 파싱 : "Authorization: jwt토큰"
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("Authorization");
     }

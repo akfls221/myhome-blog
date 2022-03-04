@@ -1,21 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import NoticeHeader from "../component/noticeComponent/NoticeHeader";
+import {getCookie} from "../util/Cookie";
 
 const NoticeView = () => {
-  const param = useParams().id;
-
-  document.cookie = "safeCookie1=foo; SameSite=Lax";
-  document.cookie = "safeCookie2=foo";
-  document.cookie = "crossCookie=bar; SameSite=None; Secure";
-
+  const id = useParams().id;
   const [noticeTitle, setNoticeTitle] = useState('');
   const [noticeType, setNoticeType] = useState('N');
   const [noticeContent, setNoticeContent] = useState('');
-  const [noticeDate, setNoticeDate] = useState('');
+  const [roleCheck, setRoleCheck] = useState(false);
 
+  const userInfo = getCookie('loginCookie');
   const navigate = useNavigate();
 
   const setTitleContent = (item) => {
@@ -28,11 +25,7 @@ const NoticeView = () => {
     navigate(-1);
   }
 
-
-
   useEffect(() => {
-    sessionStorage.setItem("id", param);
-    const id = sessionStorage.getItem("id");
     axios({
       method: "GET",
       url: `http://localhost:8080/api/v1/posts/${id}`,
@@ -49,6 +42,12 @@ const NoticeView = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if(userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
+      setRoleCheck(true);
+    }
+  }, []);
+
   return (
       <>
         <section className="section">
@@ -62,11 +61,16 @@ const NoticeView = () => {
               </div>
               <div className="col-md-12 mb-5 mb-md-0">
                 <div className="notice-content-wrap">
-                  <div dangerouslySetInnerHTML={{__html: noticeContent}}></div>
+                  <div dangerouslySetInnerHTML={{__html: noticeContent}}/>
                 </div>
               </div>
             </div>
             <button className="btn btn-regist small" onClick={returnHistory}>목록</button>
+            {roleCheck &&
+              <Link to={`/notice_modify/${id}`}>
+                <button className="btn btn-modify small">수정</button>
+              </Link>
+            }
           </div>
         </section>
       </>

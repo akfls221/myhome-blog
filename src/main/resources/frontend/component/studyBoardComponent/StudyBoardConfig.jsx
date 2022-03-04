@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StudyBoardConfig = ({titleValue, titleOnChange, subOnChange, subValue, dateValue}) => {
+const StudyBoardConfig = ({titleValue, titleOnChange, subOnChange, subValue, dateValue, author}) => {
 
   const handleOnChangeTitle = (e) => {
     titleOnChange(e.target.value);
@@ -24,7 +24,7 @@ const StudyBoardConfig = ({titleValue, titleOnChange, subOnChange, subValue, dat
             </div>
             <div className="board-detail">
               <div className="board-subtitle">게시글 작성자</div>
-              <div className="board-sub-content">엄태권</div>
+              <div className="board-sub-content">{author}</div>
               <div className="board-subtitle">작성일</div>
               <div className="board-sub-content">{dateValue}</div>
             </div>

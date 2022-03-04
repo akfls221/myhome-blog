@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router";
 import {getCookie} from "../util/Cookie";
 
 const MyPage = () => {
@@ -9,6 +8,7 @@ const MyPage = () => {
   const [userAuth, setUserAuth] = useState('');
   const [userLoginType, setUserLoginType] = useState('');
   const [userProfile, setUserProfile] = useState('');
+  const [profileChange, setProfileChange] = useState(false);
   const userInfo = getCookie('loginCookie');
 
   useEffect(() => {
@@ -21,7 +21,11 @@ const MyPage = () => {
       setUserNickName(userInfo.nickName);
     }
 
-  }, []);
+    if (userLoginType === 'BLOG') {
+      setProfileChange(true);
+    }
+
+  }, [userInfo]);
 
   return (
       <>
@@ -35,7 +39,15 @@ const MyPage = () => {
                 <form method="post" role="form" className="php-email-form">
                   <div className="col-md-12 mb-5 mb-md-0">
                     <div className="profile-wrapper">
-                      <img className="profile-img" src={userProfile} />
+                      <div className="profile-img-wrapper">
+                        <img className="profile-img" src={userProfile} />
+                        {profileChange === true &&
+                          <>
+                            <label className="input-file-button" htmlFor="inputFile">프로필 업로드</label>
+                            <input className="input-file" type="file" id="inputFile" multiple="multiple"  />
+                          </>
+                        }
+                      </div>
                       <div className="profile-info">
                         <div className="profile-detail">
                           <div className="profile-subtitle">USER_ID</div>

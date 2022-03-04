@@ -24,12 +24,14 @@ public class SignService {
 
     @Getter
     public enum CommonResponseDto{
-        SUCCESS(0, "성공하셨습니다.");
+        SUCCESS(true,0, "성공하셨습니다.");
 
+        boolean success;
         int code;
         String msg;
 
-        CommonResponseDto(int code, String msg) {
+        CommonResponseDto(boolean success, int code, String msg) {
+            this.success = success;
             this.code = code;
             this.msg = msg;
         }
@@ -45,6 +47,7 @@ public class SignService {
         String accessToken = jwtTokenProvider.createToken(String.valueOf(user.getId()), user.getRoles());
 
         SignResponseDto response = SignResponseDto.builder()
+                .success(CommonResponseDto.SUCCESS.success)
                 .code(CommonResponseDto.SUCCESS.code)
                 .msg(CommonResponseDto.SUCCESS.msg)
                 .accessToken(accessToken)
@@ -55,17 +58,14 @@ public class SignService {
                 .socialType(user.getSocialType())
                 .nickName(user.getNickName())
                 .roles(user.getRoles())
+                .picture(user.getProfileImageUrl())
                 .build();
 
         return response;
     }
 
     public boolean isJoinedUser(String uid) {
-        if (userRepository.findByUid(uid).isPresent()) {
-            return false;
-        } else {
-            return true;
-        }
+        return userRepository.existsByUid(uid);
     }
 
     @Transactional
@@ -80,6 +80,7 @@ public class SignService {
                 .email(request.getEmail())
                 .nickName(request.getNickName())
                 .roles(Collections.singletonList("ROLE_USER"))
+                .profileImageUrl(request.getProfileImageUrl())
                 .build());
 
         setSuccessResponse(response);

@@ -15,6 +15,8 @@ import Social from "./Social";
 import MyPage from "./MyPage";
 import JoinPage from "./JoinPage";
 import AboutMe from "./AboutMe";
+import NoticeModify from "./NoticeModify";
+import StudyModify from "./StudyModify";
 
 const App = () => {
 
@@ -24,18 +26,20 @@ const App = () => {
         <Header />
         <WelcomeSection />
         <Routes>
-          <Route path = "/" exact element={<Main />}></Route>
-          <Route path = "/notice" element={<Notice />}></Route>
-          <Route path = "/notice_edit" element={<NoticeEdit />}></Route>
-          <Route path = "/view/:id" exact element={<NoticeView />}></Route>
-          <Route path = "/study" element={<Study />}></Route>
-          <Route path = "/study_edit" element={<StudyEdit />}></Route>
-          <Route path = "/study/:id" exact element={<StudyView />}></Route>
-          <Route path = "/join" exact element={<JoinPage />}></Route>
-          <Route path = "/mypage" element={<MyPage />}></Route>
-          <Route path = "/google" exact element={<Social />}></Route>
-          <Route path = "/kakao" exact element={<Social />}></Route>
-          <Route path = "/about" exact element={<AboutMe />}></Route>
+          <Route path = "/" exact element={<Main/>}/>
+          <Route path = "/notice" element={<Notice/>}/>
+          <Route path = "/notice_edit" element={<NoticeEdit/>}/>
+          <Route path = "/view/:id" exact element={<NoticeView/>}/>
+          <Route path = "/notice_modify/:id" element={<NoticeModify/>}/>
+          <Route path = "/study" element={<Study/>}/>
+          <Route path = "/study_edit" element={<StudyEdit/>}/>
+          <Route path = "/study/:id" exact element={<StudyView/>}/>
+          <Route path = "/study_modify/:id" element={<StudyModify/>}/>
+          <Route path = "/join" exact element={<JoinPage/>}/>
+          <Route path = "/mypage" element={<MyPage/>}/>
+          <Route path = "/google" exact element={<Social/>}/>
+          <Route path = "/kakao" exact element={<Social/>}/>
+          <Route path = "/about" exact element={<AboutMe/>}/>
 
         </Routes>
         <Footer />

@@ -25,7 +25,7 @@ public class BoardApiController {
     }
 
     @PostMapping("/api/v1/boardUpdate/{id}")
-    public long update(@PathVariable Long id, BoardUpdateRequestDto requestDto) {
+    public long update(@PathVariable Long id, @RequestBody BoardUpdateRequestDto requestDto) {
         return boardService.update(id, requestDto);
     }
 

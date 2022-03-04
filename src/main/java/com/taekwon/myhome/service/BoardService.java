@@ -33,7 +33,7 @@ public class BoardService {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
 
-        board.updateBoard(requestDto.getTitle(), requestDto.getSub(), requestDto.getContent());
+        board.updateBoard(requestDto.getTitle(), requestDto.getSub(), requestDto.getContent(), requestDto.getAuthor());
 
         return id;
     }

@@ -13,11 +13,13 @@ public class BoardUpdateRequestDto {
     private String title;
     private String sub;
     private String content;
+    private String author;
 
     @Builder
-    public BoardUpdateRequestDto(String title, String sub, String content) {
+    public BoardUpdateRequestDto(String title, String sub, String content, String author) {
         this.title = title;
         this.sub = sub;
         this.content = content;
+        this.author = author;
     }
 }

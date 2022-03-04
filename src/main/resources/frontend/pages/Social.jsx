@@ -17,7 +17,7 @@ const Social = () => {
       const resData = res.data
       console.log("!!!!!!!!!!!!!", resData);
       setCookie('loginCookie', resData, {
-        // httpOnly: true,
+        expires: new Date(Date.parse(new Date()) + 1000 * 60 * 60)
       });
       location.reload();
     }).catch(error => {

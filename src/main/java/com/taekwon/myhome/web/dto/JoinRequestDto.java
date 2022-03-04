@@ -12,4 +12,5 @@ public class JoinRequestDto {
     private String name;
     private String nickName;
     private String email;
+    private String profileImageUrl;
 }

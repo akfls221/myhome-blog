@@ -1,29 +1,32 @@
 import React, {useEffect, useState} from 'react';
-
-import NoticeConfig from "../component/noticeComponent/NoticeConfig";
-import NoticeContent from "../component/noticeComponent/NoticeContent";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import StudyBoardConfig from "../component/studyBoardComponent/StudyBoardConfig";
+import NoticeContent from "../component/noticeComponent/NoticeContent";
 import {getCookie} from "../util/Cookie";
+import {useParams} from "react-router";
 
-const NoticeEdit = () => {
-  const [noticeTitle, setNoticeTitle] = useState('');
-  const [noticeType, setNoticeType] = useState('N');
-  const [noticeContent, setNoticeContent] = useState('');
-  const [noticeDate, setNoticeDate] = useState('');
+const StudyModify = () => {
+  const [studyTitle, setStudyTitle] = useState('');
+  const [studySub, setStudySub] = useState('');
+  const [studyContent, setStudyContent] = useState('');
+  const [studyDate, setStudyDate] = useState('');
   const [author, setAuthor] = useState('');
+
+  const navigate = useNavigate()
   const userInfo = getCookie('loginCookie');
+  const id = useParams().id;
 
   const handleTitleInput = (value) => {
-    setNoticeTitle(value);
+    setStudyTitle(value);
   }
 
-  const handleNoticeType = (value) => {
-    setNoticeType(value)
+  const handleStudySub = (value) => {
+    setStudySub(value)
   }
 
   const handelNoticeContent = (value) => {
-    setNoticeContent(value);
+    setStudyContent(value);
   }
 
   const createNoticeDate = () => {
@@ -34,40 +37,63 @@ const NoticeEdit = () => {
     const time = date.toLocaleTimeString();
     const totalDate = `${year}-${month}-${day} .${time}`;
 
-    setNoticeDate(totalDate);
+    setStudyDate(totalDate);
   }
 
   const handleDeleteBtn = (e) => {
     e.preventDefault();
+
     navigate(-1);
   }
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     createNoticeDate();
     return () => {}
   }, []);
 
-  const registNotice = (e) => {
+  useEffect(() => {
+    if(userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
+      axios({
+        method: "GET",
+        url: `http://localhost:8080/api/v1/board/${id}`,
+      }).then((res) => {
+        const item = res.data;
+        setStudyTitle(item.title);
+        setStudyContent(item.content);
+        setStudySub(item.sub);
+        setAuthor(item.name);
+
+      }).catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
+    }
+
+    return () => {
+    }
+  }, [])
+
+  const modifyStudy = (e) => {
     e.preventDefault();
-    if (noticeTitle.length === 0 || noticeContent.length === 0) {
+
+    if (studyTitle.length === 0 || studyContent.length === 0) {
       alert("게시글 제목 또는 내용을 입력해 주세요");
       return;
     }
+
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/posts',
+      url: `http://localhost:8080/api/v1/boardUpdate/${id}`,
       headers: {Authorization: userInfo.accessToken},
       data: {
-        title: noticeTitle,
+        title: studyTitle,
         author : author,
-        content : noticeContent,
-        type: noticeType,
+        content : studyContent,
+        sub: studySub,
       }
     }).then((res) => {
-      alert("게시글 등록이 완료되었습니다.");
-      navigate('/notice');
+      alert("수정이 완료되었습니다.");
+      navigate(-1);
     }).catch(error => {
       console.log(error);
       throw new Error(error);
@@ -87,25 +113,25 @@ const NoticeEdit = () => {
         <section className="section">
           <div className="container">
             <div className="row justify-content-left text-left mb-5" data-aos="fade-up">
-              <h2 className="board-title">공지사항 등록</h2>
+              <h2 className="board-title">게시글 등록</h2>
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-                <form method="post" role="form" className="php-email-form" onSubmit={registNotice}>
-                  <NoticeConfig
-                      titleValue={noticeTitle}
+                <form method="post" role="form" className="php-email-form" onSubmit={modifyStudy}>
+                  <StudyBoardConfig
+                      titleValue={studyTitle}
                       titleOnChange={(value) => handleTitleInput(value)}
-                      typeValue={noticeType}
-                      typeOnChange={(value) => handleNoticeType(value)}
-                      dateValue={noticeDate}
+                      subValue={studySub}
+                      subOnChange={(value) => handleStudySub(value)}
+                      dateValue={studyDate}
                       author={author}
                   />
                   <NoticeContent
-                      contentValue={noticeContent}
+                      contentValue={studyContent}
                       contentOnChange={(value) => handelNoticeContent(value)}
                   />
                   <button onClick={handleDeleteBtn} className="btn btn-delete small">취소</button>
-                  <button className="btn btn-regist small" onClick={registNotice}>등록</button>
+                  <button className="btn btn-regist small" onClick={modifyStudy}>등록</button>
                 </form>
               </div>
             </div>
@@ -115,4 +141,4 @@ const NoticeEdit = () => {
   )
 }
 
-export default NoticeEdit;
+export default StudyModify;
