@@ -14,4 +14,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Page<Board> findAllDesc(Pageable pageable);
 
     List<Board> findTop3ByOrderByCreatedDateDesc();
+
+    Page<Board> findByContentContainingIgnoreCase(String content, Pageable pageable);
+
+    Page<Board> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 }

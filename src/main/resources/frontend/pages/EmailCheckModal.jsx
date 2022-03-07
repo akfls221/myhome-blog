@@ -20,12 +20,14 @@ const EmailCheckModal = ({ open, close, setModalOpen, userEmail, setEmailCheckRe
       method: "GET",
       url: 'http://localhost:8080/api/v1/emailCheck?email='+userEmail+"&code="+code,
     }).then((res) => {
-      if (res.data) {
+      if (res.data.error) {
+        alert(res.data.message);
+      } else if(res.data === false) {
+        alert("인증코드가 잘못되었습니다. 다시 확인해 주세요");
+      } else{
         alert("정상적으로 인증되었습니다.");
         setEmailCheckResult(true);
         setModalOpen(false);
-      } else {
-        alert("인증번호가 잘못되었습니다. 다시 확인 부탁드립니다.");
       }
     }).catch(error => {
       console.log(error);

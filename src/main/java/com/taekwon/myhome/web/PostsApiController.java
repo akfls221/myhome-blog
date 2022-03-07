@@ -39,12 +39,13 @@ public class PostsApiController {
     }
 
     @PostMapping("/api/v1/postsList")
-    public Page<PostsListResponseDto> findAllDesc(Pageable pageable) {
-        return postsService.findAllDesc(pageable);
+    public Page<PostsListResponseDto> searchPosts(String type, String searchValue, Pageable pageable) {
+        return postsService.searchPosts(type, searchValue, pageable);
     }
 
     @PostMapping("/api/v1/recentPostList")
     public List<PostsListResponseDto> findTop3() {
         return postsService.findTop3();
     }
+
 }

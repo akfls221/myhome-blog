@@ -45,10 +45,19 @@ public class BoardService {
         return new BoardResponseDto(board);
     }
 
-    public Page<BoardListResponseDto> findAllDesc (Pageable pageable) {
+    public Page<BoardListResponseDto> searchBoards (String type, String searchValue, Pageable pageable) {
         int page = pageable.getPageNumber() == 0 ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, 6);
-        return boardRepository.findAllDesc(pageable).map((board) -> new BoardListResponseDto(board));
+
+        if(searchValue.isBlank()) {
+            return boardRepository.findAllDesc(pageable).map((board) -> new BoardListResponseDto(board));
+        } else if (type.equals("T")) {
+            return boardRepository.findByTitleContainingIgnoreCase(searchValue, pageable).map(BoardListResponseDto::new);
+        } else if (type.equals("C")) {
+            return boardRepository.findByContentContainingIgnoreCase(searchValue, pageable).map(BoardListResponseDto::new);
+        } else {
+            throw new IllegalArgumentException("검색중 오류가 발생하였습니다. 관리자에게 문의해 주세요.");
+        }
     }
 
     public List<BoardListResponseDto> findTop3() {

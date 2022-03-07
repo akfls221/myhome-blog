@@ -1,8 +1,8 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import axios from "axios";
 import RecentBoardDetail from "./RecentBoardDetail";
 
-const RecentBoard = () => {
+const RecentBoard = memo(() => {
   const [recentBoard, setRecentBoard] = useState([]);
 
   useEffect(() => {
@@ -32,14 +32,14 @@ const RecentBoard = () => {
 
             <div className="row">
               {recentBoard.length <= 0 &&
-                  <div className="board-list-none">
-                    <img src="/static/img/none-notice.png"/>
-                    <div className="board-list-none-text">최근 게시글이 없습니다</div>
-                  </div>
+              <div className="board-list-none">
+                <img src="/static/img/none-notice.png"/>
+                <div className="board-list-none-text">최근 게시글이 없습니다</div>
+              </div>
               }
               {recentBoard.map(item => {
-                return(
-                  <RecentBoardDetail key={"board_"+item.id} value={item}/>
+                return (
+                    <RecentBoardDetail key={"board_" + item.id} value={item}/>
                 )
               })}
             </div>
@@ -47,6 +47,6 @@ const RecentBoard = () => {
         </section>
       </>
   );
-}
+});
 
 export default RecentBoard;

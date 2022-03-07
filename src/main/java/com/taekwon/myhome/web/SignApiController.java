@@ -50,8 +50,8 @@ public class SignApiController {
     }
 
     @GetMapping("/email")
-    public void emailCodeSend(String email) throws Exception {
-        emailService.sendEmail(email);
+    public boolean emailCodeSend(String email) throws Exception {
+        return emailService.sendEmail(email);
     }
 
     @PostMapping(value = "/profile")

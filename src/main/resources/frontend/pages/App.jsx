@@ -17,6 +17,7 @@ import JoinPage from "./JoinPage";
 import AboutMe from "./AboutMe";
 import NoticeModify from "./NoticeModify";
 import StudyModify from "./StudyModify";
+import NotFound from "../component/NotFound";
 
 const App = () => {
 
@@ -26,20 +27,21 @@ const App = () => {
         <Header />
         <WelcomeSection />
         <Routes>
-          <Route path = "/" exact element={<Main/>}/>
-          <Route path = "/notice" element={<Notice/>}/>
-          <Route path = "/notice_edit" element={<NoticeEdit/>}/>
-          <Route path = "/view/:id" exact element={<NoticeView/>}/>
-          <Route path = "/notice_modify/:id" element={<NoticeModify/>}/>
-          <Route path = "/study" element={<Study/>}/>
-          <Route path = "/study_edit" element={<StudyEdit/>}/>
-          <Route path = "/study/:id" exact element={<StudyView/>}/>
-          <Route path = "/study_modify/:id" element={<StudyModify/>}/>
-          <Route path = "/join" exact element={<JoinPage/>}/>
-          <Route path = "/mypage" element={<MyPage/>}/>
-          <Route path = "/google" exact element={<Social/>}/>
-          <Route path = "/kakao" exact element={<Social/>}/>
-          <Route path = "/about" exact element={<AboutMe/>}/>
+          <Route exact path = "/" element={<Main/>}/>
+          <Route exact path = "/notice" element={<Notice/>}/>
+          <Route exact path = "/notice_edit" element={<NoticeEdit/>}/>
+          <Route exact path = "/view/:id" element={<NoticeView/>}/>
+          <Route exact path = "/notice_modify/:id" element={<NoticeModify/>}/>
+          <Route exact path = "/study" element={<Study/>}/>
+          <Route exact path = "/study_edit" element={<StudyEdit/>}/>
+          <Route exact path = "/study/:id" element={<StudyView/>}/>
+          <Route exact path = "/study_modify/:id" element={<StudyModify/>}/>
+          <Route exact path = "/join" element={<JoinPage/>}/>
+          <Route exact path = "/mypage" element={<MyPage/>}/>
+          <Route exact path = "/google" element={<Social/>}/>
+          <Route exact path = "/kakao" element={<Social/>}/>
+          <Route exact path = "/about" element={<AboutMe/>}/>
+          <Route path="*" element={<NotFound />}/>
 
         </Routes>
         <Footer />

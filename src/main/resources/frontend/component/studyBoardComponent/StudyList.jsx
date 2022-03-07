@@ -1,7 +1,7 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import { Link } from "react-router-dom";
 
-const StudyList = ({value}) => {
+const StudyList = memo(({value}) => {
   const [thumbNail, setThumbNail] = useState('');
 
   const CreateThumbnail = () => {
@@ -10,7 +10,8 @@ const StudyList = ({value}) => {
     const endImg = `"`;
     let viewThumbNail = '';
     console.log(content.indexOf(startImg))
-    if(content.indexOf(startImg) !== -1) {
+    
+    if (content.indexOf(startImg) !== -1) {
       const startIndex = content.indexOf(startImg, 0) + 5;
       const endIndex = content.indexOf(endImg, startIndex);
       viewThumbNail = content.substring(startIndex, endIndex);
@@ -28,22 +29,22 @@ const StudyList = ({value}) => {
   }, [])
 
   return (
-    <>
-      <div className="study-notice-wrapper">
-        <div className="post-entry">
-          <Link to={`/study/${value.id}`}>
-            <img src={thumbNail} alt="Image" className="study-thumbnail" />
-          </Link>
-          <div className="post-text">
-            <span className="post-meta">December 13, 2019  By Admin</span>
-            <h3><Link to={`/study/${value.id}`}>{value.title}</Link></h3>
-            <p>{value.sub}</p>
-            <p><Link to={`/study/${value.id}`}>Read more</Link></p>
+      <>
+        <div className="study-notice-wrapper">
+          <div className="post-entry">
+            <Link to={`/study/${value.id}`}>
+              <img src={thumbNail} alt="Image" className="study-thumbnail"/>
+            </Link>
+            <div className="post-text">
+              <span className="post-meta">December 13, 2019  By Admin</span>
+              <h3><Link to={`/study/${value.id}`}>{value.title}</Link></h3>
+              <p>{value.sub}</p>
+              <p><Link to={`/study/${value.id}`}>Read more</Link></p>
+            </div>
           </div>
         </div>
-      </div>
-    </>
+      </>
   );
-}
+});
 
 export default StudyList;

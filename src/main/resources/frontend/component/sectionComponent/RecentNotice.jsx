@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import axios from "axios";
 import RecentNoticeDetail from "./RecentNoticeDetail";
 
-const RecentNotice = () => {
+const RecentNotice = memo(() => {
   const [recentNotice, setRecentNotice] = useState([]);
 
   useEffect(() => {
@@ -30,14 +30,14 @@ const RecentNotice = () => {
             </div>
             <div className="row">
               {recentNotice.length <= 0 &&
-                <div className="board-list-none">
-                  <img src="/static/img/none-notice.png"/>
-                  <div className="board-list-none-text">최근 공지사항이 없습니다</div>
-                </div>
+              <div className="board-list-none">
+                <img src="/static/img/none-notice.png"/>
+                <div className="board-list-none-text">최근 공지사항이 없습니다</div>
+              </div>
               }
               {recentNotice.map((item, index) => {
                 return (
-                  <RecentNoticeDetail value={item} key={"notice_" + item.id} index={index}/>
+                    <RecentNoticeDetail value={item} key={"notice_" + item.id} index={index}/>
                 )
               })}
             </div>
@@ -45,6 +45,6 @@ const RecentNotice = () => {
         </section>
       </>
   );
-}
+});
 
 export default RecentNotice;

@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {getCookie} from "../../util/Cookie";
 
-const RecentBoardDetail = ({value}) => {
+const RecentBoardDetail = memo(({value}) => {
   const [thumbNail, setThumbNail] = useState('');
 
   const userInfo = getCookie('loginCookie');
@@ -14,7 +14,7 @@ const RecentBoardDetail = ({value}) => {
     const endImg = `"`;
     let viewThumbNail = '';
 
-    if(content.indexOf(startImg) !== -1) {
+    if (content.indexOf(startImg) !== -1) {
       const startIndex = content.indexOf(startImg, 0) + 5;
       const endIndex = content.indexOf(endImg, startIndex);
       viewThumbNail = content.substring(startIndex, endIndex);
@@ -39,17 +39,16 @@ const RecentBoardDetail = ({value}) => {
     }
   }, [])
 
-  return(
-    <div className="col-md-4">
-      <div className="feature-1 text-center">
-        <div className="post-entry-thumb">
-          <img className="recent-board-thumb" src={thumbNail} onClick={checkLogin}/>
-        </div>
-        <h4 className="mb-2" onClick={checkLogin}>{value.title.slice(0, 20)}</h4>
+  return (
+      <div className="col-md-4">
+        <div className="feature-1 text-center">
+          <div className="post-entry-thumb">
+            <img className="recent-board-thumb" src={thumbNail} onClick={checkLogin}/>
+          </div>
+          <h4 className="mb-2" onClick={checkLogin}>{value.title.slice(0, 20)}</h4>
           <p>{value.sub}</p>
+        </div>
       </div>
-    </div>
-  )
-
-}
+  );
+});
 export default RecentBoardDetail;

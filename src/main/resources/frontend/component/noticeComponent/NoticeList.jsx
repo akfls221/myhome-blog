@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {memo} from 'react';
 import { Link } from "react-router-dom";
 
-const NoticeList = ({value}) => {
+const NoticeList = memo(({value}) => {
 
   return (
       <>
         <div className="row justify-content-center text-center">
-          <div className="col-md-12 mb-5 mb-md-0" >
+          <div className="col-md-12 mb-5 mb-md-0">
             <div className="board-list-content-wrap">
               <div className="board-list-content-title">
                 {value.type === "M" && <img className="must-notice-img" src="/static/img/must.png"/>}
@@ -29,6 +29,6 @@ const NoticeList = ({value}) => {
         </div>
       </>
   );
-}
+});
 
 export default NoticeList;

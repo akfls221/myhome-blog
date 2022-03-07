@@ -1,5 +1,6 @@
 package com.taekwon.myhome.web;
 
+import com.taekwon.myhome.exception.CEmailSignFailedException;
 import com.taekwon.myhome.exception.UploadFileException;
 import com.taekwon.myhome.web.dto.ResponseErrorDto;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +19,14 @@ public class ErrorPageController {
 
     @ExceptionHandler(UploadFileException.class)
     public ResponseErrorDto uploadFileExceptionAdvice(UploadFileException e) {
+        return ResponseErrorDto.builder()
+                .error(e.toString())
+                .message(e.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(CEmailSignFailedException.class)
+    public ResponseErrorDto emailSignExceptionAdvice(CEmailSignFailedException e) {
         return ResponseErrorDto.builder()
                 .error(e.toString())
                 .message(e.getMessage())

@@ -45,10 +45,19 @@ public class PostsService {
         return new PostsResponseDto(posts);
     }
 
-    public Page<PostsListResponseDto> findAllDesc(Pageable pageable) {
+    public Page<PostsListResponseDto> searchPosts(String type, String searchValue, Pageable pageable) {
         int page = pageable.getPageNumber() == 0 ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, 10);
-        return postsRepository.findAllDesc(pageable).map(posts -> new PostsListResponseDto(posts));
+
+        if(searchValue.isBlank()) {
+            return postsRepository.findAllDesc(pageable).map(posts -> new PostsListResponseDto(posts));
+        } else if (type.equals("T")) {
+            return postsRepository.findByTitleContainingIgnoreCase(searchValue, pageable).map(PostsListResponseDto::new);
+        } else if (type.equals("C")){
+            return postsRepository.findByContentContainingIgnoreCase(searchValue, pageable).map(PostsListResponseDto::new);
+        } else {
+            throw new IllegalArgumentException("검색중 오류가 발생하였습니다. 관리자에게 문의해 주세요.");
+        }
     }
 
     public List<PostsListResponseDto> findTop3() {

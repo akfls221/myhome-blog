@@ -1683,3 +1683,45 @@ section {
 .input-file{
   display: none;
 }
+
+.profile-delete {
+  display: block;
+  border: none;
+  background-color: red;
+  font-size: 18px;
+  font-weight: bolder;
+  color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  float: right;
+}
+
+.loading-image{
+  height: 330px;
+}
+
+.loading-form-wrapper {
+  padding: 0 10px;
+  text-align: center;
+  height: 300px;
+  margin: 0 10px;
+  background-color: transparent;
+}
+
+.loading-form-message{
+  font-weight: bolder;
+  color: white;
+}
+
+.loading-section {
+  width: 90%;
+  max-width: 420px;
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 0.3rem;
+  background-color: transparent;
+  animation: modal-show 0.3s;
+  overflow: hidden;
+}

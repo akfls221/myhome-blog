@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 
-const Page = ({totalPage, setNowPage, nowPage, movePage}) => {
+const Page = memo(({totalPage, setNowPage, nowPage, movePage}) => {
   const [page, setPage] = useState([]);
   const [blockNum, setBlockNum] = useState(0);
   const [limitPage, setLimitPage] = useState(5);
@@ -26,7 +26,7 @@ const Page = ({totalPage, setNowPage, nowPage, movePage}) => {
     console.log(blockNum);
     console.log(lastPage)
 
-    if (nowPage -1 === blockNum) {
+    if (nowPage - 1 === blockNum) {
       setLastPage(prevState => prevState - limitPage);
       setBlockNum(nowPage - (limitPage + 1));
       showPage = page.slice(blockNum, lastPage);
@@ -64,17 +64,17 @@ const Page = ({totalPage, setNowPage, nowPage, movePage}) => {
     }
   }, [nowPage])
 
-  return(
+  return (
       <>
         {prevBtn == true && <button className="btn-prev" onClick={movePrevent}>.</button>}
         {showPage.map(value =>
-          <button key={value} onClick={(e) => movePage(value)}
-             className={nowPage === value ? "btn-page active" : "btn-page"}
-          >{value}</button>
+            <button key={value} onClick={(e) => movePage(value)}
+                    className={nowPage === value ? "btn-page active" : "btn-page"}
+            >{value}</button>
         )}
         {nextBtn === true && <button className="btn-next" onClick={moveNext}>.</button>}
-        </>
+      </>
   )
-}
+});
 
 export default Page;

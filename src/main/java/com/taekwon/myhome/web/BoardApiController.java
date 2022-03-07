@@ -35,8 +35,8 @@ public class BoardApiController {
     }
 
     @PostMapping("/api/v1/board/boardList")
-    public Page<BoardListResponseDto> findAllDesc(Pageable pageable) {
-        return boardService.findAllDesc(pageable);
+    public Page<BoardListResponseDto> searchBoards(String type, String searchValue, Pageable pageable) {
+        return boardService.searchBoards(type, searchValue, pageable);
     }
 
     @PostMapping("/api/v1/board/recentBoardList")

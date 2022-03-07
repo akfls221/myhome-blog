@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 
-const FeedBackSection = () => {
+const FeedBackSection = memo(() => {
 
-  return(
+  return (
       <>
         <section className="section">
           <div className="container">
@@ -13,13 +13,13 @@ const FeedBackSection = () => {
                 <p><a href="#" className="btn btn-primary">FeedBack 하러가기!</a></p>
               </div>
               <div className="col-md-6" data-aos="fade-left">
-                <img src="/static/img/feedback.png" alt="Image" className="img-fluid" />
+                <img src="/static/img/feedback.png" alt="Image" className="img-fluid"/>
               </div>
             </div>
           </div>
         </section>
       </>
   )
-}
+});
 
 export default FeedBackSection;

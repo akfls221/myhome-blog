@@ -2,6 +2,7 @@ package com.taekwon.myhome.service;
 
 import com.taekwon.myhome.domain.email.Email;
 import com.taekwon.myhome.domain.email.EmailRepository;
+import com.taekwon.myhome.domain.user.UserRepository;
 import com.taekwon.myhome.exception.CEmailSignFailedException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
     private final EmailRepository emailRepository;
+    private final UserRepository userRepository;
 
     private Map<String, Object> emailCreate(String email) throws Exception {
         Map<String, Object> map = new HashMap<>();
@@ -52,21 +54,25 @@ public class EmailService {
     }
 
     @Transactional
-    public void sendEmail(String to)throws Exception {
+    public boolean sendEmail(String to)throws Exception {
         Map<String, Object> emailMap = emailCreate(to);
         MimeMessage message = (MimeMessage) emailMap.get("message");
         LocalDateTime now = LocalDateTime.now();
         String code = emailMap.get("code").toString();
 
         try{
-            emailSender.send(message);
-            Email email = Email.builder()
-                    .access_code(code)
-                    .createDate(now)
-                    .email(to)
-                    .build();
-            emailRepository.save(email);
-
+            if (userRepository.existsByEmail(to)) {
+                throw new CEmailSignFailedException("이미 가입되어 있는 이메일 입니다.");
+            } else {
+                emailSender.send(message);
+                Email email = Email.builder()
+                        .access_code(code)
+                        .createDate(now)
+                        .email(to)
+                        .build();
+                emailRepository.save(email);
+                return true;
+            }
         }catch(MailException es){
             es.printStackTrace();
             throw new CEmailSignFailedException("존재하지 않는 이메일 이거나 형식이 잘못 되었습니다.");
@@ -77,11 +83,7 @@ public class EmailService {
         String accessCode = emailRepository.findRecentEmail(email)
                 .orElseThrow(() -> new CEmailSignFailedException("코드를 재발급 해주세요"))
                 .getAccess_code();
-        if (accessCode.equals(code)) {
-            return true;
-        } else {
-            return false;
-        }
+        return accessCode.equals(code);
     }
 
     private String createRandomCode() {

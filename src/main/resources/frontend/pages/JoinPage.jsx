@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
 import axios from "axios";
 import EmailCheckModal from "./EmailCheckModal";
+import WaitingModal from "../component/WaitingModal";
 
 const JoinPage = () => {
   const [userId, setUserId] = useState('');
@@ -12,12 +13,14 @@ const JoinPage = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [userNickName, setUserNickName] = useState('');
-  const [userProfile, setUserProfile] = useState('');
+  const [userProfile, setUserProfile] = useState('../static/img/user_icon.png');
   const [datePath, setDatePath] = useState('');
   const [uuidFilename, setUuidFilename] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [emailCheckResult, setEmailCheckResult] = useState(false);
   const [joinBtn, setJoinBtn] = useState(true);
+  const [openLoading, setOpenLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const uIdHandle = (e) => {
@@ -52,15 +55,53 @@ const JoinPage = () => {
       return;
     }
 
+    setOpenLoading(true);
+
     axios({
       method: "GET",
       url: 'http://localhost:8080/api/v1/email?email=' + userEmail,
     }).then((res) => {
-        setModalOpen(true);
+      if (res.data.error) {
+        alert(res.data.message);
+        return;
+      } else {
+        if(res.data === true) {
+          setOpenLoading(false);
+          setModalOpen(true);
+        }
+      }
     }).catch(error => {
       console.log(error);
       alert("존재하지 않는 이메일이거나 이메일 형식이 잘못 되었습니다.");
     });
+  }
+
+  const deleteProfile = () => {
+    if (uuidFilename !== '') {
+      axios({
+        method: "POST",
+        url: "http://localhost:8080/api/v1/deleteProfile",
+        data: {deletePath : datePath + "\\" + uuidFilename},
+      }).then((res) => {
+        if (res.data.error) {
+          alert(res.data.message);
+          return;
+        }
+        setDatePath('');
+        setUuidFilename('');
+        setUserProfile('../static/img/user_icon.png');
+
+      }).catch(error => {
+        console.log(error);
+        alert("파일 업로드에 문제가 있습니다. 관리자에게 문의해주세요");
+      });
+    }
+  }
+
+  const handleDeleteProfile =(e) => {
+    e.preventDefault();
+
+    deleteProfile();
   }
 
   const uploadProfile = (e) => {
@@ -70,25 +111,7 @@ const JoinPage = () => {
       formData.append("multipartFile", profile);
       console.log(e.target.files[0]);
 
-      if (uuidFilename !== '') {
-        axios({
-          method: "POST",
-          url: "http://localhost:8080/api/v1/deleteProfile",
-          data: {deletePath : datePath + "\\" + uuidFilename},
-        }).then((res) => {
-          if (res.data.error) {
-            alert(res.data.message);
-            return;
-          }
-          setDatePath('');
-          setUuidFilename('');
-          setUserProfile('');
-
-        }).catch(error => {
-          console.log(error);
-          alert("파일 업로드에 문제가 있습니다. 관리자에게 문의해주세요");
-        });
-      }
+      deleteProfile();
 
       axios({
         method: "POST",
@@ -145,6 +168,17 @@ const JoinPage = () => {
   const joinSite = (e) => {
     e.preventDefault();
 
+    if (!existCheck){
+      alert("ID 중복체크를 진행해 주세요.");
+      return;
+    } else if(!pwCheckResult){
+      alert("패스워드가 일치하지 않습니다.");
+      return;
+    } else if(!emailCheckResult) {
+      alert("email 인증코드를 정상적으로 입력해주세요.");
+      return;
+    }
+
     axios({
       method: "POST",
       url: 'http://localhost:8080/api/v1/join',
@@ -199,6 +233,10 @@ const JoinPage = () => {
                   <div className="col-md-12 mb-5 mb-md-0">
                     <div className="profile-wrapper">
                       <div className="profile-img-wrapper">
+                        <button className="profile-delete" onClick={handleDeleteProfile}>
+                          {' '}
+                          &times;
+                        </button>
                       <img className="profile-img" src={userProfile} />
                         <label className="input-file-button" htmlFor="inputFile">프로필 업로드</label>
                         <input className="input-file" type="file" id="inputFile" multiple="multiple" onChange={uploadProfile} />
@@ -248,7 +286,7 @@ const JoinPage = () => {
                   </div>
                 </form>
               </div>
-              <button className="btn btn-join" disabled={joinBtn} onClick={joinSite}>가입</button>
+              <button className="btn btn-join" onClick={joinSite}>가입</button>
             </div>
           </div>
         </section>
@@ -259,6 +297,7 @@ const JoinPage = () => {
                          setModalOpen={setModalOpen}
                          header="이메일 인증"
         />
+        <WaitingModal open={openLoading}/>
       </>
   );
 }

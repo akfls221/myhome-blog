@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Link} from "react-router-dom";
 
-const RecentNoticeDetail = ({value, index}) => {
+const RecentNoticeDetail = memo(({value, index}) => {
 
-  return(
+  return (
       <div className="col-md-4" key={value.id}>
         <div className="step">
           {value.type === 'M' ?
@@ -12,12 +12,11 @@ const RecentNoticeDetail = ({value, index}) => {
               <span className="number">{'0' + (index + 1)}</span>
           }
           <Link to={`/view/${value.id}`}>
-            <h4>{value.title.substring(0,25)}</h4>
+            <h4>{value.title.substring(0, 25)}</h4>
           </Link>
           <p>{value.content.substring(3, 40) + "..."}</p>
         </div>
       </div>
   )
-
-}
+});
 export default RecentNoticeDetail;
