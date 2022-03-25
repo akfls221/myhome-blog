@@ -1,10 +1,12 @@
 const path = require('path');
 const refreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports ={
     mode: 'development', // 모드 (개발용 // 실서비스 : production)
-    devtool: 'eval', //빠르게 하겠다
+    // mode: 'production', // 모드 (개발용 // 실서비스 : production)
+    devtool: false, //빠르게 하겠다
     resolve:{
         extensions:['.jsx', '.js'],
     },
@@ -17,7 +19,7 @@ module.exports ={
             loader: 'babel-loader',
             options:{
                 presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins:['react-refresh/babel',],
+                plugins:['react-refresh/babel'],
             }},
             { test: /\.css$/, use:['css-loader']},
         ],
@@ -27,6 +29,11 @@ module.exports ={
         new webpack.ProvidePlugin({
           $: "jquery",
           jQuery: "jquery",
+        }),
+        new CopyPlugin({
+          patterns: [
+            {from: 'static', to: "dest/static"}
+          ]
         }),
     ],
     output: {
@@ -39,5 +46,8 @@ module.exports ={
         devMiddleware: { publicPath: '/dist/' },
         static: { directory: path.resolve(__dirname) }, //static: index.html(실제 존재하는 정적파일들의 경로를 적어줌//index.html이 다른경로에 있을경우 { directory: path.resolve(__dirname), '경로명'}
         hot: true
+    },
+    performance: {
+      hints: process.env.NODE_ENV === 'production' ? "warning" : false,
     },
 };

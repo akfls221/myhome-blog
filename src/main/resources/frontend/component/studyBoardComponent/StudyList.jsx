@@ -1,7 +1,7 @@
 import React, {memo, useEffect, useMemo, useState} from 'react';
 import { Link } from "react-router-dom";
 
-const StudyList = memo(({value}) => {
+const StudyList = memo(({value, index}) => {
   const [thumbNail, setThumbNail] = useState('');
 
   const CreateThumbnail = () => {

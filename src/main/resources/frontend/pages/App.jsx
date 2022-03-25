@@ -17,7 +17,12 @@ import JoinPage from "./JoinPage";
 import AboutMe from "./AboutMe";
 import NoticeModify from "./NoticeModify";
 import StudyModify from "./StudyModify";
-import NotFound from "../component/NotFound";
+import NotFound from "./NotFound";
+import ProfileModify from "./ProfileModify";
+import NoAuth from "./NoAuth";
+import FeedBack from "./FeedBack";
+import FeedBackEdit from "./FeedBackEdit";
+import FeedBackView from "./FeedBackView";
 
 const App = () => {
 
@@ -38,9 +43,14 @@ const App = () => {
           <Route exact path = "/study_modify/:id" element={<StudyModify/>}/>
           <Route exact path = "/join" element={<JoinPage/>}/>
           <Route exact path = "/mypage" element={<MyPage/>}/>
+          <Route exact path = "/feedBack" element={<FeedBack/>}/>
+          <Route exact path = "/feedback_edit" element={<FeedBackEdit/>}/>
+          <Route exact path = "/feedBackView/:id" element={<FeedBackView/>}/>
+          <Route exact path = "/profile_edit" element={<ProfileModify/>}/>
           <Route exact path = "/google" element={<Social/>}/>
           <Route exact path = "/kakao" element={<Social/>}/>
           <Route exact path = "/about" element={<AboutMe/>}/>
+          <Route exact path = "/noAuth" element={<NoAuth/>}/>
           <Route path="*" element={<NotFound />}/>
 
         </Routes>

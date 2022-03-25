@@ -2,19 +2,19 @@ import React, {memo, useEffect, useState} from 'react';
 import SearchForm from "../component/SearchForm";
 import StudyList from "../component/studyBoardComponent/StudyList";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import Page from "../component/Page";
 
 const Study = memo(() => {
   const [boardList, setBoardList] = useState([]);
-  const [roleCheck, setRoleCheck] = useState(false);
   const [totalPage, setTotalPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
   const [searchType, setSearchType] = useState('T');
   const [searchValue, setSearchValue] = useState('');
 
   const userInfo = getCookie('loginCookie');
+  const navigate = useNavigate();
 
   const movePage = (value) => {
     setNowPage(value);
@@ -37,11 +37,9 @@ const Study = memo(() => {
   useEffect(() => {
     if (userInfo !== undefined) {
       searchBoard();
-      if (userInfo.roles[0] === 'ROLE_ADMIN') {
-        setRoleCheck(true);
-      }
     } else {
-      setRoleCheck(false);
+      alert("회원 전용 게시글 입니다. 로그인 후 이용 부탁 드립니다.");
+      navigate(-1);
     }
     return () => {
     };
@@ -68,9 +66,9 @@ const Study = memo(() => {
             </div>
             }
             <div className="row mb-5">
-              {boardList.map((item) => {
+              {boardList.map((item, index) => {
                 return (
-                    <StudyList key={item.id} value={item}/>
+                  <StudyList key={item.id} value={item} index={index}/>
                 );
               })}
             </div>
@@ -85,7 +83,9 @@ const Study = memo(() => {
               </div>
             </div>
             {
-              roleCheck === true && <Link to={"/study_edit"}>
+              userInfo !== undefined &&
+              userInfo.roles[0] === 'ROLE_ADMIN' &&
+              <Link to={"/study_edit"}>
                 <button className="btn btn-regist small">글쓰기</button>
               </Link>
             }

@@ -9,7 +9,7 @@ const Nav = memo(() => {
     {menu: 'NOTICE', url: "/notice"},
     {menu: 'STUDY', url: "/study"},
     {menu: 'ABOUT ME', url: "/about"},
-    {menu: 'CONTACT ME', url: "/contact"},
+    {menu: 'FEED_BACK', url: "/feedBack"},
   ]);
   const [selectMenu, setSelectMenu] = useState("");
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ const Nav = memo(() => {
     if (item === 'STUDY') {
       const access = getCookie('loginCookie');
       if (access === undefined) {
-        alert("회원 전용 게시글 입니다. 로그인 후 이용 부탁 드립니다.");
-        navigate(-1);
+        alert("회원가입이 필요한 메뉴입니다.");
+        navigate("/join")
       }
     }
   }

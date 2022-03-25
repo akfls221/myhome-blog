@@ -1,6 +1,7 @@
 package com.taekwon.myhome.domain.user;
 
 import com.taekwon.myhome.domain.BaseTimeEntity;
+import com.taekwon.myhome.domain.feedBack.FeedBack;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,6 +57,16 @@ public class User extends BaseTimeEntity implements UserDetails {
     public User update(String name, String picture) {
         this.name = name;
         this.profileImageUrl = picture;
+
+        return this;
+    }
+
+    public User userModify(String uid, String password, String name, String nickName, String profileImageUrl) {
+        this.uid = uid;
+        this.password = password;
+        this.name = name;
+        this.nickName = nickName;
+        this.profileImageUrl = profileImageUrl;
 
         return this;
     }

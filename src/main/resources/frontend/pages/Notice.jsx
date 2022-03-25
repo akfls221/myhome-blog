@@ -38,14 +38,7 @@ const Notice = () => {
   }
 
   useEffect(() => {
-    if (userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
-      setRoleCheck(true);
-    }else{
-      setRoleCheck(false);
-    }
-
     searchPosts();
-
     return () => {
     };
   }, [nowPage]);
@@ -67,9 +60,9 @@ const Notice = () => {
                 <img src="/static/img/none-notice.png" />
                 <div className="board-list-none-text">게시글이 없습니다</div></div>
             }
-            {noticeList.map((item) => {
+            {noticeList.map((item, index) => {
               return (
-                <NoticeList key={item.id} value={item}/>
+                <NoticeList key={item.id} value={item} index={index}/>
               );
             })}
             <div className="row">
@@ -83,7 +76,9 @@ const Notice = () => {
               </div>
             </div>
             {
-              roleCheck === true && <Link to={"/notice_edit"}><button className="btn btn-regist small">글쓰기</button></Link>
+              userInfo !== undefined &&
+              userInfo.roles[0] === 'ROLE_ADMIN' &&
+              <Link to={"/notice_edit"}><button className="btn btn-regist small">글쓰기</button></Link>
             }
           </div>
         </section>

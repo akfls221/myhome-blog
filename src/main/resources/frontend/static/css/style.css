@@ -957,10 +957,11 @@ section {
 
 .board-sub-content{
   padding: 16px 20px;
-  width: 100%;
+  width: 350px;
   font-weight: 200;
   line-height: 25px;
   text-align: left;
+  display: block;
 }
 
 .board-subtitle::after{
@@ -1163,7 +1164,7 @@ section {
     border-radius: 0.3rem;
     background-color: #fff;
     /* 팝업이 열릴때 스르륵 열리는 효과 */
-    animation: modal-show 0.3s;
+    animation: modal-show 0.1s;
     overflow: hidden;
 }
 .modal > section > header {
@@ -1725,3 +1726,200 @@ section {
   animation: modal-show 0.3s;
   overflow: hidden;
 }
+
+.change-id-btn {
+  color: white;
+  font-weight: bolder;
+  font-size: 13px;
+  padding: 0px;
+  background-color: #d74343;
+  border-color: #d74343;
+  border-radius: 12%;
+  height: 36px;
+  width: 60px;
+  display: inline-block;
+  float: right;
+  margin-top: 10px;
+}
+
+
+.checkId-section {
+  width: 90%;
+  max-width: 420px;
+  height: 200px;
+  margin: 0 auto;
+  border-radius: 0.3rem;
+  background-color: #fff;
+  animation: modal-show 0.3s;
+  overflow: hidden;
+}
+
+.no-auth-wrapper{
+  margin-top: 50px;
+  text-align: center;
+}
+
+.profile-sub-content{
+  padding: 16px 20px;
+  width: 350px;
+  font-weight: 200;
+  line-height: 25px;
+  text-align: left;
+  display: inline-block;
+}
+
+.feedback-type-select{
+  width: 200px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: rgba(255, 255, 255, 0.75);
+  background-clip: padding-box;
+  border: 1px solid rgba(50, 145, 220, 0.28);
+  border-radius: 5px;
+  height: 38px;
+}
+
+.feedback-sub-content{
+  padding: 10px 10px;
+  width: 350px;
+  font-weight: 200;
+  line-height: 25px;
+  text-align: left;
+  display: block;
+}
+
+.comment-wrapper{
+  padding-bottom: 150px;
+}
+
+.dropdown {
+  float: right;
+  position: absolute;
+  display: block;
+  left: 700px;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+}
+
+.comment-profile {
+  margin-left: 50px;
+  width: 50px;
+  height: 50px;
+  float: left;
+  border-radius: 50%;
+}
+
+.comment-area{
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  min-height: 90px;
+  padding: 8px;
+  width: 100%;
+}
+
+.comment-header{
+  background-color: #f6f8fa;
+  border-bottom: 1px solid #e1e4e8;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  margin-bottom: 0;
+  padding: 8px 8px 0;
+}
+
+.comment{
+  width: 1000px;
+  margin-left: 120px;
+  background-color: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.tabnav-tabs{
+  display: block;
+  margin-bottom: -1px;
+  overflow: auto;
+}
+
+.tabnav-tab{
+  background-color: initial;
+  border: 1px solid #0000;
+  border-bottom: 0;
+  color: #24292e;
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 14px;
+  line-height: 23px;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.tabnav-tab[aria-selected=true]{
+  background-color: #fff;
+  border-color: #e1e4e8;
+  border-radius: 6px 6px 0 0;
+}
+
+.comment-content {
+  padding: 8px;
+}
+
+.btn-comment{
+  float: left;
+  background-color: #2ea44f;
+  border-color: #1b1f231a;
+  box-shadow: 0 1px 0 #1b1f231a, inset 0 1px 0 #ffffff08;
+  color: #ffffff;
+}
+
+.new-comment-footer{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px 8px;
+}
+
+.emoji-plus {
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.emoji-plus:hover {
+  color: #0a53be;
+}
+
+.comment-list-header{
+  background-color: #f1f8ff;
+  border-bottom: 1px solid #e1e4e8;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  margin-bottom: 0;
+  padding: 8px 8px 0;
+  height: 40px;
+}
+
+.comment-text{
+ color: black;
+}
+
+.comment-list-wrapper{
+    padding-bottom: 30px;
+}
+
+.btn-cancel{
+    float: right;
+    background-color: #a42e2e;
+    border-color: #1b1f231a;
+    box-shadow: 0 1px 0 #1b1f231a, inset 0 1px 0 #ffffff08;
+    color: #ffffff;
+    margin-left: 10px;
+}
+

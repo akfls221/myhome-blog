@@ -24,6 +24,7 @@ const JoinPage = () => {
   const navigate = useNavigate();
 
   const uIdHandle = (e) => {
+    setExistCheck(false);
     setUserId(e.target.value);
   }
 
@@ -54,16 +55,14 @@ const JoinPage = () => {
       alert("이메일 입력은 필수 입니다.");
       return;
     }
-
     setOpenLoading(true);
-
     axios({
       method: "GET",
       url: 'http://localhost:8080/api/v1/email?email=' + userEmail,
     }).then((res) => {
       if (res.data.error) {
         alert(res.data.message);
-        return;
+        setOpenLoading(false);
       } else {
         if(res.data === true) {
           setOpenLoading(false);
@@ -105,6 +104,8 @@ const JoinPage = () => {
   }
 
   const uploadProfile = (e) => {
+    e.preventDefault();
+
     const profile = e.target.files[0]
     if (profile !== undefined) {
       const formData = new FormData();
@@ -139,7 +140,8 @@ const JoinPage = () => {
   }
 
   const idCheckHandle = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
     if (userId.length <= 0) {
       alert("아이디는 필수 입력값입니다.");
       return;
@@ -229,62 +231,60 @@ const JoinPage = () => {
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-                <form method="post" role="form" className="php-email-form">
-                  <div className="col-md-12 mb-5 mb-md-0">
-                    <div className="profile-wrapper">
-                      <div className="profile-img-wrapper">
-                        <button className="profile-delete" onClick={handleDeleteProfile}>
-                          {' '}
-                          &times;
-                        </button>
-                      <img className="profile-img" src={userProfile} />
-                        <label className="input-file-button" htmlFor="inputFile">프로필 업로드</label>
-                        <input className="input-file" type="file" id="inputFile" multiple="multiple" onChange={uploadProfile} />
+                <div className="col-md-12 mb-5 mb-md-0">
+                  <div className="profile-wrapper">
+                    <div className="profile-img-wrapper">
+                      <button className="profile-delete" onClick={handleDeleteProfile}>
+                        {' '}
+                        &times;
+                      </button>
+                    <img className="profile-img" src={userProfile} />
+                      <label className="input-file-button" htmlFor="inputFile">프로필 업로드</label>
+                      <input className="input-file" type="file" id="inputFile" multiple="multiple" onChange={uploadProfile} />
+                    </div>
+                    <div className="profile-info">
+                      <div className="join-detail">
+                        <div className="profile-subtitle">사용자 ID</div>
+                        <input className="join-input" value={userId} onChange={uIdHandle} />
+                        {existCheck === true ?
+                            <img className="check-result" src='../static/img/check-icon.png' />
+                            :
+                            <button className="non-exist-check" onClick={idCheckHandle}>중복체크</button>
+                        }
                       </div>
-                      <div className="profile-info">
-                        <div className="join-detail">
-                          <div className="profile-subtitle">사용자 ID</div>
-                          <input className="join-input" value={userId} onChange={uIdHandle} />
-                          {existCheck === true ?
-                              <img className="check-result" src='../static/img/check-icon.png' />
-                              :
-                              <button className="non-exist-check" onClick={idCheckHandle}>중복체크</button>
-                          }
-                        </div>
-                        <div className="join-detail">
-                          <div className="profile-subtitle">비밀번호</div>
-                          <input className="join-input" type="password" value={userPw} onChange={uPwHandle} />
-                        </div>
-                        <div className="join-detail">
-                          <div className="profile-subtitle">비밀번호 확인</div>
-                          <input className="join-input" type="password" value={userPwCheck} onChange={uPwCheckHandle} />
-                          {pwCheckResult === true ?
-                              <img className="check-result" src='/static/img/check-icon.png' />
-                              :
-                              <img className="check-result" src='/static/img/non-icon.png' />
-                          }
-                        </div>
-                        <div className="join-detail">
-                          <div className="profile-subtitle">E-Mail</div>
-                          <input className="join-input" type="email" readOnly={emailCheckResult === true && 'readOnly'} value={userEmail} onChange={uEmailHandle} />
-                          {emailCheckResult === true ?
-                              <img className="check-result" src='/static/img/check-icon.png' />
-                              :
-                              <button className="non-exist-check" onClick={mailCheckHandle}>메일인증</button>
-                          }
-                        </div>
-                        <div className="join-detail">
-                          <div className="profile-subtitle">사용자 이름</div>
-                          <input className="join-input" value={userName} onChange={uNameHandle} />
-                        </div>
-                        <div className="join-detail">
-                          <div className="profile-subtitle">사용자 닉네임</div>
-                          <input className="join-input" value={userNickName} onChange={uNickHandle} />
-                        </div>
+                      <div className="join-detail">
+                        <div className="profile-subtitle">비밀번호</div>
+                        <input className="join-input" type="password" value={userPw} onChange={uPwHandle} />
+                      </div>
+                      <div className="join-detail">
+                        <div className="profile-subtitle">비밀번호 확인</div>
+                        <input className="join-input" type="password" value={userPwCheck} onChange={uPwCheckHandle} />
+                        {pwCheckResult === true ?
+                            <img className="check-result" src='/static/img/check-icon.png' />
+                            :
+                            <img className="check-result" src='/static/img/non-icon.png' />
+                        }
+                      </div>
+                      <div className="join-detail">
+                        <div className="profile-subtitle">E-Mail</div>
+                        <input className="join-input" type="email" readOnly={emailCheckResult === true && 'readOnly'} value={userEmail} onChange={uEmailHandle} />
+                        {emailCheckResult === true ?
+                            <img className="check-result" src='/static/img/check-icon.png' />
+                            :
+                            <button className="non-exist-check" onClick={mailCheckHandle}>메일인증</button>
+                        }
+                      </div>
+                      <div className="join-detail">
+                        <div className="profile-subtitle">사용자 이름</div>
+                        <input className="join-input" value={userName} onChange={uNameHandle} />
+                      </div>
+                      <div className="join-detail">
+                        <div className="profile-subtitle">사용자 닉네임</div>
+                        <input className="join-input" value={userNickName} onChange={uNickHandle} />
                       </div>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
               <button className="btn btn-join" onClick={joinSite}>가입</button>
             </div>

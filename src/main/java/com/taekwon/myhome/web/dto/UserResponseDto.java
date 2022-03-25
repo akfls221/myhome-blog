@@ -14,12 +14,14 @@ public class UserResponseDto {
     private Long id;
     private String uid;
     private String name;
+    private String profile;
     private List<String> roles;
 
     public UserResponseDto(User entity) {
         this.id = entity.getId();
         this.uid = entity.getUid();
         this.name = entity.getName();
+        this.profile = entity.getProfileImageUrl();
         this.roles = entity.getRoles();
     }
 }

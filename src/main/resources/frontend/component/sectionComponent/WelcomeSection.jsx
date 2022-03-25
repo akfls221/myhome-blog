@@ -40,7 +40,7 @@ const WelcomeSection = memo(() => {
   useEffect(() => {
     console.log("@@@@@@", userInfo)
     if (userInfo !== undefined) {
-      setWelcomeSub(`안녕하세요! ${userInfo.name} 님!!`);
+      setWelcomeSub(`안녕하세요! ${userInfo.nickName} 님!!`);
       setBtnState('LogOut');
     } else {
       setWelcomeSub("안녕하세요! 저의 사이트에 방문해 주셔서 감사 합니다!");

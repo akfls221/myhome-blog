@@ -72,6 +72,10 @@ public class SignService {
     public SignResponseDto join(JoinRequestDto request) {
         SignResponseDto response = new SignResponseDto();
 
+        if (request.getUid().isBlank() || request.getPassword().isBlank() || request.getEmail().isBlank()) {
+            throw new IllegalArgumentException("필수 입력값은 비어 있을 수 없습니다.");
+        }
+
         userRepository.save(User.builder()
                 .uid(request.getUid())
                 .password(passwordEncoder.encode(request.getPassword()))

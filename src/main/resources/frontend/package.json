@@ -6,7 +6,8 @@
   "proxy": "http://localhost:8080",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack serve --env development"
+    "dev": "webpack serve --env development",
+    "start": "react-scripts start"
   },
   "keywords": [
     "UTK"
@@ -14,9 +15,11 @@
   "author": "taekwon",
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.17.2",
+    "@fvilers/disable-react-devtools": "^1.2.1",
     "axios": "^0.25.0",
     "bootstrap": "^3.4.1",
+    "copy-webpack-plugin": "^10.2.4",
+    "emoji-mart": "^3.0.1",
     "jodit-react": "^1.1.21",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
@@ -28,7 +31,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
-    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",

@@ -55,6 +55,7 @@ const NoticeEdit = () => {
       alert("게시글 제목 또는 내용을 입력해 주세요");
       return;
     }
+
     axios({
       method: "POST",
       url: 'http://localhost:8080/api/v1/posts',
@@ -69,14 +70,13 @@ const NoticeEdit = () => {
       alert("게시글 등록이 완료되었습니다.");
       navigate('/notice');
     }).catch(error => {
-      console.log(error);
       throw new Error(error);
     });
   }
 
   useEffect(() => {
     if (userInfo === undefined || userInfo.roles[0] !== 'ROLE_ADMIN') {
-      navigate(-1);
+      navigate("/noAuth");
     } else {
       setAuthor(userInfo.name);
     }

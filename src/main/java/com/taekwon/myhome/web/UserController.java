@@ -1,6 +1,8 @@
 package com.taekwon.myhome.web;
 
 import com.taekwon.myhome.service.UserService;
+import com.taekwon.myhome.web.dto.ProfileEditRequestDto;
+import com.taekwon.myhome.web.dto.SignResponseDto;
 import com.taekwon.myhome.web.dto.UserListResponseDto;
 import com.taekwon.myhome.web.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -29,4 +31,10 @@ public class UserController {
         System.out.println("name = " + name);
         return userService.findById(id);
     }
+
+    @PostMapping("/userEdit")
+    public SignResponseDto userModify(@RequestBody ProfileEditRequestDto requestDto) {
+        return userService.userModify(requestDto);
+    }
+
 }

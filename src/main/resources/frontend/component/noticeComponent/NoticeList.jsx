@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import { Link } from "react-router-dom";
 
-const NoticeList = memo(({value}) => {
+const NoticeList = memo(({value, index}) => {
 
   return (
       <>
@@ -19,7 +19,7 @@ const NoticeList = memo(({value}) => {
                 </Link>
               </div>
               <div className="board-list-content-sub">
-                <div className="board-content-detail">No.{value.id}</div>
+                <div className="board-content-detail">No.{(index + 1)}</div>
                 <div className="board-content-detail">{value.author}</div>
                 <div className="board-content-detail">{'2020-01-02'}</div>
                 <div className="board-content-detail">조회수 {''}</div>

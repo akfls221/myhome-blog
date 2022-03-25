@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {getCookie} from "../util/Cookie";
+import {Link, useNavigate} from "react-router-dom";
 
 const MyPage = () => {
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
   const [userNickName, setUserNickName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   const [userAuth, setUserAuth] = useState('');
   const [userLoginType, setUserLoginType] = useState('');
   const [userProfile, setUserProfile] = useState('');
   const [profileChange, setProfileChange] = useState(false);
+
   const userInfo = getCookie('loginCookie');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userInfo !== undefined) {
@@ -19,12 +23,10 @@ const MyPage = () => {
       setUserAuth(userInfo.roles[0]);
       setUserLoginType(userInfo.socialType.toUpperCase());
       setUserNickName(userInfo.nickName);
+      setUserEmail(userInfo.email);
+    } else {
+      navigate("/noAuth");
     }
-
-    if (userLoginType === 'BLOG') {
-      setProfileChange(true);
-    }
-
   }, [userInfo]);
 
   return (
@@ -62,6 +64,10 @@ const MyPage = () => {
                           <div className="board-sub-content">{userNickName}</div>
                         </div>
                         <div className="profile-detail">
+                          <div className="profile-subtitle">USER_E-mail</div>
+                          <div className="board-sub-content">{userEmail}</div>
+                        </div>
+                        <div className="profile-detail">
                           <div className="profile-subtitle">USER_AUTH</div>
                           {userAuth === 'ROLE_ADMIN' ?
                               <div className="board-sub-content">관리자</div>
@@ -79,6 +85,7 @@ const MyPage = () => {
                   </div>
                 </form>
               </div>
+              <Link to={"/profile_edit"}><button className="btn btn-join" >변경</button></Link>
             </div>
           </div>
         </section>
