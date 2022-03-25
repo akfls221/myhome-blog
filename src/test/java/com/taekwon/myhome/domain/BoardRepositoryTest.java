@@ -50,26 +50,26 @@ class BoardRepositoryTest {
         assertThat(result.get(0).getSub()).isEqualTo(sub);
     }
 
-    @Test
-    void BaseTimeEntity_insert() {
-        //given
-        LocalDateTime now = LocalDateTime.now();
-        repository.save(Board.builder()
-                .title("title")
-                .content("content")
-                .author("author")
-                .build());
-
-        //when
-        List<Board> all = repository.findAll();
-
-        //then
-        Board posts = all.get(0);
-        System.out.println(">>>>>>CreatedDate = " + posts.getCreatedDate());
-        System.out.println(">>>>>>ModifiedDate = " + posts.getModifiedDate());
-
-        assertThat(posts.getCreatedDate()).isAfter(now);
-        assertThat(posts.getModifiedDate()).isAfter(now);
-    }
+//    @Test
+//    void BaseTimeEntity_insert() {
+//        //given
+//        LocalDateTime now = LocalDateTime.now();
+//        repository.save(Board.builder()
+//                .title("title")
+//                .content("content")
+//                .author("author")
+//                .build());
+//
+//        //when
+//        List<Board> all = repository.findAll();
+//
+//        //then
+//        Board posts = all.get(0);
+//        System.out.println(">>>>>>CreatedDate = " + posts.getCreatedDate());
+//        System.out.println(">>>>>>ModifiedDate = " + posts.getModifiedDate());
+//
+//        assertThat(posts.getCreatedDate()).isAfter(now);
+//        assertThat(posts.getModifiedDate()).isAfter(now);
+//    }
 
 }
