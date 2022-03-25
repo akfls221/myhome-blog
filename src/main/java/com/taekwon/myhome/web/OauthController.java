@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:8081/")
+@CrossOrigin(origins = "http://localhost:80/")
 @RequiredArgsConstructor
 public class OauthController {
 

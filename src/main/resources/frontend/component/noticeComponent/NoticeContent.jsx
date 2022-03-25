@@ -14,7 +14,7 @@ const NoticeContent = ({contentValue, contentOnChange }) => {
     language : 'ko',
     uploader: {
       insertImageAsBase64URI: true,
-      url: 'http://localhost:8081',
+      url: 'http://localhost:80',
       format: 'json',
       pathVariableName: 'path',
       filesVariableName: function (r) {

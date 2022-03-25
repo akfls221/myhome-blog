@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:8081/")
+@CrossOrigin(origins = "http://localhost:80/")
 public class PostsApiController {
 
     private final PostsService postsService;
@@ -27,7 +27,7 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
-    @CrossOrigin(origins = "http://localhost:8081/")
+    @CrossOrigin(origins = "http://localhost:80/")
     @PostMapping("/api/v1/postsUpdate/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);

@@ -37,7 +37,7 @@ public class EmailService {
         message.setSubject("KwonBlog 가입 확인 코드 : " + code);
 
         String msg = "";
-        msg += "<img width=\"120\" height=\"120\" style=\"margin-top: 0; margin-right: 0; margin-bottom: 32px; margin-left: 0px; padding-right: 30px; padding-left: 30px;\" src=\"http://localhost:8081/static/img/none-notice.png\" alt=\"\" loading=\"lazy\">";
+        msg += "<img width=\"120\" height=\"120\" style=\"margin-top: 0; margin-right: 0; margin-bottom: 32px; margin-left: 0px; padding-right: 30px; padding-left: 30px;\" src=\"http://localhost:80/static/img/none-notice.png\" alt=\"\" loading=\"lazy\">";
         msg += "<h1 style=\"font-size: 30px; padding-right: 30px; padding-left: 30px;\">이메일 주소 확인</h1>";
         msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px;\">안녕하세요 KwonBlog 입니다.</p>";
         msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px;\">아래 확인 코드를 회원가입 창이 있는 브라우저 창에 입력하세요.</p>";

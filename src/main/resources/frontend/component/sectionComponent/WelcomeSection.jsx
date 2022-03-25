@@ -17,7 +17,7 @@ const WelcomeSection = memo(() => {
       location.href = "http://localhost:8080/social/kakao/logout";
       removeCookie('loginCookie');
     } else if (social === 'google') {
-      location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8081";
+      location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:80";
       removeCookie('loginCookie');
     } else {
       removeCookie('loginCookie');
