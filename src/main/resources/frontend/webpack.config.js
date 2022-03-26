@@ -4,8 +4,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports ={
-    mode: 'development', // 모드 (개발용 // 실서비스 : production)
-    // mode: 'production', // 모드 (개발용 // 실서비스 : production)
+    // mode: 'development', // 모드 (개발용 // 실서비스 : production)
+    mode: 'production', // 모드 (개발용 // 실서비스 : production)
     devtool: false, //빠르게 하겠다
     resolve:{
         extensions:['.jsx', '.js'],
@@ -19,7 +19,7 @@ module.exports ={
             loader: 'babel-loader',
             options:{
                 presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins:['react-refresh/babel'],
+                // plugins:['react-refresh/babel'],
             }},
             { test: /\.css$/, use:['css-loader']},
         ],
@@ -32,7 +32,7 @@ module.exports ={
         }),
         new CopyPlugin({
           patterns: [
-            {from: 'static', to: "dest/static"}
+            {from: 'static', to: "dist/static"}
           ]
         }),
     ],
