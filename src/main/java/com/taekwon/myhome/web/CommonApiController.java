@@ -9,7 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:80/")
+//@CrossOrigin(origins = "http://localhost:80/")
+@CrossOrigin(origins = "http://54.180.64.141:80/")
 public class CommonApiController {
 
     @PostMapping("/api/img")
