@@ -56,7 +56,14 @@ public class ProfileMaker {
     }
 
     public String deleteProfile(ProfileDeleteRequestDto requestPath) {
-        File file = new File(rootPath + "\\" + requestPath.getDeletePath());
+        String os = System.getProperty("os.name").toLowerCase();
+        File file = null;
+
+        if (os.contains("win")) {
+            file = new File(rootPath + "\\" + requestPath.getDeletePath());
+        } else if (os.contains("linux")) {
+            file = new File(rootPath + "/" + requestPath.getDeletePath());
+        }
 
         if (file.exists()) {
             file.delete();
