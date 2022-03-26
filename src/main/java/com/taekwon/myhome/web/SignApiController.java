@@ -72,7 +72,14 @@ public class SignApiController {
                                                @PathVariable String month,
                                                @PathVariable String date) {
 
-        String subPath = "\\" + year + "\\" + month + "\\" + date + "\\";
+        String os = System.getProperty("os.name").toLowerCase();
+        String subPath = null;
+
+        if (os.contains("win")) {
+            subPath = "\\" + year + "\\" + month + "\\" + date + "\\";
+        } else if (os.contains("linux")) {
+            subPath = "/" + year + "/" + month + "/" + date + "/";
+        }
         Resource resource = new FileSystemResource(rootPath + subPath + name);
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
