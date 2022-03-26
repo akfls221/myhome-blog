@@ -70,7 +70,7 @@ public class OAuthService {
             LinkedHashMap profileInfo = (LinkedHashMap) kakao_account.get("profile");
 
             oauthUser = OauthUser.builder()
-                    .id(Integer.toString((Integer) userInfo.get("id")))
+                    .id((String) userInfo.get("id"))
                     .email((String) kakao_account.get("email"))
                     .name((String) profileInfo.get("nickname"))
                     .picture((String) profileInfo.get("profile_image_url"))
