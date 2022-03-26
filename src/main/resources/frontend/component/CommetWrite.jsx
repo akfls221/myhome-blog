@@ -60,7 +60,7 @@ const CommentWrite = memo(({feedBackId, getFeedBackView}) => {
 
     axios({
       method: "POST",
-      url: "http://localhost:8080/api/v1/comment",
+      url: "http://54.180.64.141:8080/api/v1/comment",
       data: {
         feedBackId: feedBackId,
         userId: userInfo.id,

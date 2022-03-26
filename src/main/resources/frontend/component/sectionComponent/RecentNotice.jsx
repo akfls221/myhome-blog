@@ -8,7 +8,7 @@ const RecentNotice = memo(() => {
   useEffect(() => {
     axios({
       method: "POST",
-      url: `http://localhost:8080/api/v1/recentPostList`,
+      url: `http://54.180.64.141:8080/api/v1/recentPostList`,
     }).then((res) => {
       const item = res.data;
       setRecentNotice(item);

@@ -55,7 +55,7 @@ const StudyModify = () => {
     if(userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
       axios({
         method: "GET",
-        url: `http://localhost:8080/api/v1/board/${id}`,
+        url: `http://54.180.64.141:8080/api/v1/board/${id}`,
       }).then((res) => {
         const item = res.data;
         setStudyTitle(item.title);
@@ -83,7 +83,7 @@ const StudyModify = () => {
 
     axios({
       method: "POST",
-      url: `http://localhost:8080/api/v1/boardUpdate/${id}`,
+      url: `http://54.180.64.141:8080/api/v1/boardUpdate/${id}`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: studyTitle,

@@ -20,7 +20,7 @@ const NoticeModify = () => {
     if(userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
       axios({
         method: "GET",
-        url: `http://localhost:8080/api/v1/posts/${id}`,
+        url: `http://54.180.64.141:8080/api/v1/posts/${id}`,
       }).then((res) => {
         const item = res.data;
         console.log(item);
@@ -82,7 +82,7 @@ const NoticeModify = () => {
     }
     axios({
       method: "POST",
-      url: `http://localhost:8080/api/v1/postsUpdate/${id}`,
+      url: `http://54.180.64.141:8080/api/v1/postsUpdate/${id}`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: noticeTitle,

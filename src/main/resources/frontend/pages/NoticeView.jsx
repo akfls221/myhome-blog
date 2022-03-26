@@ -28,7 +28,7 @@ const NoticeView = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `http://localhost:8080/api/v1/posts/${id}`,
+      url: `http://54.180.64.141:8080/api/v1/posts/${id}`,
     }).then((res) => {
       const item = res.data;
       setTitleContent(item);

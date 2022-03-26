@@ -40,7 +40,7 @@ public class MyhomeApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://ec2-54-180-64-141.ap-northeast-2.compute.amazonaws.com/");
+                registry.addMapping("/**").allowedOrigins("http://ec2-54-180-64-141.ap-northeast-2.compute.amazonaws.com");
             }
         };
     }

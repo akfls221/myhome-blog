@@ -23,7 +23,7 @@ const StudyView = () => {
     if(userInfo !== undefined) {
       axios({
         method: "GET",
-        url: `http://localhost:8080/api/v1/board/${id}`,
+        url: `http://54.180.64.141:8080/api/v1/board/${id}`,
       }).then((res) => {
         const item = res.data;
         setStudyTitle(item.title);

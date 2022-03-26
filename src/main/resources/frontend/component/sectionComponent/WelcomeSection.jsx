@@ -14,7 +14,7 @@ const WelcomeSection = memo(() => {
   const handleLogOut = (e) => {
     const social = userInfo.socialType;
     if (social === 'kakao') {
-      location.href = "http://localhost:8080/social/kakao/logout";
+      location.href = "http://54.180.64.141:8080/social/kakao/logout";
       removeCookie('loginCookie');
     } else if (social === 'google') {
       location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:80";

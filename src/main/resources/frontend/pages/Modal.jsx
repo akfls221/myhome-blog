@@ -18,11 +18,11 @@ const Modal = ({ open, close }) => {
   }
 
   const loginGoogle = () => {
-    location.href = "http://localhost:8080/social/google";
+    location.href = "http://54.180.64.141:8080/social/google";
   }
 
   const loginKakao =() => {
-    location.href = "http://localhost:8080/social/kakao";
+    location.href = "http://54.180.64.141:8080/social/kakao";
   }
 
   const loginSubmit = (e) => {
@@ -35,7 +35,7 @@ const Modal = ({ open, close }) => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/sign',
+      url: 'http://54.180.64.141:8080/api/v1/sign',
       data : {
         'uid' : userId,
         'password': userPw

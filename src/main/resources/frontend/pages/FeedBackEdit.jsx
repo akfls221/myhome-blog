@@ -65,7 +65,7 @@ const FeedBackEdit = memo(() => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/feedBack',
+      url: 'http://54.180.64.141:8080/api/v1/feedBack',
       headers: {Authorization: userInfo.accessToken},
       data: {
         userId: userInfo.id,

@@ -58,7 +58,7 @@ const NoticeEdit = () => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/posts',
+      url: 'http://54.180.64.141:8080/api/v1/posts',
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: noticeTitle,

@@ -12,7 +12,7 @@ const Social = () => {
 
     axios({
       method: "GET",
-      url: 'http://localhost:8080/social/google/callback?code=' + code + "&socialType=" + socialType,
+      url: 'http://54.180.64.141:8080/social/google/callback?code=' + code + "&socialType=" + socialType,
     }).then((res) => {
       const resData = res.data
       console.log("!!!!!!!!!!!!!", resData);

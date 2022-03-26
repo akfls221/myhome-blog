@@ -18,7 +18,7 @@ const EmailCheckModal = ({ open, close, setModalOpen, userEmail, setEmailCheckRe
 
     axios({
       method: "GET",
-      url: 'http://localhost:8080/api/v1/emailCheck?email='+userEmail+"&code="+code,
+      url: 'http://54.180.64.141:8080/api/v1/emailCheck?email='+userEmail+"&code="+code,
     }).then((res) => {
       if (res.data.error) {
         alert(res.data.message);

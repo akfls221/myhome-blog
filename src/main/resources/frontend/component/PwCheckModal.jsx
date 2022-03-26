@@ -30,7 +30,7 @@ const pwCheckModal = ({ open, close, boardId }) => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/checkPw',
+      url: 'http://54.180.64.141:8080/api/v1/checkPw',
       data: {
         boardId: boardId,
         userId: userInfo.id,

@@ -74,7 +74,7 @@ console.log(userInfo.id)
 
     axios({
       method: "POST",
-      url: `http://localhost:8080/api/v1/comment/${value.id}`,
+      url: `http://54.180.64.141:8080/api/v1/comment/${value.id}`,
       data: {
         content: replyContent,
       },

@@ -23,7 +23,7 @@ const Notice = () => {
   const searchPosts = () => {
     axios({
       method: "POST",
-      url: `http://localhost:8080/api/v1/postsList?page=${nowPage}&type=${searchType}&searchValue=${searchValue}` ,
+      url: `http://54.180.64.141:8080/api/v1/postsList?page=${nowPage}&type=${searchType}&searchValue=${searchValue}` ,
       data: {
 
       }

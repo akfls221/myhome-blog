@@ -45,7 +45,7 @@ const FeedBackView = memo(() => {
   const getFeedBackView = () => {
     axios({
       method: "GET",
-      url: `http://localhost:8080/api/v1/feedBack/${id}`,
+      url: `http://54.180.64.141:8080/api/v1/feedBack/${id}`,
     }).then((res) => {
       if (res.data.error) {
         alert(res.data.message);

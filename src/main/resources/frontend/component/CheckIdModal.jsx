@@ -18,7 +18,7 @@ const CheckIdModal = ({ open, close, setIdCheckResult, setUserId, setModalOpen }
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/idCheck',
+      url: 'http://54.180.64.141:8080/api/v1/idCheck',
       data: {
         uid: changeId
       }

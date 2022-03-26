@@ -60,7 +60,7 @@ const StudyEdit = () => {
 
     axios({
       method: "POST",
-      url: 'http://localhost:8080/api/v1/board',
+      url: 'http://54.180.64.141:8080/api/v1/board',
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: studyTitle,
