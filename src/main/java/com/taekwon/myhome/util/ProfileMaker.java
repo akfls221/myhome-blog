@@ -27,11 +27,12 @@ public class ProfileMaker {
     @Value("${FilePath.dev}")
     private String rootPath;
 
+    private String os = System.getProperty("os.name").toLowerCase();
+
 
     public ProfileResponseDto saveFile(MultipartFile multipartFile) throws IOException {
         if(fileExistenceCheck(multipartFile)){
 
-            String os = System.getProperty("os.name").toLowerCase();
             String originalFilename = multipartFile.getOriginalFilename();
             String extension = getExtension(originalFilename);
             String noExtension = removeExtension(originalFilename);
@@ -62,7 +63,6 @@ public class ProfileMaker {
     }
 
     public String deleteProfile(ProfileDeleteRequestDto requestPath) {
-        String os = System.getProperty("os.name").toLowerCase();
         File file = null;
 
         if (os.contains("win")) {
