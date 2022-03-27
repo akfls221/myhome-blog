@@ -32,7 +32,7 @@ module.exports ={
         }),
         new CopyPlugin({
           patterns: [
-            {from: 'static', to: "dist/static"}
+            {from: 'static', to: "static"}
           ]
         }),
     ],
