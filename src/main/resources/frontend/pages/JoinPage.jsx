@@ -80,7 +80,7 @@ const JoinPage = () => {
       axios({
         method: "POST",
         url: "http://54.180.64.141:8080/api/v1/deleteProfile",
-        data: {deletePath : datePath + "\\" + uuidFilename},
+        data: {deletePath : datePath + "/" + uuidFilename},
       }).then((res) => {
         if (res.data.error) {
           alert(res.data.message);
