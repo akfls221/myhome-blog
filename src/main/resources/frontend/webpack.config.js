@@ -19,7 +19,7 @@ module.exports ={
             loader: 'babel-loader',
             options:{
                 presets: ['@babel/preset-env', '@babel/preset-react'],
-                // plugins:['react-refresh/babel'],
+                // plugins:['react-refresh/babel'], //build시 빼야함.
             }},
             { test: /\.css$/, use:['css-loader']},
         ],
