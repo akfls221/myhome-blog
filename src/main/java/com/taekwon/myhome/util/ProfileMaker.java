@@ -31,6 +31,7 @@ public class ProfileMaker {
     public ProfileResponseDto saveFile(MultipartFile multipartFile) throws IOException {
         if(fileExistenceCheck(multipartFile)){
 
+            String os = System.getProperty("os.name").toLowerCase();
             String originalFilename = multipartFile.getOriginalFilename();
             String extension = getExtension(originalFilename);
             String noExtension = removeExtension(originalFilename);
@@ -38,7 +39,12 @@ public class ProfileMaker {
             BufferedImage resizeImage = resizeProfileImage(multipartFile, 400, 400);
             String uploadPath = saveFolder().get("uploadPath");
             String datePath = saveFolder().get("datePath");
-            String requestPath = datePath + File.separator + uuidFilename;
+            String requestPath = null;
+            if (os.contains("win")) {
+                requestPath = datePath + "\\" + uuidFilename;
+            } else if (os.contains("linux")) {
+                requestPath = datePath + "/" + uuidFilename;
+            }
 
             File saveProfile = new File(uploadPath, uuidFilename);
             ImageIO.write(resizeImage, extension, saveProfile);
