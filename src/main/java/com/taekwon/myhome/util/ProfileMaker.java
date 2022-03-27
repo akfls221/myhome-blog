@@ -38,7 +38,7 @@ public class ProfileMaker {
             BufferedImage resizeImage = resizeProfileImage(multipartFile, 400, 400);
             String uploadPath = saveFolder().get("uploadPath");
             String datePath = saveFolder().get("datePath");
-            String requestPath = datePath + "\\" + uuidFilename;
+            String requestPath = datePath + File.separator + uuidFilename;
 
             File saveProfile = new File(uploadPath, uuidFilename);
             ImageIO.write(resizeImage, extension, saveProfile);
