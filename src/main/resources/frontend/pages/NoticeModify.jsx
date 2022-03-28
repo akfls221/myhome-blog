@@ -5,6 +5,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import {useParams} from "react-router";
+import {backend} from "../util/config";
 
 const NoticeModify = () => {
   const [noticeTitle, setNoticeTitle] = useState('');
@@ -20,7 +21,7 @@ const NoticeModify = () => {
     if(userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
       axios({
         method: "GET",
-        url: `http://54.180.64.141:8080/api/v1/posts/${id}`,
+        url: `http://${backend}/api/v1/posts/${id}`,
       }).then((res) => {
         const item = res.data;
         console.log(item);
@@ -82,7 +83,7 @@ const NoticeModify = () => {
     }
     axios({
       method: "POST",
-      url: `http://54.180.64.141:8080/api/v1/postsUpdate/${id}`,
+      url: `http://${backend}/api/v1/postsUpdate/${id}`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: noticeTitle,

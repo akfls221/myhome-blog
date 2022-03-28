@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
 import axios from "axios";
+import {backend} from "../util/config";
 
 const EmailCheckModal = ({ open, close, setModalOpen, userEmail, setEmailCheckResult }) => {
   const [code, setCode] = useState('');
@@ -18,7 +19,7 @@ const EmailCheckModal = ({ open, close, setModalOpen, userEmail, setEmailCheckRe
 
     axios({
       method: "GET",
-      url: 'http://54.180.64.141:8080/api/v1/emailCheck?email='+userEmail+"&code="+code,
+      url: `http://${backend}/api/v1/emailCheck?email=${userEmail}&code=${code}`,
     }).then((res) => {
       if (res.data.error) {
         alert(res.data.message);

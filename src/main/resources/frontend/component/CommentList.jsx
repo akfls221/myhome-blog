@@ -2,6 +2,7 @@ import React, {memo, useState} from 'react';
 import {getCookie} from "../util/Cookie";
 import Picker from "emoji-mart/dist-modern/components/picker/picker";
 import axios from "axios";
+import {backend} from "../util/config";
 
 const CommentList = memo(({value, getFeedBackView}) => {
   const [editComment, setEditComment] = useState(false);
@@ -74,7 +75,7 @@ console.log(userInfo.id)
 
     axios({
       method: "POST",
-      url: `http://54.180.64.141:8080/api/v1/comment/${value.id}`,
+      url: `http://${backend}/api/v1/comment/${value.id}`,
       data: {
         content: replyContent,
       },

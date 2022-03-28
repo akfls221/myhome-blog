@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from "axios";
 import {getCookie} from "../util/Cookie";
 import {useNavigate} from "react-router";
+import {backend} from "../util/config";
 
 const pwCheckModal = ({ open, close, boardId }) => {
   const [checkPw, setCheckPw] = useState('');
@@ -30,7 +31,7 @@ const pwCheckModal = ({ open, close, boardId }) => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/checkPw',
+      url: `http://${backend}/api/v1/checkPw`,
       data: {
         boardId: boardId,
         userId: userInfo.id,

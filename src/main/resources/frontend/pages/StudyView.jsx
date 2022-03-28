@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import StudyHeader from "../component/studyBoardComponent/StudyHeader";
 import {getCookie} from "../util/Cookie";
+import {backend} from "../util/config";
 
 const StudyView = () => {
   const [studyTitle, setStudyTitle] = useState('');
@@ -23,7 +24,7 @@ const StudyView = () => {
     if(userInfo !== undefined) {
       axios({
         method: "GET",
-        url: `http://54.180.64.141:8080/api/v1/board/${id}`,
+        url: `http://${backend}/api/v1/board/${id}`,
       }).then((res) => {
         const item = res.data;
         setStudyTitle(item.title);

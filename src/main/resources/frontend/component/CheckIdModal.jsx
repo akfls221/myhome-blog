@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import {backend} from "../util/config";
 
 const CheckIdModal = ({ open, close, setIdCheckResult, setUserId, setModalOpen }) => {
   const [changeId, setChangeId] = useState('');
@@ -18,7 +19,7 @@ const CheckIdModal = ({ open, close, setIdCheckResult, setUserId, setModalOpen }
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/idCheck',
+      url: `http://${backend}/api/v1/idCheck`,
       data: {
         uid: changeId
       }

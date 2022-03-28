@@ -2,10 +2,11 @@ import React, {memo, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {getCookie, removeCookie} from "../../util/Cookie";
 import Modal from "../../pages/Modal";
+import {backend} from "../../util/config";
 
 const WelcomeSection = memo(() => {
   const [welcomeTitle, setWelcomeTitle] = useState("엄태권의 개발 블로그입니다");
-  const [welcomeSub, setWelcomeSub] = useState("안녕하세요! 저의 사이트에 방문해 주셔서 감사 합니다!");
+  const [welcomeSub, setWelcomeSub] = useState("안녕하세요! 저의 사이트에 방문해 주셔서 감사합니다!");
   const [btnState, setBtnState] = useState("LogIn");
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -14,10 +15,10 @@ const WelcomeSection = memo(() => {
   const handleLogOut = (e) => {
     const social = userInfo.socialType;
     if (social === 'kakao') {
-      location.href = "http://54.180.64.141:8080/social/kakao/logout";
+      location.href = `http://${backend}/social/kakao/logout`;
       removeCookie('loginCookie');
     } else if (social === 'google') {
-      location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:80";
+      location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://${backend}`;
       removeCookie('loginCookie');
     } else {
       removeCookie('loginCookie');
@@ -59,7 +60,6 @@ const WelcomeSection = memo(() => {
                     <h1 data-aos="fade-right">{welcomeTitle}</h1>
                     <p className="mb-5" data-aos="fade-right" data-aos-delay="100">{welcomeSub}</p>
                     <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500">
-                      <a href="#" className="btn btn-outline-white">About Site</a>
                       {btnState === 'LogIn' ?
                           <a onClick={openModal} className="btn btn-outline-white">{btnState}</a>
                           :

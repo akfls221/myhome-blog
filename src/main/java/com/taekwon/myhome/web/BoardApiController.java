@@ -14,8 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-//@CrossOrigin(origins = "http://localhost:80/")
-@CrossOrigin(origins = "http://54.180.64.141:80/")
+@CrossOrigin(origins = "http://localhost:8081/")
 public class BoardApiController {
 
     private final BoardService boardService;

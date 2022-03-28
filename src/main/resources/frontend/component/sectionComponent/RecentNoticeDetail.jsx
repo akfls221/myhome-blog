@@ -14,7 +14,6 @@ const RecentNoticeDetail = memo(({value, index}) => {
           <Link to={`/view/${value.id}`}>
             <h4>{value.title.substring(0, 25)}</h4>
           </Link>
-          <p>{value.content.substring(3, 40) + "..."}</p>
         </div>
       </div>
   )

@@ -5,6 +5,7 @@ import NoticeContent from "../component/noticeComponent/NoticeContent";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
+import {backend} from "../util/config";
 
 const NoticeEdit = () => {
   const [noticeTitle, setNoticeTitle] = useState('');
@@ -58,7 +59,7 @@ const NoticeEdit = () => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/posts',
+      url: `http://${backend}/api/v1/posts`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: noticeTitle,

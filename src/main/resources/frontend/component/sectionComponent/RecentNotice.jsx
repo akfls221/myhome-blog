@@ -1,6 +1,7 @@
 import React, {memo, useEffect, useState} from 'react';
 import axios from "axios";
 import RecentNoticeDetail from "./RecentNoticeDetail";
+import {backend} from "../../util/config";
 
 const RecentNotice = memo(() => {
   const [recentNotice, setRecentNotice] = useState([]);
@@ -8,7 +9,7 @@ const RecentNotice = memo(() => {
   useEffect(() => {
     axios({
       method: "POST",
-      url: `http://54.180.64.141:8080/api/v1/recentPostList`,
+      url: `http://${backend}/api/v1/recentPostList`,
     }).then((res) => {
       const item = res.data;
       setRecentNotice(item);

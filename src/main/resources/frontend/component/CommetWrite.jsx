@@ -3,6 +3,7 @@ import React from "react";
 import {getCookie} from "../util/Cookie";
 import Picker from "emoji-mart/dist-modern/components/picker/picker";
 import axios from "axios";
+import {backend} from "../util/config";
 
 const CommentWrite = memo(({feedBackId, getFeedBackView}) => {
   const [replyContent, setReplyContent] = useState('');
@@ -60,7 +61,7 @@ const CommentWrite = memo(({feedBackId, getFeedBackView}) => {
 
     axios({
       method: "POST",
-      url: "http://54.180.64.141:8080/api/v1/comment",
+      url: `http://${backend}/api/v1/comment`,
       data: {
         feedBackId: feedBackId,
         userId: userInfo.id,

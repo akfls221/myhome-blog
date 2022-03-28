@@ -6,6 +6,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import FeedBackConfig from "../component/feedBackComponent/FeedBackConfig";
+import {backend} from "../util/config";
 
 const FeedBackEdit = memo(() => {
   const [feedBackTitle, setFeedBackTitle] = useState('');
@@ -65,7 +66,7 @@ const FeedBackEdit = memo(() => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/feedBack',
+      url: `http://${backend}/api/v1/feedBack`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         userId: userInfo.id,

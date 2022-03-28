@@ -5,6 +5,7 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import Page from "../component/Page";
+import {backend} from "../util/config";
 
 const Study = memo(() => {
   const [boardList, setBoardList] = useState([]);
@@ -23,7 +24,7 @@ const Study = memo(() => {
   const searchBoard = () => {
     axios({
       method: "POST",
-      url: `http://54.180.64.141:8080/api/v1/board/boardList?page=${nowPage}&type=${searchType}&searchValue=${searchValue}`,
+      url: `http://${backend}/api/v1/board/boardList?page=${nowPage}&type=${searchType}&searchValue=${searchValue}`,
     }).then((res) => {
       console.log(res.data);
       setBoardList(res.data.content);

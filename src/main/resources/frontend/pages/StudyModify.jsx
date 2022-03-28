@@ -5,6 +5,7 @@ import StudyBoardConfig from "../component/studyBoardComponent/StudyBoardConfig"
 import NoticeContent from "../component/noticeComponent/NoticeContent";
 import {getCookie} from "../util/Cookie";
 import {useParams} from "react-router";
+import {backend} from "../util/config";
 
 const StudyModify = () => {
   const [studyTitle, setStudyTitle] = useState('');
@@ -55,7 +56,7 @@ const StudyModify = () => {
     if(userInfo !== undefined && userInfo.roles[0] === 'ROLE_ADMIN') {
       axios({
         method: "GET",
-        url: `http://54.180.64.141:8080/api/v1/board/${id}`,
+        url: `http://${backend}/api/v1/board/${id}`,
       }).then((res) => {
         const item = res.data;
         setStudyTitle(item.title);
@@ -83,7 +84,7 @@ const StudyModify = () => {
 
     axios({
       method: "POST",
-      url: `http://54.180.64.141:8080/api/v1/boardUpdate/${id}`,
+      url: `http://${backend}/api/v1/boardUpdate/${id}`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: studyTitle,

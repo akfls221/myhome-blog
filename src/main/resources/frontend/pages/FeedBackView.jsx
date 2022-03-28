@@ -8,6 +8,7 @@ import FeedBackHeader from "../component/feedBackComponent/FeedBackHeader";
 import 'emoji-mart/css/emoji-mart.css';
 import CommentWrite from "../component/CommetWrite";
 import CommentList from "../component/CommentList";
+import {backend} from "../util/config";
 
 const FeedBackView = memo(() => {
   const id = useParams().id;
@@ -45,7 +46,7 @@ const FeedBackView = memo(() => {
   const getFeedBackView = () => {
     axios({
       method: "GET",
-      url: `http://54.180.64.141:8080/api/v1/feedBack/${id}`,
+      url: `http://${backend}/api/v1/feedBack/${id}`,
     }).then((res) => {
       if (res.data.error) {
         alert(res.data.message);

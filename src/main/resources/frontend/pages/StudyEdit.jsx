@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import StudyBoardConfig from "../component/studyBoardComponent/StudyBoardConfig";
 import NoticeContent from "../component/noticeComponent/NoticeContent";
 import {getCookie} from "../util/Cookie";
+import {backend} from "../util/config";
 
 const StudyEdit = () => {
   const [studyTitle, setStudyTitle] = useState('');
@@ -60,7 +61,7 @@ const StudyEdit = () => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/board',
+      url: `http://${backend}/api/v1/board`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         title: studyTitle,

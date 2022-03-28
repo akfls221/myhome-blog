@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import axios from "axios";
 import {setCookie} from "../util/Cookie";
 import {useNavigate} from "react-router";
+import {backend} from "../util/config";
 
 const Social = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Social = () => {
 
     axios({
       method: "GET",
-      url: 'http://54.180.64.141:8080/social/google/callback?code=' + code + "&socialType=" + socialType,
+      url: `http://${backend}/social/google/callback?code=${code}&socialType=${socialType}`,
     }).then((res) => {
       const resData = res.data
       console.log("!!!!!!!!!!!!!", resData);

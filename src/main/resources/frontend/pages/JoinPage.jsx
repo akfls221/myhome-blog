@@ -3,6 +3,7 @@ import {useNavigate} from "react-router";
 import axios from "axios";
 import EmailCheckModal from "./EmailCheckModal";
 import WaitingModal from "../component/WaitingModal";
+import {backend} from "../util/config";
 
 const JoinPage = () => {
   const [userId, setUserId] = useState('');
@@ -58,7 +59,7 @@ const JoinPage = () => {
     setOpenLoading(true);
     axios({
       method: "GET",
-      url: 'http://54.180.64.141:8080/api/v1/email?email=' + userEmail,
+      url: `http://${backend}/api/v1/email?email=${userEmail}`,
     }).then((res) => {
       if (res.data.error) {
         alert(res.data.message);
@@ -79,7 +80,7 @@ const JoinPage = () => {
     if (uuidFilename !== '') {
       axios({
         method: "POST",
-        url: "http://54.180.64.141:8080/api/v1/deleteProfile",
+        url: `http://${backend}/api/v1/deleteProfile`,
         data: {deletePath : datePath + "/" + uuidFilename},
       }).then((res) => {
         if (res.data.error) {
@@ -116,7 +117,7 @@ const JoinPage = () => {
 
       axios({
         method: "POST",
-        url: "http://54.180.64.141:8080/api/v1/profile",
+        url: `http://${backend}/api/v1/profile`,
         data: formData,
       }).then((res) => {
         if (res.data.error) {
@@ -126,7 +127,7 @@ const JoinPage = () => {
         setDatePath(res.data.datePath);
         setUuidFilename(res.data.uuidFilename);
 
-        setUserProfile("http://54.180.64.141:8080/api/v1/getProfile/" + res.data.requestPath);
+        setUserProfile(`http://${backend}/api/v1/getProfile/${res.data.requestPath}`);
 
       }).catch(error => {
         console.log(error);
@@ -149,7 +150,7 @@ const JoinPage = () => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/idCheck',
+      url: `http://${backend}/api/v1/idCheck`,
       data: {
         uid: userId
       }
@@ -183,7 +184,7 @@ const JoinPage = () => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/join',
+      url: `http://${backend}/api/v1/join`,
       data: {
         uid: userId,
         password: userPw,

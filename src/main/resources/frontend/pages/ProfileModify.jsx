@@ -3,6 +3,7 @@ import {getCookie, setCookie} from "../util/Cookie";
 import axios from "axios";
 import CheckIdModal from "../component/CheckIdModal";
 import {useNavigate} from "react-router";
+import {backend} from "../util/config";
 
 const ProfileModify = () => {
   const [userId, setUserId] = useState('');
@@ -60,7 +61,7 @@ const ProfileModify = () => {
       let splitPath = userProfile.split('getProfile/');
       axios({
         method: "POST",
-        url: "http://54.180.64.141:8080/api/v1/deleteProfile",
+        url: `http://${backend}/api/v1/deleteProfile`,
         data: {deletePath : splitPath[1]},
       }).then((res) => {
         if (res.data.error) {
@@ -87,7 +88,7 @@ const ProfileModify = () => {
 
       axios({
         method: "POST",
-        url: "http://54.180.64.141:8080/api/v1/profile",
+        url: `http://${backend}/api/v1/profile`,
         data: formData,
       }).then((res) => {
         if (res.data.error) {
@@ -97,7 +98,7 @@ const ProfileModify = () => {
         setDatePath(res.data.datePath);
         setUuidFilename(res.data.uuidFilename);
 
-        setUserProfile("http://54.180.64.141:8080/api/v1/getProfile/" + res.data.requestPath);
+        setUserProfile(`http://${backend}/api/v1/getProfile/${res.data.requestPath}`);
 
       }).catch(error => {
         console.log(error);
@@ -122,7 +123,7 @@ const ProfileModify = () => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/manage/userEdit',
+      url: `http://${backend}/api/v1/manage/userEdit`,
       headers: {Authorization: userInfo.accessToken},
       data: {
         id: userInfo.id,

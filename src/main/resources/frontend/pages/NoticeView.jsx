@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import NoticeHeader from "../component/noticeComponent/NoticeHeader";
 import {getCookie} from "../util/Cookie";
+import {backend} from "../util/config";
 
 const NoticeView = () => {
   const id = useParams().id;
@@ -28,7 +29,7 @@ const NoticeView = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `http://54.180.64.141:8080/api/v1/posts/${id}`,
+      url: `http://${backend}/api/v1/posts/${id}`,
     }).then((res) => {
       const item = res.data;
       setTitleContent(item);

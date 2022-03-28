@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-//@CrossOrigin(origins = "http://localhost:80/")
-@CrossOrigin(origins = "http://54.180.64.141:80/")
+@CrossOrigin(origins = "http://localhost:8081/")
 public class FeedBackApiController {
 
     private final FeedBackService feedBackService;

@@ -23,8 +23,7 @@ import java.io.InputStream;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1")
-//@CrossOrigin(origins = "http://localhost:80/")
-@CrossOrigin(origins = "http://54.180.64.141:80/")
+@CrossOrigin(origins = "http://localhost:8081/")
 public class SignApiController {
 
     private final SignService signService;

@@ -5,6 +5,7 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import Page from "../component/Page";
+import {backend} from "../util/config";
 
 const Notice = () => {
   const [noticeList, setNoticeList] = useState([]);
@@ -23,7 +24,7 @@ const Notice = () => {
   const searchPosts = () => {
     axios({
       method: "POST",
-      url: `http://54.180.64.141:8080/api/v1/postsList?page=${nowPage}&type=${searchType}&searchValue=${searchValue}` ,
+      url: `http://${backend}/api/v1/postsList?page=${nowPage}&type=${searchType}&searchValue=${searchValue}` ,
       data: {
 
       }

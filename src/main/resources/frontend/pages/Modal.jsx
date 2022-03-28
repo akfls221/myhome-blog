@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
 import axios from "axios";
 import {setCookie} from "../util/Cookie";
+import {backend} from "../util/config";
 
 const Modal = ({ open, close }) => {
 
@@ -18,11 +19,11 @@ const Modal = ({ open, close }) => {
   }
 
   const loginGoogle = () => {
-    location.href = "http://54.180.64.141:8080/social/google";
+    location.href = `http://${backend}/social/google`;
   }
 
   const loginKakao =() => {
-    location.href = "http://54.180.64.141:8080/social/kakao";
+    location.href = `http://${backend}/social/kakao`;
   }
 
   const loginSubmit = (e) => {
@@ -35,7 +36,7 @@ const Modal = ({ open, close }) => {
 
     axios({
       method: "POST",
-      url: 'http://54.180.64.141:8080/api/v1/sign',
+      url: `http://${backend}/api/v1/sign`,
       data : {
         'uid' : userId,
         'password': userPw
