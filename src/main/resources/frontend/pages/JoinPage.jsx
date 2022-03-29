@@ -4,6 +4,7 @@ import axios from "axios";
 import EmailCheckModal from "./EmailCheckModal";
 import WaitingModal from "../component/WaitingModal";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const JoinPage = () => {
   const [userId, setUserId] = useState('');
@@ -53,7 +54,10 @@ const JoinPage = () => {
     e.preventDefault();
 
     if(userEmail.length <= 0){
-      alert("이메일 입력은 필수 입니다.");
+      toast.error('이메일은 필수입력값 입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
     setOpenLoading(true);
@@ -62,7 +66,10 @@ const JoinPage = () => {
       url: `http://${backend}/api/v1/email?email=${userEmail}`,
     }).then((res) => {
       if (res.data.error) {
-        alert(res.data.message);
+        toast.error(res.data.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         setOpenLoading(false);
       } else {
         if(res.data === true) {
@@ -72,7 +79,10 @@ const JoinPage = () => {
       }
     }).catch(error => {
       console.log(error);
-      alert("존재하지 않는 이메일이거나 이메일 형식이 잘못 되었습니다.");
+      toast.error('존재하지 않는 이메일 혹은 형식이 잘못되었습니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
     });
   }
 
@@ -84,7 +94,10 @@ const JoinPage = () => {
         data: {deletePath : datePath + "/" + uuidFilename},
       }).then((res) => {
         if (res.data.error) {
-          alert(res.data.message);
+          toast.error(res.data.message, {
+            autoClose: 3000,
+            position: toast.POSITION.TOP_CENTER
+          });
           return;
         }
         setDatePath('');
@@ -93,7 +106,10 @@ const JoinPage = () => {
 
       }).catch(error => {
         console.log(error);
-        alert("파일 업로드에 문제가 있습니다. 관리자에게 문의해주세요");
+        toast.error('파일업로드에 문제가 있습니다 관리자에게 문의해주세요.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       });
     }
   }
@@ -121,7 +137,10 @@ const JoinPage = () => {
         data: formData,
       }).then((res) => {
         if (res.data.error) {
-          alert(res.data.message);
+          toast.error(res.data.message, {
+            autoClose: 3000,
+            position: toast.POSITION.TOP_CENTER
+          });
           return;
         }
         setDatePath(res.data.datePath);
@@ -131,7 +150,10 @@ const JoinPage = () => {
 
       }).catch(error => {
         console.log(error);
-        alert("파일 업로드에 실패 했습니다. 관리자에게 문의해주세요.");
+        toast.error('파일업로드에 문제가 있습니다 관리자에게 문의해주세요.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       });
     }
   }
@@ -144,7 +166,10 @@ const JoinPage = () => {
     e.preventDefault();
 
     if (userId.length <= 0) {
-      alert("아이디는 필수 입력값입니다.");
+      toast.error('ID는 필수입력값 입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -156,10 +181,16 @@ const JoinPage = () => {
       }
     }).then((res) => {
       if (!res.data) {
-        alert("사용 가능한 아이디 입니다.");
+        toast.success('사용가능한 ID 입니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         setExistCheck(true);
       } else {
-        alert("아이디가 중복되었습니다. 다시 확인 부탁 드립니다.");
+        toast.error('ID가 중복되었습니다. 다시 확인해주세요.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         setExistCheck(false);
       }
     }).catch(error => {
@@ -172,13 +203,22 @@ const JoinPage = () => {
     e.preventDefault();
 
     if (!existCheck){
-      alert("ID 중복체크를 진행해 주세요.");
+      toast.error('ID중복체크를 진행해주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     } else if(!pwCheckResult){
-      alert("패스워드가 일치하지 않습니다.");
+      toast.error('패스워드가 일치하지 않습니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     } else if(!emailCheckResult) {
-      alert("email 인증코드를 정상적으로 입력해주세요.");
+      toast.error('Email인증을 진행해주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -195,7 +235,10 @@ const JoinPage = () => {
       }
     }).then((res) => {
       const userInfo = res.data;
-      alert("가입을 환영합니다." + userInfo.name + "님");
+      toast.success(`가입을 환영합니다. ${userInfo.name} 님`, {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       navigate("/");
     }).catch(error => {
       console.log(error);

@@ -3,6 +3,7 @@ import {getCookie} from "../util/Cookie";
 import Picker from "emoji-mart/dist-modern/components/picker/picker";
 import axios from "axios";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const CommentList = memo(({value, getFeedBackView}) => {
   const [editComment, setEditComment] = useState(false);
@@ -66,10 +67,16 @@ const CommentList = memo(({value, getFeedBackView}) => {
 console.log(userInfo.id)
     console.log(value.user.id)
     if (userInfo.id !== value.user.id) {
-      alert("해당 댓글을 수정할 수 있는 권한이 없습니다.");
+      toast.error('해당 댓글을 수정할 수 있는 권한이 없습니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }else if (replyContent.length === 0 || replyContent === '') {
-      alert("댓글 내용은 필수 입력값 입니다.");
+      toast.error('댓글 내용은 필수 입력값 입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -81,17 +88,26 @@ console.log(userInfo.id)
       },
     }).then((res) => {
       if (res.data.error) {
-        alert(res.data.message);
+        toast.error(res.data.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         return;
       }
-      alert("댓글이 수정 되었습니다");
+      toast.success('댓글이 수정되었습니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       setReplyContent('');
       setEditComment(false);
       getFeedBackView();
 
     }).catch(error => {
       console.log(error);
-      alert("댓글 수정에 문제가 있습니다. 관리자에게 문의해주세요");
+      toast.error('댓글 수정에 문제가 있습니다. 관리자에게 문의해 주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
     });
   }
 

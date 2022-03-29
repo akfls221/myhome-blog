@@ -5,11 +5,14 @@ import axios from "axios";
 import StudyHeader from "../component/studyBoardComponent/StudyHeader";
 import {getCookie} from "../util/Cookie";
 import {backend} from "../util/config";
+import {ToastContainer, toast} from "react-toastify";
 
 const StudyView = () => {
   const [studyTitle, setStudyTitle] = useState('');
   const [studyContent, setStudyContent] = useState('');
   const [studySub, setStudySub] = useState('');
+  const [authorValue, setAuthorValue] = useState('');
+  const [dateValue, setDateValue] = useState('');
   const [roleCheck, setRoleCheck] = useState(false);
 
   const userInfo = getCookie('loginCookie');
@@ -30,6 +33,8 @@ const StudyView = () => {
         setStudyTitle(item.title);
         setStudyContent(item.content);
         setStudySub(item.sub);
+        setAuthorValue(item.author);
+        setDateValue(item.modifiedDate.substring(0, 10));
 
       }).catch(error => {
         console.log(error);
@@ -42,7 +47,10 @@ const StudyView = () => {
 
   useEffect(() => {
     if (userInfo === undefined) {
-      alert("회원가입 후 이용가능한 페이지 입니다.");
+      toast.info('회원가입이 필요한 메뉴입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       navigate(-1);
     } else if(userInfo.roles[0] === 'ROLE_ADMIN') {
       setRoleCheck(userInfo.name);
@@ -60,6 +68,8 @@ const StudyView = () => {
               <div className="col-md-12 mb-5 mb-md-0">
                <StudyHeader titleValue={studyTitle}
                             sub={studySub}
+                            authorValue={authorValue}
+                            dateValue={dateValue}
                />
               </div>
               <div className="col-md-12 mb-5 mb-md-0">

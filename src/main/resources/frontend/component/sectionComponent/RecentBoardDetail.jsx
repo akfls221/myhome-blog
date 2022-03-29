@@ -1,6 +1,7 @@
 import React, {memo, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {getCookie} from "../../util/Cookie";
+import {toast} from "react-toastify";
 
 const RecentBoardDetail = memo(({value}) => {
   const [thumbNail, setThumbNail] = useState('');
@@ -24,7 +25,10 @@ const RecentBoardDetail = memo(({value}) => {
 
   const checkLogin = () => {
     if (userInfo === undefined) {
-      alert("회원 가입후 이용 가능한 페이지 입니다.");
+      toast.info('회원가입 후 이용가능한 페이지 입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
     } else {
       navigate(`/study/${value.id}`);
     }

@@ -1,6 +1,7 @@
 import React, {memo, useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
+import {toast} from "react-toastify";
 
 
 const Nav = memo(() => {
@@ -11,6 +12,7 @@ const Nav = memo(() => {
     {menu: 'ABOUT ME', url: "/about"},
     {menu: 'FEED_BACK', url: "/feedBack"},
   ]);
+
   const [selectMenu, setSelectMenu] = useState("");
   const navigate = useNavigate();
 
@@ -20,7 +22,10 @@ const Nav = memo(() => {
     if (item === 'STUDY') {
       const access = getCookie('loginCookie');
       if (access === undefined) {
-        alert("회원가입이 필요한 메뉴입니다.");
+        toast.info('회원가입이 필요한 메뉴입니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         navigate("/join")
       }
     }

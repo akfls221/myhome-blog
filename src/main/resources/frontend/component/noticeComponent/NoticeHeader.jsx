@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NoticeHeader = ({titleValue, typeValue}) => {
+const NoticeHeader = ({titleValue, typeValue, authorValue, dateValue}) => {
 
   return (
       <>
@@ -18,9 +18,9 @@ const NoticeHeader = ({titleValue, typeValue}) => {
             </div>
             <div className="board-detail">
               <div className="board-subtitle">게시글 작성자</div>
-              <div className="board-sub-content">수정필요</div>
+              <div className="board-sub-content">{authorValue}</div>
               <div className="board-subtitle">작성일</div>
-              <div className="board-sub-content">수정필요</div>
+              <div className="board-sub-content">{dateValue}</div>
             </div>
           </div>
         </div>

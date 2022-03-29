@@ -4,6 +4,7 @@ import {getCookie} from "../util/Cookie";
 import Picker from "emoji-mart/dist-modern/components/picker/picker";
 import axios from "axios";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const CommentWrite = memo(({feedBackId, getFeedBackView}) => {
   const [replyContent, setReplyContent] = useState('');
@@ -52,10 +53,16 @@ const CommentWrite = memo(({feedBackId, getFeedBackView}) => {
     e.preventDefault();
 
     if (userInfo === undefined) {
-      alert("로그인 후 이용 부탁 드립니다.");
+      toast.info('로그인 후 이용 부탁드립니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     } else if (replyContent.length === 0 || replyContent === '') {
-      alert("댓글 내용은 필수 입력값 입니다.");
+      toast.error('댓글 내용은 필수 입력값 입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -69,16 +76,25 @@ const CommentWrite = memo(({feedBackId, getFeedBackView}) => {
       },
     }).then((res) => {
       if (res.data.error) {
-        alert(res.data.message);
+        toast.error(res.data.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         return;
       }
-      alert("댓글이 등록 되었습니다");
+      toast.success('댓글이 등록되었습니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       setReplyContent('');
       getFeedBackView();
 
     }).catch(error => {
       console.log(error);
-      alert("댓글 등록에 문제가 있습니다. 관리자에게 문의해 주세요");
+      toast.error('댓글등록에 문제가 있습니다. 관리자에게 문의해 주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
     });
   }
 

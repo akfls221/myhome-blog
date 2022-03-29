@@ -9,6 +9,7 @@ import 'emoji-mart/css/emoji-mart.css';
 import CommentWrite from "../component/CommetWrite";
 import CommentList from "../component/CommentList";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const FeedBackView = memo(() => {
   const id = useParams().id;
@@ -16,6 +17,7 @@ const FeedBackView = memo(() => {
   const [feedBackType, setFeedBackType] = useState('');
   const [feedBackContent, setFeedBackContent] = useState('');
   const [feedBackAuth, setFeedBackAuth] = useState('');
+  const [feedBackDate, setFeedBackDate] = useState('');
   const [commentList, setCommentList] = useState([]);
 
   const userInfo = getCookie('loginCookie');
@@ -27,6 +29,7 @@ const FeedBackView = memo(() => {
     setFeedBackContent(item.content);
     setFeedBackAuth(item.auth);
     setFeedBackType(transType(item.feedbackType));
+    setFeedBackDate(item.modifyDate.substring(0, 10));
   }
 
   const transType = (type) => {
@@ -49,7 +52,10 @@ const FeedBackView = memo(() => {
       url: `http://${backend}/api/v1/feedBack/${id}`,
     }).then((res) => {
       if (res.data.error) {
-        alert(res.data.message);
+        toast.error(res.data.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         return;
       }
       const item = res.data;
@@ -75,7 +81,12 @@ const FeedBackView = memo(() => {
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-                <FeedBackHeader typeValue={feedBackType} titleValue={feedBackTitle} authorValue={feedBackAuth}/>
+                <FeedBackHeader typeValue={feedBackType}
+                                titleValue={feedBackTitle}
+                                authorValue={feedBackAuth}
+                                feedBackDate={feedBackDate}
+
+                />
               </div>
               <div className="col-md-12 mb-5 mb-md-0">
                 <div className="notice-content-wrap">

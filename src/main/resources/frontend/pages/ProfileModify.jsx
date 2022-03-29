@@ -4,6 +4,7 @@ import axios from "axios";
 import CheckIdModal from "../component/CheckIdModal";
 import {useNavigate} from "react-router";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const ProfileModify = () => {
   const [userId, setUserId] = useState('');
@@ -65,14 +66,20 @@ const ProfileModify = () => {
         data: {deletePath : splitPath[1]},
       }).then((res) => {
         if (res.data.error) {
-          alert(res.data.message);
+          toast.error(res.data.message, {
+            autoClose: 3000,
+            position: toast.POSITION.TOP_CENTER
+          });
           return;
         }
         setUserProfile('../static/img/user_icon.png');
 
       }).catch(error => {
         console.log(error);
-        alert("파일 삭제에 문제가 있습니다. 관리자에게 문의해주세요");
+        toast.error('파일삭제에 문제가있습니다. 관리자에게 문의해주세요.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       });
     }
   }
@@ -92,7 +99,10 @@ const ProfileModify = () => {
         data: formData,
       }).then((res) => {
         if (res.data.error) {
-          alert(res.data.message);
+          toast.error(res.data.message, {
+            autoClose: 3000,
+            position: toast.POSITION.TOP_CENTER
+          });
           return;
         }
         setDatePath(res.data.datePath);
@@ -102,7 +112,10 @@ const ProfileModify = () => {
 
       }).catch(error => {
         console.log(error);
-        alert("파일 업로드에 실패 했습니다. 관리자에게 문의해주세요.");
+        toast.error('파일업로드에 실패했습니다. 관리자에게 문의해주세요.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       });
     }
   }
@@ -111,12 +124,18 @@ const ProfileModify = () => {
     e.preventDefault();
 
     if (!idCheckResult){
-      alert("ID 중복체크를 진행해 주세요.");
+      toast.error('ID중복체크를 진행해주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
     if (userPw !== '' && pwCheckResult === false) {
-      alert("비밀번호 확인후 재시도 해주세요");
+      toast.error('PW확인후 재시도해주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -136,13 +155,19 @@ const ProfileModify = () => {
       }
     }).then((res) => {
       if (res.data.error) {
-        alert(res.data.message);
+        toast.error(res.data.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       } else {
         const userInfo = res.data;
         setCookie('loginCookie', userInfo, {
           expires: new Date(Date.parse(new Date()) + 1000 * 60 * 60)
         });
-        alert("회원 정보 변경을 완료하였습니다.");
+        toast.success('회원정보 변경을 완료했습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         navigate("/");
       }
     }).catch(error => {

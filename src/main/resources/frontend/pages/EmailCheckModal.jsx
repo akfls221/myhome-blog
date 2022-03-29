@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
 import axios from "axios";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const EmailCheckModal = ({ open, close, setModalOpen, userEmail, setEmailCheckResult }) => {
   const [code, setCode] = useState('');
@@ -22,11 +23,20 @@ const EmailCheckModal = ({ open, close, setModalOpen, userEmail, setEmailCheckRe
       url: `http://${backend}/api/v1/emailCheck?email=${userEmail}&code=${code}`,
     }).then((res) => {
       if (res.data.error) {
-        alert(res.data.message);
+        toast.error(res.data.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       } else if(res.data === false) {
-        alert("인증코드가 잘못되었습니다. 다시 확인해 주세요");
+        toast.error('인증코드가 잘못되었습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       } else{
-        alert("정상적으로 인증되었습니다.");
+        toast.success('정상적으로 인증되었습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         setEmailCheckResult(true);
         setModalOpen(false);
       }

@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import {useParams} from "react-router";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const NoticeModify = () => {
   const [noticeTitle, setNoticeTitle] = useState('');
@@ -78,7 +79,10 @@ const NoticeModify = () => {
   const modifyNotice = (e) => {
     e.preventDefault();
     if (noticeTitle.length === 0 || noticeContent.length === 0) {
-      alert("게시글 제목 또는 내용을 입력해 주세요");
+      toast.error('게시글 제목 또는 내용을 입력해 주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
     axios({
@@ -94,9 +98,15 @@ const NoticeModify = () => {
     }).then((res) => {
       const resData = res.data;
       if (resData.message !== undefined) {
-        alert(resData.message);
+        toast.error(resData.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       }else {
-        alert("수정이 완료되었습니다.");
+        toast.success('수정이 완료되었습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         navigate(-1);
       }
     }).catch(error => {

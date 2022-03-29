@@ -5,6 +5,7 @@ import StudyBoardConfig from "../component/studyBoardComponent/StudyBoardConfig"
 import NoticeContent from "../component/noticeComponent/NoticeContent";
 import {getCookie} from "../util/Cookie";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const StudyEdit = () => {
   const [studyTitle, setStudyTitle] = useState('');
@@ -53,7 +54,10 @@ const StudyEdit = () => {
     e.preventDefault();
 
     if (studyTitle.length === 0 || studyContent.length === 0) {
-      alert("게시글 제목 또는 내용을 입력해 주세요");
+      toast.error('게시글 제목 또는 내용을 입력해 주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 

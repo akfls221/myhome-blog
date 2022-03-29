@@ -3,6 +3,7 @@ import {useNavigate} from "react-router";
 import axios from "axios";
 import {setCookie} from "../util/Cookie";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const Modal = ({ open, close }) => {
 
@@ -30,7 +31,10 @@ const Modal = ({ open, close }) => {
     e.preventDefault();
 
     if (userPw.length === 0 && userId.length === 0) {
-      alert("ID 혹은 비밀번호를 입력해주세요");
+      toast.error('ID 혹은 PW를 확인해주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -44,7 +48,10 @@ const Modal = ({ open, close }) => {
     }).then((res) => {
       const resData = res.data
       if (resData.message !== undefined) {
-        alert(resData.message);
+        toast.error(resData.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         return;
       } else {
         setCookie('loginCookie', resData, {
@@ -55,7 +62,10 @@ const Modal = ({ open, close }) => {
         location.reload();
       }
     }).catch(error => {
-      alert(error);
+      toast.error('로그인에 문제가있습니다. 관리자에게 문의하세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
     });
   }
 

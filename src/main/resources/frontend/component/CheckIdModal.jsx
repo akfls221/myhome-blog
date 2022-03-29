@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const CheckIdModal = ({ open, close, setIdCheckResult, setUserId, setModalOpen }) => {
   const [changeId, setChangeId] = useState('');
@@ -13,7 +14,10 @@ const CheckIdModal = ({ open, close, setIdCheckResult, setUserId, setModalOpen }
   const idCheckHandle = (e) => {
     e.preventDefault()
     if (changeId.length <= 0) {
-      alert("아이디는 필수 입력값입니다.");
+      toast.info('아이디는 필수 입력값입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -25,13 +29,19 @@ const CheckIdModal = ({ open, close, setIdCheckResult, setUserId, setModalOpen }
       }
     }).then((res) => {
       if (!res.data) {
-        alert("사용 가능한 아이디 입니다.");
+        toast.success('사용가능한 ID 입니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         setIdCheckResult(true);
         setUserId(changeId);
         setChangeId('')
         setModalOpen(false);
       } else {
-        alert("아이디가 중복되었습니다. 다시 확인 부탁 드립니다.");
+        toast.error('ID가 중복되었습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
         setIdCheckResult(false);
       }
     }).catch(error => {

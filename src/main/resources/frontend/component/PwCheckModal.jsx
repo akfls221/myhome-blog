@@ -3,6 +3,7 @@ import axios from "axios";
 import {getCookie} from "../util/Cookie";
 import {useNavigate} from "react-router";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const pwCheckModal = ({ open, close, boardId }) => {
   const [checkPw, setCheckPw] = useState('');
@@ -22,10 +23,16 @@ const pwCheckModal = ({ open, close, boardId }) => {
 
   const boardPwCheck = () => {
     if (checkPw.length <= 0) {
-      alert("패스워드는 필수 입력값입니다.");
+      toast.error('패스워드는 필수 입력값입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     } else if (userInfo === undefined) {
-      alert("회원 로그인 후 실행 부탁 드립니다.");
+      toast.error('로그인후 실행 부탁드립니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -39,7 +46,10 @@ const pwCheckModal = ({ open, close, boardId }) => {
       }
     }).then((res) => {
       if(res.data.error) {
-        alert(res.data.message);
+        toast.error(res.data.message, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
       } else {
         navigate(`/feedBackView/${boardId}`);
       }

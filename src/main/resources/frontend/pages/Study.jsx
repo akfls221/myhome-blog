@@ -6,6 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import Page from "../component/Page";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const Study = memo(() => {
   const [boardList, setBoardList] = useState([]);
@@ -39,7 +40,10 @@ const Study = memo(() => {
     if (userInfo !== undefined) {
       searchBoard();
     } else {
-      alert("회원 전용 게시글 입니다. 로그인 후 이용 부탁 드립니다.");
+      toast.info('회원가입이 필요한 게시판 입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       navigate(-1);
     }
     return () => {

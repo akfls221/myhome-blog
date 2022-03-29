@@ -4,6 +4,8 @@ import com.taekwon.myhome.domain.posts.Posts;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @RequiredArgsConstructor
 public class PostsResponseDto {
@@ -13,6 +15,7 @@ public class PostsResponseDto {
     private String content;
     private String author;
     private String type;
+    private LocalDateTime modifiedDate;
 
     public PostsResponseDto(Posts entity) {
         this.id = entity.getId();
@@ -20,5 +23,6 @@ public class PostsResponseDto {
         this.content = entity.getContent();
         this.author = entity.getAuthor();
         this.type = entity.getType();
+        this.modifiedDate = entity.getModifiedDate();
     }
 }

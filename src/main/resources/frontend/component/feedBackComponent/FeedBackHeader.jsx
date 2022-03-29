@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-const FeedBackHeader = memo(({titleValue, typeValue, authorValue}) => {
+const FeedBackHeader = memo(({titleValue, typeValue, authorValue, feedBackDate}) => {
 
   return (
       <>
@@ -20,7 +20,7 @@ const FeedBackHeader = memo(({titleValue, typeValue, authorValue}) => {
               <div className="board-subtitle">게시글 작성자</div>
               <div className="board-sub-content">{authorValue}</div>
               <div className="board-subtitle">작성일</div>
-              <div className="board-sub-content">수정필요</div>
+              <div className="board-sub-content">{feedBackDate}</div>
             </div>
           </div>
         </div>

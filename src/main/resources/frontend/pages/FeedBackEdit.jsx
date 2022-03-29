@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import FeedBackConfig from "../component/feedBackComponent/FeedBackConfig";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const FeedBackEdit = memo(() => {
   const [feedBackTitle, setFeedBackTitle] = useState('');
@@ -60,7 +61,10 @@ const FeedBackEdit = memo(() => {
   const registFeedBack = (e) => {
     e.preventDefault();
     if (feedBackTitle.length === 0 || feedBackContent.length === 0) {
-      alert("게시글 제목 또는 내용을 입력해 주세요");
+      toast.error('게시글 제목 또는 내용을 입력해 주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -76,7 +80,10 @@ const FeedBackEdit = memo(() => {
         content: feedBackContent,
       }
     }).then((res) => {
-      alert("피드백 등록이 완료되었습니다.");
+      toast.success('피드백 등록이 완료되었습니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       navigate('/feedback');
     }).catch(error => {
       throw new Error(error);
@@ -85,7 +92,10 @@ const FeedBackEdit = memo(() => {
 
   useEffect(() => {
     if (userInfo === undefined) {
-      alert("회원가입 후 이용가능한 페이지 입니다.");
+      toast.info('회원가입후 이용가능한 페이지입니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       navigate("/join");
     } else {
       setAuthor(userInfo.name);

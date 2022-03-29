@@ -11,6 +11,8 @@ const NoticeView = () => {
   const [noticeTitle, setNoticeTitle] = useState('');
   const [noticeType, setNoticeType] = useState('N');
   const [noticeContent, setNoticeContent] = useState('');
+  const [noticeAuthor, setNoticeAuthor] = useState('');
+  const [noticeDate, setNoticeDate] = useState('');
   const [roleCheck, setRoleCheck] = useState(false);
 
   const userInfo = getCookie('loginCookie');
@@ -20,6 +22,9 @@ const NoticeView = () => {
     setNoticeTitle(item.title);
     setNoticeContent(item.content);
     setNoticeType(item.type);
+    setNoticeAuthor(item.author);
+    setNoticeDate(item.modifiedDate.substring(0, 10));
+
   }
 
   const returnHistory = () => {
@@ -58,7 +63,11 @@ const NoticeView = () => {
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-               <NoticeHeader typeValue={noticeType} titleValue={noticeTitle}/>
+               <NoticeHeader typeValue={noticeType}
+                             titleValue={noticeTitle}
+                             authorValue={noticeAuthor}
+                             dateValue={noticeDate}
+               />
               </div>
               <div className="col-md-12 mb-5 mb-md-0">
                 <div className="notice-content-wrap">

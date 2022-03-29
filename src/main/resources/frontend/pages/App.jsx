@@ -23,6 +23,7 @@ import NoAuth from "./NoAuth";
 import FeedBack from "./FeedBack";
 import FeedBackEdit from "./FeedBackEdit";
 import FeedBackView from "./FeedBackView";
+import {ToastContainer} from "react-toastify";
 
 const App = () => {
 
@@ -55,6 +56,7 @@ const App = () => {
 
         </Routes>
         <Footer />
+        <ToastContainer />
       </Router>
     </>
   )

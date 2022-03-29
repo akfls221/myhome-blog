@@ -6,6 +6,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {getCookie} from "../util/Cookie";
 import {backend} from "../util/config";
+import {toast} from "react-toastify";
 
 const NoticeEdit = () => {
   const [noticeTitle, setNoticeTitle] = useState('');
@@ -53,7 +54,10 @@ const NoticeEdit = () => {
   const registNotice = (e) => {
     e.preventDefault();
     if (noticeTitle.length === 0 || noticeContent.length === 0) {
-      alert("게시글 제목 또는 내용을 입력해 주세요");
+      toast.error('게시글 제목 또는 내용을 입력해 주세요.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
 
@@ -68,7 +72,10 @@ const NoticeEdit = () => {
         type: noticeType,
       }
     }).then((res) => {
-      alert("게시글 등록이 완료되었습니다.");
+      toast.success('게시글 등록이 완료되었습니다.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER
+      });
       navigate('/notice');
     }).catch(error => {
       throw new Error(error);
