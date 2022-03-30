@@ -22,7 +22,7 @@ const NoticeList = memo(({value, index}) => {
                 <div className="board-content-detail">No.{(index + 1)}</div>
                 <div className="board-content-detail">{value.author}</div>
                 <div className="board-content-detail">{value.modifiedDate.substring(0, 10)}</div>
-                <div className="board-content-detail">조회수 {''}</div>
+                <div className="board-content-detail">조회수 : {value.hitCount}</div>
               </div>
             </div>
           </div>

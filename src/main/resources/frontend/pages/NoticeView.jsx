@@ -13,6 +13,7 @@ const NoticeView = () => {
   const [noticeContent, setNoticeContent] = useState('');
   const [noticeAuthor, setNoticeAuthor] = useState('');
   const [noticeDate, setNoticeDate] = useState('');
+  const [noticeHitCount, setNoticeHitCount] = useState(0);
   const [roleCheck, setRoleCheck] = useState(false);
 
   const userInfo = getCookie('loginCookie');
@@ -24,6 +25,7 @@ const NoticeView = () => {
     setNoticeType(item.type);
     setNoticeAuthor(item.author);
     setNoticeDate(item.modifiedDate.substring(0, 10));
+    setNoticeHitCount(item.hitCount);
 
   }
 
@@ -63,11 +65,12 @@ const NoticeView = () => {
             </div>
             <div className="row justify-content-center text-center">
               <div className="col-md-12 mb-5 mb-md-0">
-               <NoticeHeader typeValue={noticeType}
-                             titleValue={noticeTitle}
-                             authorValue={noticeAuthor}
-                             dateValue={noticeDate}
-               />
+                <NoticeHeader typeValue={noticeType}
+                              titleValue={noticeTitle}
+                              authorValue={noticeAuthor}
+                              dateValue={noticeDate}
+                              hitValue={noticeHitCount}
+                />
               </div>
               <div className="col-md-12 mb-5 mb-md-0">
                 <div className="notice-content-wrap">
@@ -77,9 +80,9 @@ const NoticeView = () => {
             </div>
             <button className="btn btn-regist small" onClick={returnHistory}>목록</button>
             {roleCheck &&
-              <Link to={`/notice_modify/${id}`}>
-                <button className="btn btn-modify small">수정</button>
-              </Link>
+            <Link to={`/notice_modify/${id}`}>
+              <button className="btn btn-modify small">수정</button>
+            </Link>
             }
           </div>
         </section>

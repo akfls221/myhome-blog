@@ -36,7 +36,7 @@ const StudyList = memo(({value, index}) => {
               <img src={thumbNail} alt="Image" className="study-thumbnail"/>
             </Link>
             <div className="post-text">
-              <span className="post-meta">{value.modifiedDate.substring(0, 10)}  By {value.author}</span>
+              <span className="post-meta">{value.modifiedDate.substring(0, 10)}  By {value.author} <strong>{value.hitCount}</strong> views</span>
               <h3><Link to={`/study/${value.id}`}>{value.title}</Link></h3>
               <p>{value.sub}</p>
               <p><Link to={`/study/${value.id}`}>Read more</Link></p>

@@ -17,6 +17,7 @@ public class PostsListResponseDto {
     private String author;
     private LocalDateTime modifiedDate;
     private String type;
+    private int hitCount;
 
     public PostsListResponseDto(Posts entity) {
         this.id = entity.getId();
@@ -25,5 +26,6 @@ public class PostsListResponseDto {
         this.author = entity.getAuthor();
         this.modifiedDate = entity.getModifiedDate();
         this.type = entity.getType();
+        this.hitCount = entity.getHitCount();
     }
 }

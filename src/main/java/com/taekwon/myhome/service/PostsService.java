@@ -63,4 +63,9 @@ public class PostsService {
     public List<PostsListResponseDto> findTop3() {
         return postsRepository.findTop3ByOrderByCreatedDateDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
+
+    @Transactional
+    public void updateView(Long id) {
+        postsRepository.updateView(id);
+    }
 }

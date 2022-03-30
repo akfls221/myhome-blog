@@ -27,6 +27,9 @@ public class Posts extends BaseTimeEntity {
 
     private String type;
 
+    @Column(name = "hit_count", columnDefinition = "integer default 0", nullable = false)
+    private int hitCount;
+
     @Builder
     public Posts(Long id, String title, String content, String author, String type) {
         this.id = id;

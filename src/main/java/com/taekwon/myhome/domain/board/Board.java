@@ -28,6 +28,9 @@ public class Board extends BaseTimeEntity {
 
     private String author;
 
+    @Column(name = "hit_count", columnDefinition = "integer default 0", nullable = false)
+    private int hitCount;
+
     @Builder
     public Board(Long id, String title, String sub, String content, String author) {
         this.id = id;

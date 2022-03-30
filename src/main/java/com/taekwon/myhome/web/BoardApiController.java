@@ -31,6 +31,7 @@ public class BoardApiController {
 
     @GetMapping("/api/v1/board/{id}")
     public BoardResponseDto findById(@PathVariable Long id) {
+        boardService.updateView(id);
         return boardService.findById(id);
     }
 

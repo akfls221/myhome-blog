@@ -16,6 +16,7 @@ public class BoardListResponseDto {
     private String content;
     private String author;
     private LocalDateTime modifiedDate;
+    private int hitCount;
 
     public BoardListResponseDto(Board entity) {
         this.id = entity.getId();
@@ -24,5 +25,6 @@ public class BoardListResponseDto {
         this.content = entity.getContent();
         this.author = entity.getAuthor();
         this.modifiedDate = entity.getModifiedDate();
+        this.hitCount = entity.getHitCount();
     }
 }

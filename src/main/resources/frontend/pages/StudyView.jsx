@@ -13,6 +13,7 @@ const StudyView = () => {
   const [studySub, setStudySub] = useState('');
   const [authorValue, setAuthorValue] = useState('');
   const [dateValue, setDateValue] = useState('');
+  const [studyHitCount, setStudyHitCount] = useState(0);
   const [roleCheck, setRoleCheck] = useState(false);
 
   const userInfo = getCookie('loginCookie');
@@ -35,6 +36,7 @@ const StudyView = () => {
         setStudySub(item.sub);
         setAuthorValue(item.author);
         setDateValue(item.modifiedDate.substring(0, 10));
+        setStudyHitCount(item.hitCount);
 
       }).catch(error => {
         console.log(error);

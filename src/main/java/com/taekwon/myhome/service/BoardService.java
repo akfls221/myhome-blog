@@ -63,4 +63,9 @@ public class BoardService {
     public List<BoardListResponseDto> findTop3() {
         return boardRepository.findTop3ByOrderByCreatedDateDesc().stream().map((BoardListResponseDto::new)).collect(Collectors.toList());
     }
+
+    @Transactional
+    public void updateView(Long id) {
+        boardRepository.updateView(id);
+    }
 }
