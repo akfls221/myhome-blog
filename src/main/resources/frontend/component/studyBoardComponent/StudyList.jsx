@@ -9,7 +9,6 @@ const StudyList = memo(({value, index}) => {
     const startImg = "src=";
     const endImg = `"`;
     let viewThumbNail = '';
-    console.log(content.indexOf(startImg))
     
     if (content.indexOf(startImg) !== -1) {
       const startIndex = content.indexOf(startImg, 0) + 5;

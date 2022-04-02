@@ -24,7 +24,6 @@ const FeedBackView = memo(() => {
   const navigate = useNavigate();
 
   const setTitleContent = (item) => {
-    console.log(item)
     setFeedBackTitle(item.title);
     setFeedBackContent(item.content);
     setFeedBackAuth(item.auth);

@@ -30,7 +30,6 @@ const FeedBack = () => {
 
       }
     }).then((res) => {
-      console.log(res.data);
       setFeedBackList(res.data.content);
       setTotalPage(res.data.totalPages);
     }).catch(error => {

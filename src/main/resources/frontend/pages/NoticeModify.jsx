@@ -25,7 +25,6 @@ const NoticeModify = () => {
         url: `http://${backend}/api/v1/posts/${id}`,
       }).then((res) => {
         const item = res.data;
-        console.log(item);
         setNoticeType(item.type);
         setNoticeContent(item.content);
         setNoticeTitle(item.title)

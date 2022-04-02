@@ -61,8 +61,6 @@ const StudyEdit = () => {
       return;
     }
 
-    console.log("썸네일 뽑아보자", studyContent)
-
     axios({
       method: "POST",
       url: `http://${backend}/api/v1/board`,

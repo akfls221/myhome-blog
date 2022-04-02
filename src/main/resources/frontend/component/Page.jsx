@@ -22,9 +22,6 @@ const Page = memo(({totalPage, setNowPage, nowPage, movePage}) => {
     setNowPage(prevState => {
       setNowPage(prevState - 1);
     });
-    console.log(nowPage);
-    console.log(blockNum);
-    console.log(lastPage)
 
     if (nowPage - 1 === blockNum) {
       setLastPage(prevState => prevState - limitPage);

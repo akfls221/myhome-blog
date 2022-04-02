@@ -29,7 +29,6 @@ const Notice = () => {
 
       }
     }).then((res) => {
-      console.log(res.data);
       setNoticeList(res.data.content);
       setTotalPage(res.data.totalPages);
     }).catch(error => {

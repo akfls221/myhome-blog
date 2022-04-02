@@ -16,7 +16,6 @@ const Social = () => {
       url: `http://${backend}/social/google/callback?code=${code}&socialType=${socialType}`,
     }).then((res) => {
       const resData = res.data
-      console.log("!!!!!!!!!!!!!", resData);
       setCookie('loginCookie', resData, {
         expires: new Date(Date.parse(new Date()) + 1000 * 60 * 60)
       });

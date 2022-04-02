@@ -27,7 +27,6 @@ const Study = memo(() => {
       method: "POST",
       url: `http://${backend}/api/v1/board/boardList?page=${nowPage}&type=${searchType}&searchValue=${searchValue}`,
     }).then((res) => {
-      console.log(res.data);
       setBoardList(res.data.content);
       setTotalPage(res.data.totalPages);
     }).catch(error => {

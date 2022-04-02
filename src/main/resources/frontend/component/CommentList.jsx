@@ -64,8 +64,6 @@ const CommentList = memo(({value, getFeedBackView}) => {
 
   const editCommentContent = (e) => {
     e.preventDefault();
-console.log(userInfo.id)
-    console.log(value.user.id)
     if (userInfo.id !== value.user.id) {
       toast.error('해당 댓글을 수정할 수 있는 권한이 없습니다.', {
         autoClose: 3000,

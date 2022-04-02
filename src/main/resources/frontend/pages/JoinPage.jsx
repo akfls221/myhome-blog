@@ -127,7 +127,6 @@ const JoinPage = () => {
     if (profile !== undefined) {
       const formData = new FormData();
       formData.append("multipartFile", profile);
-      console.log(e.target.files[0]);
 
       deleteProfile();
 
