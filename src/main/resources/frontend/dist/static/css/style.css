@@ -1911,15 +1911,43 @@ section {
 }
 
 .comment-list-wrapper{
-    padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 .btn-cancel{
-    float: right;
-    background-color: #a42e2e;
-    border-color: #1b1f231a;
-    box-shadow: 0 1px 0 #1b1f231a, inset 0 1px 0 #ffffff08;
-    color: #ffffff;
-    margin-left: 10px;
+  float: right;
+  background-color: #a42e2e;
+  border-color: #1b1f231a;
+  box-shadow: 0 1px 0 #1b1f231a, inset 0 1px 0 #ffffff08;
+  color: #ffffff;
+  margin-left: 10px;
 }
 
+.history h2 {
+  position: relative;
+  font-size: 33px;
+  line-height: 1;
+  text-align: left;
+  color: #274685;
+  font-weight: bolder;
+}
+.history h2:before {
+  content:""; position: absolute;
+  left:-48px; top:50%; transform: translateY(-50%);
+  width: 17px; height: 17px; border-radius: 100%;
+  background:#fff; border: 5px solid #274685;
+  box-sizing: border-box;}
+
+.history div {position: relative; padding: 0 0 0 48px;}
+.history div:before { content:""; position:absolute; left:8px; top:0;
+  width: 2px; height:100%; background:#ddd;}
+.history div:first-child:before { top:10px; height:calc(100% - 10px);}
+
+
+.history ol { padding: 20px 0 74px; }
+.history li {font-size: 19px; color:#000; line-height: 29px; text-align: left; list-style: square; font-family: aboutStie; padding-top: 10px  }
+
+@font-face {
+  font-family: "aboutStie";
+  src: url("../font/BMHANNAPro.ttf");
+}
