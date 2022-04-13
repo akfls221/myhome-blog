@@ -24,6 +24,7 @@ import FeedBack from "./FeedBack";
 import FeedBackEdit from "./FeedBackEdit";
 import FeedBackView from "./FeedBackView";
 import {ToastContainer} from "react-toastify";
+import AboutSite from "./AboutSite";
 
 const App = () => {
 
@@ -52,6 +53,7 @@ const App = () => {
           <Route exact path = "/kakao" element={<Social/>}/>
           <Route exact path = "/about" element={<AboutMe/>}/>
           <Route exact path = "/noAuth" element={<NoAuth/>}/>
+          <Route exact path = "/about_site" element={<AboutSite/>}/>
           <Route path="*" element={<NotFound />}/>
 
         </Routes>

@@ -38,13 +38,6 @@ const Footer = (props) => {
                       <li><a href="#">Events</a></li>
                     </ul>
                   </div>
-                  <div className="col-md-4 mb-4 mb-md-0">
-                    <h3>Downloads</h3>
-                    <ul className="list-unstyled">
-                      <li><a href="#">Get from the App Store</a></li>
-                      <li><a href="#">Get from the Play Store</a></li>
-                    </ul>
-                  </div>
                 </div>
               </div>
             </div>

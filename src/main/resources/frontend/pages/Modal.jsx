@@ -27,6 +27,13 @@ const Modal = ({ open, close }) => {
     location.href = `http://${backend}/social/kakao`;
   }
 
+  const loginNaver =() => {
+    toast.warning('현재 개발중입니다.', {
+      autoClose: 3000,
+      position: toast.POSITION.TOP_CENTER
+    });
+  }
+
   const loginSubmit = (e) => {
     e.preventDefault();
 
@@ -113,7 +120,7 @@ const Modal = ({ open, close }) => {
                   </div>
                   <div className="login-btn-form">
                     <img className="logo-zone" src="../static/img/naver-btn.png" />
-                    <button className="btn btn-naver" onClick={loginGoogle}>Naver Login 하기</button>
+                    <button className="btn btn-naver" onClick={loginNaver}>Naver Login 하기</button>
                   </div>
                 </div>
               <footer>

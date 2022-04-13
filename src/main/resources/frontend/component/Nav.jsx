@@ -10,6 +10,7 @@ const Nav = memo(() => {
     {menu: 'NOTICE', url: "/notice"},
     {menu: 'STUDY', url: "/study"},
     {menu: 'ABOUT ME', url: "/about"},
+    {menu: 'ABOUT SITE', url: "/about_site"},
     {menu: 'FEED_BACK', url: "/feedBack"},
   ]);
 

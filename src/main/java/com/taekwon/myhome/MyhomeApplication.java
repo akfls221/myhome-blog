@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 @EnableJpaAuditing
 @SpringBootApplication
@@ -22,8 +23,8 @@ public class MyhomeApplication {
 
 	public static void main(String[] args) {SpringApplication.run(MyhomeApplication.class, args);	}
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
       return PasswordEncoderFactories.createDelegatingPasswordEncoder();
   }
 
@@ -31,7 +32,7 @@ public class MyhomeApplication {
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder
                 .requestFactory(() -> new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()))
-                .additionalMessageConverters(new StringHttpMessageConverter(Charset.forName("UTF-8")))
+                .additionalMessageConverters(new StringHttpMessageConverter(StandardCharsets.UTF_8))
                 .build();
     }
 

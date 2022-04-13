@@ -1,5 +1,5 @@
 import React, {memo, useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {getCookie, removeCookie} from "../../util/Cookie";
 import Modal from "../../pages/Modal";
 import {backend} from "../../util/config";
