@@ -49,6 +49,7 @@ const FeedBackView = memo(() => {
     axios({
       method: "GET",
       url: `http://${backend}/api/v1/feedBack/${id}`,
+      headers: {Authorization: userInfo.accessToken},
     }).then((res) => {
       if (res.data.error) {
         toast.error(res.data.message, {

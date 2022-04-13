@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests() //다음 리퀘스트에 대한 사용권한 체크
                 .antMatchers("/api/v1/board", "/api/v1/boardUpdate/**").hasRole("ADMIN")
                 .antMatchers("/api/v1/posts", "/api/v1/postsUpdate/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/feedBack", "/api/v1/feedBackView/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/api/v1/feedBack", "/api/v1/feedBack/**").hasAnyRole("ADMIN", "USER")
 //                .antMatchers("/api/v1/manage/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().permitAll()
                 .and()
